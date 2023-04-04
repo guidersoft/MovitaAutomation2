@@ -22,7 +22,7 @@ public class Test1 extends BaseMovita {
     public void logo(){
         click(llogo);
         bekle(3000);
-        visible(lMobilVasıta);
+        visible(lMobilVasita);
 
         //assertElement(lMobilVasıta,str);
 
@@ -31,7 +31,7 @@ public class Test1 extends BaseMovita {
     @Test(priority = 3)
     public void enterButton(){
         click(lEnterButton);
-        click(lTurkishLang);
+        click(lEnglishLang);
         bekle(500);
         getScreenshot("login");
         bekle(500);
@@ -48,13 +48,16 @@ public class Test1 extends BaseMovita {
     }
     @Test(priority = 4,dependsOnMethods = "openMovita")
     public void homePage(){
-        hoverOver(homePageMenu("Ana Sayfa"),"Ana Sayfa");
-        visible(lMobilVasıta);
+        bekle(1000);
+        hoverOver(homePageMenu(1),1);
+        bekle(1000);
+        visible(lMobilVasita);
 
     }
     @Test(priority = 5,dependsOnMethods = "openMovita")
     public void kurumsal(){
-        hoverOver(homePageMenu("Kurumsal"),"Kurumsal");
+        bekle(1000);
+        hoverOver(homePageMenu(2),2);
         hoverAll(lSubMenuKurumsal);
 
     }

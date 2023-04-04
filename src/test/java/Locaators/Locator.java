@@ -10,7 +10,7 @@ public interface Locator {
 
     By llogo = By.xpath("//a[@class='standard-logo']");
 
-    By lMobilVasıta = By.xpath("//div[@class='tp-mask-wrap']//div[text()='Mobil Vasıta İzleme Takip Sistemi']");
+    By lMobilVasita = By.xpath("//div[@class='tp-mask-wrap']//div[text()='Mobil Vasıta İzleme Takip Sistemi']");
     String str = "Mobil Vasıta İzleme Takip Sistemi";
     By lEnterButton = By.xpath("//button[@id='dropdownMenuButton']/parent::div");
     By lEnglishLang = By.xpath("(//button[@id='dropdownMenuButton']/parent::div//a)[1]");
@@ -24,4 +24,5 @@ public interface Locator {
     WebElement homePageMenu(String text);
 
 
+    WebElement homePageMenu(int num);
 }
