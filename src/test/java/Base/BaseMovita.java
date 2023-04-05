@@ -26,7 +26,7 @@ public class BaseMovita implements Locator {
     @Parameters("browser")
     public void beforeTest(@Optional("CHROME") String browser) {
         driver = Driver.getDriver(Browsers.valueOf(browser));
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         driver.manage().window().maximize();
     }
 
@@ -50,7 +50,7 @@ public class BaseMovita implements Locator {
     }
 
     public void click(By locator) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         click(element);
 
     }
@@ -104,10 +104,10 @@ public class BaseMovita implements Locator {
         }
 
     }
-    public void hoverOver(WebElement element,String text){
+    public void hoverOver(WebElement element,int num){
         new Actions(driver)
                 .moveToElement(element)
-                .click(homePageMenu(text))
+                .click(homePageMenu(num))
                 .build()
                 .perform();
     }
@@ -125,7 +125,12 @@ public class BaseMovita implements Locator {
 
     @Override
     public WebElement homePageMenu(String text) {
-        WebElement element = driver.findElement(By.xpath("//ul[@class='menu-container']//div[text()='" + text + "']"));
+        return null;
+    }
+
+    @Override
+    public WebElement homePageMenu(int num) {
+        WebElement element = driver.findElement(By.xpath("(//ul[@class='menu-container']/li)"+"["+num+"]"));
 
         return element;
 
