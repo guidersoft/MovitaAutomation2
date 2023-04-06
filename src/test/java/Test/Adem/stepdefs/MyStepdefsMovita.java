@@ -21,4 +21,5 @@ public class MyStepdefsMovita extends BaseMovita {
         visible(lMobilVasitaIzlemeTakipText);
         getScreenShot("Movita Arac Takip_");
     }
+
 }
