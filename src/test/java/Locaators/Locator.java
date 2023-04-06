@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import java.io.StringReader;
 
 public interface Locator {
-    String url = "https://movita.com.tr/";
+
 
     By llogo = By.xpath("//a[@class='standard-logo']");
 
@@ -20,6 +20,9 @@ public interface Locator {
 
     By lAnaSayfa = By.xpath("//ul[@class='menu-container']//div[text()='Ana Sayfa']");
     By lSubMenuKurumsal=By.xpath("(//ul[@class='sub-menu-container'])[1]//div");
+
+    By lMovitaLogo=By.xpath("//a[@class='retina-logo']/img[@alt='Canvas Logo']");
+    By lMovitaLogoText=By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobil Vasıta İzleme Takip Sistemi')]");
 
     WebElement homePageMenu(String text);
 

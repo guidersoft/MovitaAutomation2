@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import readers.property.PropertyReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,18 +23,14 @@ public class BaseMovita implements Locator {
     private  WebDriver driver;
     private  WebDriverWait wait;
 
-    @BeforeTest
-    @Parameters("browser")
-    public void beforeTest(@Optional("CHROME") String browser) {
-        driver = Driver.getDriver(Browsers.valueOf(browser));
+
+    public BaseMovita(){
+        driver = Driver.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
 
-    @AfterTest
-    public void afterTest() {
-        Driver.quitDriver();
-    }
+
 
 
 
@@ -46,19 +43,9 @@ public class BaseMovita implements Locator {
         wait=new WebDriverWait(driver,Duration.ofSeconds(10));
     }*/
     public void open() {
-        driver.get(url);
+        driver.get(PropertyReader.read().get("url"));
     }
 
-    public void click(By locator) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
-        click(element);
-
-    }
-
-    public void click(WebElement element) {
-        element.click();
-
-    }
 
     public void visible(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
@@ -129,5 +116,66 @@ public class BaseMovita implements Locator {
 
         return element;
 
+    }
+    public void click(By locator) {
+        WebElement until = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        click(until);
+    }
+    public void click(WebElement element) {
+        // wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        wait.until(d1 -> {
+            try {
+                element.click();
+                return true;
+            } catch (Exception e) {
+                try {
+                    new Actions(d1)
+                            .moveToElement(element).click().perform();
+                    return true;
+                } catch (Exception e2) {
+                    try {
+                        ((JavascriptExecutor) d1).executeScript("arguments[0].click()", element);
+                        return true;
+                    } catch (Exception e3) {
+                        return false;
+                    }
+                }
+            }
+        });
+    }
+
+    public void sendeys(By locator, String text) {
+        WebElement until = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        sendeys(until, text);
+    }
+
+    public void sendeys(WebElement element, String text) {
+        // wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        wait.until(d1 -> {
+            try {
+                element.clear();
+                element.sendKeys(text);
+                return true;
+            } catch (Exception e) {
+                try {
+                    element.clear();
+                    new Actions(d1)
+                            .moveToElement(element).sendKeys(text).perform();
+                    return true;
+                } catch (Exception e2) {
+                    try {
+                        element.clear();
+                        ((JavascriptExecutor) d1).executeScript("arguments[0].value='" + text + "'", element);
+                        return true;
+                    } catch (Exception e3) {
+                        return false;
+                    }
+                }
+            }
+        });
+    }
+
+    public void waitForVisibility(WebElement webElement) {
+        wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 }
