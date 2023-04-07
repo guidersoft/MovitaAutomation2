@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class BaseMovita implements Locator {
+public class Base_Mvt implements Locator {
     private  WebDriver driver;
     private  WebDriverWait wait;
 
@@ -106,6 +106,7 @@ public class BaseMovita implements Locator {
         }
 
     }
+
     public void hoverOver(WebElement element,String text){
         new Actions(driver)
                 .moveToElement(element)
@@ -113,6 +114,7 @@ public class BaseMovita implements Locator {
                 .build()
                 .perform();
     }
+
     public void hoverAll(By locator){
         List<WebElement> list=driver.findElements(locator);
 
@@ -204,8 +206,9 @@ public class BaseMovita implements Locator {
         });
     }
 
-
-
+    public void pause(long millis) {
+        new Actions(driver).pause(millis).perform();
+    }
 
 
 }

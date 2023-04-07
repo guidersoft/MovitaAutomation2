@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 
 @CucumberOptions(
-        features = {"src/test/java/Test/Adem/features/AdemhomePage.feature"},// feature dosyasının source path ini yazıyoruz.
+        features = {"src/test/java/Test/Adem/features/HomePage_Mvt.feature"},// feature dosyasının source path ini yazıyoruz.
         glue = {"Test.Adem.stepdefs"},// sadece çalışması istenen stepdefs in olduğu package ın path ini yazıyoruz.
        // tags = "@login2", // Sadece @login2 taglı feature dosyasını çalıştırır, ya da ayrı bir runner class oluşturabiliriz.
         plugin = { "pretty",
