@@ -38,6 +38,7 @@ public class MyStepdefs_MovitaAdem {
     By lMobilVehicleTrackingText = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobile Vehicle')]");
 
 
+    /*
     @Given("user on {string} page")
     public void userOnHttpsWwwMovitaComTrLoginPage(String url) {
         driver.get(url);
@@ -127,19 +128,6 @@ public class MyStepdefs_MovitaAdem {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+     */
 
-    @Given("Ana sayfa linkine hover over olunca yazisi renk degistirmeli")
-    public void anaSayfaLinkineHoverOverOluncaYazisiRenkDegistirmeli() {
-
-    }
-
-    @When("Clickable olmalidir")
-    public void clickableOlmalidir() {
-
-    }
-
-    @Then("Click yapınca “Mobil Vasita izleme takip Sistemi” yazisi ekranda cikmali")
-    public void clickYapıncaMobilVasitaIzlemeTakipSistemiYazisiEkrandaCikmali() {
-
-    }
 }

@@ -1,14 +1,20 @@
 Feature: Movita Homepage
 
-    Background: user on homepage
-    Given user is on homepage
+  Background: Homepage
+    When user is on homepage
+
+  Scenario: Movita logo
     When user should clicks movita logo
     Then user should see the text
 
 
-  Scenario: Anasayfadaki dil seçenegi butonu clickable olmali
+  Scenario: Anasayfadaki dil seçenegi butonu
     Given Clickable olmali
-    When Iki secenegi click yapabilmeli:
+    When Kullanıcı "English" butonuna tıklar
     And English “Mobile Vehicle Tracking System” yazisi gözükmeli
+    When Kullanıcı "Türkçe" butonuna tıklar
     Then Türkce “Mobil Vasita izleme takip Sistemi” yazisi gözükmeli
+
+
+
 
