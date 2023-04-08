@@ -19,6 +19,7 @@ public interface Locator {
     By lLanguageButton = By.xpath("//img[@alt='English']");
     By lEnglishButton = By.xpath("//a[@class='dropdown-item'][1]");
     By lTurkishButton = By.xpath("//a[@class='dropdown-item'][1]");
+
     By lMobilVehicleTrackingText = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobile Vehicle')]");
 
     By lHeaderMenuLink = By.xpath("//ul[@class='menu-container']//div");

@@ -8,12 +8,16 @@ Feature: Movita Homepage
     Then user should see the text
 
 
-  Scenario: Anasayfadaki dil seçenegi butonu
+  Scenario: Language option on Homepage
     Given Clickable olmali
     When Kullanıcı "English" butonuna tıklar
-    And English “Mobile Vehicle Tracking System” yazisi gözükmeli
+    And "Mobile Vehicle" yazisi gözükmeli
     When Kullanıcı "Türkçe" butonuna tıklar
-    Then Türkce “Mobil Vasita izleme takip Sistemi” yazisi gözükmeli
+    Then "Mobil Vasıta" yazisi gözükmeli
+    
+
+
+
 
 
 

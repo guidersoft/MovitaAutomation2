@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import readers.property.PropertyReader;
 
 
-// Tekrar içleri doldurulacak.
 public class MyStepdefs_Mvt extends Base_Mvt {
     @Given("user is on homepage")
     public void userIsOnHomepage() {
@@ -37,18 +36,13 @@ public class MyStepdefs_Mvt extends Base_Mvt {
         click(locator);
     }
 
-    @And("English “Mobile Vehicle Tracking System” yazisi gözükmeli")
-    public void englishMobileVehicleTrackingSystemYazisiGözükmeli() {
-        visible(lMobilVehicleTrackingText);
-        pause(2000);
-        getScreenShot("English Text");
-    }
 
-    @Then("Türkce “Mobil Vasita izleme takip Sistemi” yazisi gözükmeli")
-    public void türkceMobilVasitaIzlemeTakipSistemiYazisiGözükmeli() {
-        visible(lMobilVasitaIzlemeTakipText);
+    @Then("{string} yazisi gözükmeli")
+    public void yazisiGözükmeli(String text) {
+        By locator = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'" + text + "')]");
+        visible(locator);
         pause(2000);
-        getScreenShot("Türkçe Text");
+        getScreenShot(text);
     }
 }
 
