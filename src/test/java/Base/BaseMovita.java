@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import readers.property.PropertyReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,47 +19,25 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class BaseMovita implements Locator {
+public class BaseMovita  implements Locator {
     private  WebDriver driver;
     private  WebDriverWait wait;
 
-    @BeforeTest
-    @Parameters("browser")
-    public void beforeTest(@Optional("CHROME") String browser) {
-        driver = Driver.getDriver(Browsers.valueOf(browser));
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-        driver.manage().window().maximize();
-    }
-
-    @AfterTest
-    public void afterTest() {
-        Driver.quitDriver();
-    }
 
 
 
-   /*   public BaseMovita() {
-          driver=Driver.getDriver();
-          wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-      }*/
-    /*{
+
+    public BaseMovita() {
         driver=Driver.getDriver();
+        driver.manage().window().maximize();
         wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-    }*/
+    }
+
     public void open() {
-        driver.get(url);
+
+        driver.get(PropertyReader.propertyReader().get("url"));
     }
 
-    public void click(By locator) {
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        click(element);
-
-    }
-
-    public void click(WebElement element) {
-        element.click();
-
-    }
 
     public void visible(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
@@ -104,10 +83,10 @@ public class BaseMovita implements Locator {
         }
 
     }
-    public void hoverOver(WebElement element,int num){
+    public void hoverOver(WebElement element,String text){
         new Actions(driver)
                 .moveToElement(element)
-                .click(homePageMenu(num))
+                .click(homePageMenu(text))
                 .build()
                 .perform();
     }
@@ -125,14 +104,68 @@ public class BaseMovita implements Locator {
 
     @Override
     public WebElement homePageMenu(String text) {
-        return null;
-    }
-
-    @Override
-    public WebElement homePageMenu(int num) {
-        WebElement element = driver.findElement(By.xpath("(//ul[@class='menu-container']/li)"+"["+num+"]"));
+        WebElement element = driver.findElement(By.xpath("//ul[@class='menu-container']//div[text()='" + text + "']"));
 
         return element;
 
     }
+
+    public void click(By locator){
+        WebElement element=wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        click(element);
+
+    }
+
+    public void click(WebElement element){
+        wait.until(driver1-> {
+            try {
+                element.click();
+                return true;
+            } catch (Exception e1) {
+                try {
+                    new Actions(driver).moveToElement(element).click().perform();
+                    return true;
+                } catch (Exception e2) {
+                    try {
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].click", element);
+                        return true;
+                    } catch (Exception e3) {
+                        return false;
+                    }
+                }
+            }
+        });
+    }
+
+    public void sendkeys(WebElement element,String text){
+        wait.until(driver1-> {
+            try {
+                element.clear();
+                element.sendKeys(text);
+                return true;
+            } catch (Exception e1) {
+                try {
+                    element.clear();
+                    new Actions(driver).moveToElement(element).sendKeys().perform();
+                    return true;
+                } catch (Exception e2) {
+                    try {
+                        element.clear();
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].value='"+ text + "'", element);
+                        return true;
+                    } catch (Exception e3) {
+                        return false;
+                    }
+                }
+            }
+        });
+    }
+
+    public void waitForVisibility(WebElement element){
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+
 }
+
+

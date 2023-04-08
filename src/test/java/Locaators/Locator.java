@@ -5,12 +5,14 @@ import org.openqa.selenium.WebElement;
 
 import java.io.StringReader;
 
+import static java.awt.SystemColor.text;
+
 public interface Locator {
     String url = "https://movita.com.tr/";
 
     By llogo = By.xpath("//a[@class='standard-logo']");
 
-    By lMobilVasita = By.xpath("//div[@class='tp-mask-wrap']//div[text()='Mobil Vasıta İzleme Takip Sistemi']");
+    By lMobilVasıta = By.xpath("//div[@class='tp-mask-wrap']//div[text()='Mobil Vasıta İzleme Takip Sistemi']");
     String str = "Mobil Vasıta İzleme Takip Sistemi";
     By lEnterButton = By.xpath("//button[@id='dropdownMenuButton']/parent::div");
     By lEnglishLang = By.xpath("(//button[@id='dropdownMenuButton']/parent::div//a)[1]");
@@ -24,5 +26,12 @@ public interface Locator {
     WebElement homePageMenu(String text);
 
 
-    WebElement homePageMenu(int num);
+    By lMovitaLogo=By.xpath("//a[@class='retina-logo']/img[@alt='Canvas Logo']");
+    By lMovitaLogoText=By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobil Vasıta İzleme Takip Sistemi')]");
+    By lMobilVasitaIzlemeText = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobil Vasıta İzleme Takip Sistemi')]");
+    By locator=By.xpath("//a[@class='dropdown-item' and contains(.,'" + text + "')]");
+    By lMobilVehicleTrackingText = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobile Vehicle')]");
+    By lFlagButton=By.id("dropdownMenuButton");
 }
+
+

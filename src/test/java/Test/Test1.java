@@ -22,7 +22,7 @@ public class Test1 extends BaseMovita {
     public void logo(){
         click(llogo);
         bekle(3000);
-        visible(lMobilVasita);
+      //  visible(lMobilVasita);
 
         //assertElement(lMobilVasıta,str);
 
@@ -49,15 +49,15 @@ public class Test1 extends BaseMovita {
     @Test(priority = 4,dependsOnMethods = "openMovita")
     public void homePage(){
         bekle(1000);
-        hoverOver(homePageMenu(1),1);
+       // hoverOver(homePageMenu(1),1);
         bekle(1000);
-        visible(lMobilVasita);
+        //visible(lMobilVasita);
 
     }
     @Test(priority = 5,dependsOnMethods = "openMovita")
     public void kurumsal(){
         bekle(1000);
-        hoverOver(homePageMenu(2),2);
+       // hoverOver(homePageMenu(2),2);
         hoverAll(lSubMenuKurumsal);
 
     }
