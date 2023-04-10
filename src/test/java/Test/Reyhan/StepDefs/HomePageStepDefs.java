@@ -1,11 +1,13 @@
 package Test.Reyhan.StepDefs;
 
 import Base.BaseMovita;
+import Utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 
 public class HomePageStepDefs extends BaseMovita{
 
@@ -46,5 +48,24 @@ public class HomePageStepDefs extends BaseMovita{
     public void userCliksButtun(String text) {
         By locator=By.xpath("//a[@class='dropdown-item' and contains(.,'" + text + "')]");
         click(locator);
+    }
+
+    @When("User hover {string}")
+    public void userHover(String text) {
+        menuLocator(text);
+        new Actions(Driver.getDriver())
+                .moveToElement(menuLocator(text)).perform();
+
+    }
+
+    @And("user click {string}")
+    public void userClick(String text) {
+        click(menuLocator(text));
+    }
+
+
+    @Then("user should see the text Movita")
+    public void userShouldSeeTheTextMovita() {
+        waitForVisibility(driver.findElement(lMobilVasitaIzlemeText));
     }
 }

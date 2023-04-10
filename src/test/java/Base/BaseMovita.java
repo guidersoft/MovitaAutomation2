@@ -19,9 +19,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class BaseMovita  implements Locator {
-    private  WebDriver driver;
-    private  WebDriverWait wait;
+ public class BaseMovita  implements Locator {
+    public  WebDriver driver;
+    public  WebDriverWait wait;
 
 
 
@@ -164,6 +164,15 @@ public class BaseMovita  implements Locator {
     public void waitForVisibility(WebElement element){
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+
+     public WebElement menuLocator(String text){
+         WebElement element = driver.findElement(By.xpath("//nav[@class='primary-menu']/ul//li/a/div[contains(text(),'" + text + "')]//ancestor::a"));
+         return element;
+     }
+
+
+
+
 
 
 }

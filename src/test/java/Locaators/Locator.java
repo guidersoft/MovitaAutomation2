@@ -32,6 +32,7 @@ public interface Locator {
     By locator=By.xpath("//a[@class='dropdown-item' and contains(.,'" + text + "')]");
     By lMobilVehicleTrackingText = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobile Vehicle')]");
     By lFlagButton=By.id("dropdownMenuButton");
+
 }
 
 

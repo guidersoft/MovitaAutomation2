@@ -16,4 +16,10 @@ When  user click flag logo
 And  user cliks "Türk" buttun
 Then  user should see turkce Text
 
+  Scenario: Ana sayfa
+    When User hover "Ana Sayfa"
+    And user click "Ana Sayfa"
+    Then user should see the text Movita
+
+
 
