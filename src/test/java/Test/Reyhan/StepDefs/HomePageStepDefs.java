@@ -1,4 +1,4 @@
-package Reyhan;
+package Test.Reyhan.StepDefs;
 
 import Base.BaseMovita;
 import io.cucumber.java.en.And;
