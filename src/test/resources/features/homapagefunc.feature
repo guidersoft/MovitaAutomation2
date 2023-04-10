@@ -20,7 +20,7 @@ Feature: functionality of links on the homepage
     Given user on homepage
     When user hower over to "Ana Sayfa" link
     Then Homepage text should change colour
-    When user clicks Homepage link
+    When user clicks "Ana Sayfa" link
     Then "Mobil Vasıta" text must be visible
 
     When user hower over the "Kurumsal" link
@@ -32,19 +32,15 @@ Feature: functionality of links on the homepage
       | Çerez Politikası  |
       | KVKK              |
 
-  Scenario Outline: repeat
-    Given user on homepage
     When user hower over the "Kurumsal" link
-    When Clicking on the "<links>" will visiable the following "<text>"
+    When the "Kurumsal" link is hovered and the links in the drop-down list are clicked, the following data must be verified
 
-    Examples:
-      | links             | text                                 |
-      | Hakkımızda        | Hakkımızda                           |
-      | Belgelerimiz      | BELGELERİMİZ                         |
-      | Bayilik Başvurusu | Bayilik Başvuru                    |
-      | Demo Başvrusu     | Demo Başvuru                         |
-      | Çerez Politikası  | Çerez Politikası                     |
-      | KVKK              | KİŞİSEL VERİLERİN İŞLENME POLİTİKASI |
+      | Hakkımızda                           |
+      | BELGELERİMİZ                         |
+      | Bayilik Başvuru                      |
+      | Demo Başvuru                         |
+      | Çerez Politikası                     |
+      | KİŞİSEL VERİLERİN İŞLENME POLİTİKASI |
 
 
   Scenario: hover and click functionality of ÜRÜNLER in the header menu
@@ -72,18 +68,13 @@ Feature: functionality of links on the homepage
       | Yük ve Eşya Taşıyan Araçlar  |
       | Belediye ve Halk Otobüsleri  |
 
-  Scenario Outline: repeat
-    Given user on homepage
-    When user hower over the "Çözümler" link
-    When Clicking on the "<links>" will visiable the following "<text>"
+    When the "Çözümler" link is hovered and the links in the drop-down list are clicked, the following data must be verified
 
-    Examples:
-      | links                        | text                         |
-      | Taksi ve Özel Araçlar        | Taksi ve Özel Araçlar        |
-      | Minibüsler ve Midibüsler     | Minibüsler ve Midibüsler     |
-      | Şehirler Arası Otobüsler     | Şehirler Arası Otobüsler     |
-      | Zırhlı Taşıma Araçları       | Zırhlı Taşıma Araçları       |
-      | Okul Servisleri              | Okul Servisleri              |
-      | Güvenlik Kuvvetleri Araçları | Güvenlik Kuvvetleri Araçları |
-      | Yük ve Eşya Taşıyan Araçlar  | Yük ve Eşya Taşıyan Araçlar  |
-      | Belediye ve Halk Otobüsleri  | Belediye ve Halk Otobüsleri  |
+      | Taksi ve Özel Araçlar        |
+      | Minibüsler ve Midibüsler     |
+      | Şehirler Arası Otobüsler     |
+      | Zırhlı Taşıma Araçları       |
+      | Okul Servisleri              |
+      | Güvenlik Kuvvetleri Araçları |
+      | Yük ve Eşya Taşıyan Araçlar  |
+      | Belediye ve Halk Otobüsleri  |

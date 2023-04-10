@@ -81,10 +81,10 @@ public class HomePagefunc extends BaseClass implements HomePageLocator {
         Assert.assertFalse( color.equals(newcolor));
     }
 
-    @When("user clicks Homepage link")
-    public void userClicksHomepageLink() {
-        $(xpath(ALL_A,"Ana Sayfa")).click();
 
+    @When("user clicks {string} link")
+    public void userClicksLink(String link) {
+        $(xpath(ALL_A,link)).click();
     }
 
     @When("user hower over the {string} link")
@@ -102,7 +102,6 @@ public class HomePagefunc extends BaseClass implements HomePageLocator {
             WebElement currentElement = $(xpath(ALL_A, drobdownTexs.get(i))).getCurrentElement();
             color = getElementCssProperty(currentElement, "color");
             $(currentElement).hower();
-            getElementScreenshotsAs(currentElement);
             threadSleep(500);
             newcolor = getElementCssProperty(currentElement, "color");
             Assert.assertNotEquals(newcolor, color);
@@ -122,14 +121,6 @@ public class HomePagefunc extends BaseClass implements HomePageLocator {
     }
 
 
-
-
-    @When("Clicking on the {string} will visiable the following {string}")
-    public void clickingOnTheWillVisiableTheFollowing(String linkTex, String elementText) {
-        $(xpath(ALL_A, linkTex)).click().
-                $(xpath(ALLVerifyText, elementText)).waitFor(visibilty, null);
-    }
-
     @When("the {string} link is hovered and the links in the drop-down list are clicked, the following data must be verified")
     public void theLinkIsHoveredAndTheLinksInTheDropDownListAreClickedTheFollowingDataMustBeVerified(String links,DataTable table) {
         List<String> list = table.asList();
@@ -144,4 +135,6 @@ public class HomePagefunc extends BaseClass implements HomePageLocator {
                     $(xpath(ALLVerifyText,list.get(i))).waitFor(visibilty,null);
         }
     }
+
+
 }
