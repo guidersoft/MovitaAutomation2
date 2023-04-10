@@ -1,6 +1,6 @@
 package Base;
 
-import Locaators.Locator;
+import Locaators.HomePageLocator;
 import Utilities.Browsers;
 import Utilities.Driver;
 import org.apache.commons.io.FileUtils;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class BaseMovita implements Locator {
+public class BaseMovita implements HomePageLocator {
     private  WebDriver driver;
     private  WebDriverWait wait;
 
@@ -104,13 +104,6 @@ public class BaseMovita implements Locator {
         }
 
     }
-    public void hoverOver(WebElement element,int num){
-        new Actions(driver)
-                .moveToElement(element)
-                .click(homePageMenu(num))
-                .build()
-                .perform();
-    }
     public void hoverAll(By locator){
         List<WebElement> list=driver.findElements(locator);
 
@@ -123,16 +116,4 @@ public class BaseMovita implements Locator {
     }
 
 
-    @Override
-    public WebElement homePageMenu(String text) {
-        return null;
-    }
-
-    @Override
-    public WebElement homePageMenu(int num) {
-        WebElement element = driver.findElement(By.xpath("(//ul[@class='menu-container']/li)"+"["+num+"]"));
-
-        return element;
-
-    }
 }
