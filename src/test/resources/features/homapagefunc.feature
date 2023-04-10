@@ -43,7 +43,7 @@ Feature: functionality of links on the homepage
       | KİŞİSEL VERİLERİN İŞLENME POLİTİKASI |
 
 
-  Scenario: hover and click functionality of ÜRÜNLER in the header menu
+    Scenario: hover and click functionality of ÜRÜNLER in the header menu
     Given user on homepage
     When user hower over the "Ürünler" link
     When the "Ürünler" link is hovered and the links in the drop-down list are clicked, the following data must be verified
