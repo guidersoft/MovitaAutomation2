@@ -6,6 +6,7 @@ import Utilities.Driver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -214,8 +215,6 @@ public class Base_Mvt implements Locator {
     }
 
 
-    // //nav[@class='primary-menu']/ul//li/a/div[contains(text(),'Min')]//ancestor::a
-    // Engin beydeki locator
 
     /**
      * Bu metot topMenudeki elementlerin locator ını döndürür.
@@ -232,6 +231,16 @@ public class Base_Mvt implements Locator {
 
 
     /**
+     * Bu metot top menu locator larını getirir.
+     * @param text String
+     * @return By xpath
+     */
+    public By topMenuXpath(String text) {
+        return By.xpath("//div[text()='" + text + "']");
+    }
+
+
+    /**
      * Bu metot top menu altındaki açılır menulerin listesini döndürür.
      *
      * @param text subMenu adi
@@ -244,11 +253,40 @@ public class Base_Mvt implements Locator {
         return elements;
     }
 
-    public void clickTopSubMenuelements(String text, String subText) {
+    /**
+     * Bu metot topmenu altındaki submenulere click eder
+     * @param text menu link adı
+     * @param subText submenu link adı
+     */
+    public void clickTopSubMenuElements(String text, String subText) {
         WebElement element = driver.findElement(By.xpath("//li[.//div[text()='" + text + "']]//div[contains(.,'" + subText + "')]"));
         element.click();
 
     }
+
+
+    public void assertChangeColor(By locator, String expColor){
+        WebElement element = driver.findElement(locator);
+        String actColorRGB = element.getCssValue("color");
+        String actColorHEX = Color.fromString(actColorRGB).asHex();
+        Assert.assertEquals(actColorHEX,expColor);// mevcut renk istenen renkle aynı mı ?
+        // #00adee -> hover edince oluşan renk kodu
+
+    }
+
+
+    /**
+     * Bu metot girilen menu ye ait submenu locator ını getirir.
+     * @param textMenu String
+     * @param textSubMenu String
+     * @return By
+     */
+    public By topSubMenuXpath(String textMenu, String textSubMenu){
+        return By.xpath("//li[.//div[text()='" + textMenu + "']]//div[contains(.,'" + textSubMenu + "')]");
+    }
+
+
+
 
 
 }

@@ -85,7 +85,7 @@ public class MyStepdefs_Mvt extends Base_Mvt {
 
     @And("kullanici {string} altindaki {string} submenulere click yapar")
     public void kullaniciAltindakiSubmenulereClickYapar(String text, String subText) {
-        clickTopSubMenuelements(text, subText);
+        clickTopSubMenuElements(text, subText);
     }
 
     @Then("kullanici {string} yazisini görmeli")
@@ -96,6 +96,33 @@ public class MyStepdefs_Mvt extends Base_Mvt {
         getWait().until((ExpectedConditions.textToBe(xpath, "Demo Başvuru")));
         pause(2000);
         getScreenShot("Demo Başvurusu");
+    }
+
+    @Given("kullanici {string} deki {string} ye click yapar")
+    public void kullaniciDekiYeClickYapar(String menu, String submenu) {
+        clickTopSubMenuElements(menu, submenu);
+    }
+
+    @And("kullanici {string} sayfasina girmeli")
+    public void kullaniciSayfasinaGirmeli(String actUrl) {
+        String currentUrl = getDriver().getCurrentUrl();
+        Assert.assertEquals(actUrl, currentUrl);
+    }
+
+    @Then("kullanici {string} görmeli")
+    public void kullaniciGörmeli(String text) {
+        By xpath = By.xpath("//h1[contains(text(),'" + text + "')]");
+        visible(xpath);
+    }
+
+    @Given("user is on homepage {string}")
+    public void userIsOnHomepage(String url) {
+        getDriver().get(url);
+    }
+
+    @And("{string} deki renk değişmeli")
+    public void dekiRenkDeğişmeli(String menuText) {
+        assertChangeColor(topMenuXpath(menuText),"#00adee");
     }
 }
 
