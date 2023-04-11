@@ -48,6 +48,7 @@ public class Driver {
 
         }
         waits.set(new WebDriverWait(drivers.get(), Duration.ofSeconds(10)));// waits i set ettik.
+        drivers.get().manage().window().maximize();
         return drivers.get();
 
     }

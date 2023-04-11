@@ -8,9 +8,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import readers.property.PropertyReader;
 
 import static Utilities.Driver.*;
 
@@ -20,7 +18,8 @@ import java.util.List;
 public class MyStepdefs_Mvt extends Base_Mvt {
     @Given("user is on homepage")
     public void userIsOnHomepage() {
-        Driver.getDriver().get(PropertyReader.read().get("url"));
+        //Driver.getDriver().get(PropertyReader.read().get("url"));
+        getDriver().get("http://movita.com.tr/");
     }
 
     @When("user should clicks movita logo")
@@ -55,7 +54,6 @@ public class MyStepdefs_Mvt extends Base_Mvt {
     @When("user hover {string}")
     public void userHover(String text) {
         new Actions(Driver.getDriver()).moveToElement(topMenuElement(text)).perform();
-        // Burada background daki renk değişimi Assert edilecek!
     }
 
     @And("user click {string}")
@@ -72,42 +70,15 @@ public class MyStepdefs_Mvt extends Base_Mvt {
     @Then("{string} menusu altında {int} seçenek çıkmalı")
     public void menusuAltındaSeçenekÇıkmalı(String text, int num) {
         List<WebElement> webElements = topSubMenuElements(text);
-        Assert.assertTrue(webElements.size() == num);
+        Assert.assertEquals(num, webElements.size());
     }
 
-
-    @And("kullanici {string} altındaki submenulere Hover Yapar")
-    public void kullaniciAltındakiSubmenulereHoverYapar(String text) {
-        for (WebElement element : topSubMenuElements(text)) {
-            new Actions(Driver.getDriver()).moveToElement(element).perform();
-        }
-    }
-
-    @And("kullanici {string} altindaki {string} submenulere click yapar")
-    public void kullaniciAltindakiSubmenulereClickYapar(String text, String subText) {
-        clickTopSubMenuElements(text, subText);
-    }
-
-    @Then("kullanici {string} yazisini görmeli")
-    public void kullaniciYazisiniGörmeli(String text) {
-        By xpath = By.xpath("//h1[contains(text(),'" + text + "')]");// genelleştiricez
-        // todo: uygun assert metodu bulunacak, submenude "Başvru" yazısı sıkıntı çıkarıyor.
-        //Assert.assertEquals(getDriver().findElement(xpath).getText(),text);
-        getWait().until((ExpectedConditions.textToBe(xpath, "Demo Başvuru")));
-        pause(2000);
-        getScreenShot("Demo Başvurusu");
-    }
 
     @Given("kullanici {string} deki {string} ye click yapar")
     public void kullaniciDekiYeClickYapar(String menu, String submenu) {
         clickTopSubMenuElements(menu, submenu);
     }
 
-    @And("kullanici {string} sayfasina girmeli")
-    public void kullaniciSayfasinaGirmeli(String actUrl) {
-        String currentUrl = getDriver().getCurrentUrl();
-        Assert.assertEquals(actUrl, currentUrl);
-    }
 
     @Then("kullanici {string} görmeli")
     public void kullaniciGörmeli(String text) {
@@ -115,14 +86,25 @@ public class MyStepdefs_Mvt extends Base_Mvt {
         visible(xpath);
     }
 
-    @Given("user is on homepage {string}")
-    public void userIsOnHomepage(String url) {
-        getDriver().get(url);
-    }
 
     @And("{string} deki renk değişmeli")
     public void dekiRenkDeğişmeli(String menuText) {
-        assertChangeColor(topMenuXpath(menuText),"#00adee");
+        assertChangeColor(topMenuXpath(menuText), "#00adee");
     }
+
+
+    @And("sayfa adresi {string} olmalı")
+    public void sayfaAdresiOlmalı(String expUrl) {
+        Assert.assertEquals(getDriver().getCurrentUrl(), expUrl);
+    }
+
+
+    @And("kullanici {string} altındaki Submenu lere hover over yapar")
+    public void kullaniciAltındakiSubmenuLereHoverOverYapar(String menuText) {
+        for (WebElement element : topSubMenuElements(menuText)) {
+            new Actions(Driver.getDriver()).moveToElement(element).perform();
+        }
+    }
+
 }
 

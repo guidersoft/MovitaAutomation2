@@ -1,7 +1,6 @@
 package Test.Adem.stepdefs;
 
 import Locators.Locator;
-import Utilities.Browsers;
 import Utilities.Driver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -10,19 +9,17 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import readers.property.PropertyReader;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Base_Mvt implements Locator {
-    private WebDriver driver;
-    private WebDriverWait wait;
+    private WebDriver driver = Driver.getDriver();
+    private WebDriverWait wait = Driver.getWait();
 
     /*
     @BeforeTest
@@ -33,29 +30,14 @@ public class Base_Mvt implements Locator {
         driver.manage().window().maximize();
     }
      */
-
+/*
     {
         driver = Driver.getDriver(Browsers.EDGE);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    @AfterTest
-    public void afterTest() {
-        Driver.quitDriver();
-    }
-
-
-
-   /*   public BaseMovita() {
-          driver=Driver.getDriver();
-          wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-      }*/
-
-    /*{
-        driver=Driver.getDriver();
-        wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-    }*/
+ */
 
 
     public void open() {
@@ -215,7 +197,6 @@ public class Base_Mvt implements Locator {
     }
 
 
-
     /**
      * Bu metot topMenudeki elementlerin locator ını döndürür.
      * text teki kelimelerin ilk harfleri büyük olmalı.
@@ -232,6 +213,7 @@ public class Base_Mvt implements Locator {
 
     /**
      * Bu metot top menu locator larını getirir.
+     *
      * @param text String
      * @return By xpath
      */
@@ -255,7 +237,8 @@ public class Base_Mvt implements Locator {
 
     /**
      * Bu metot topmenu altındaki submenulere click eder
-     * @param text menu link adı
+     *
+     * @param text    menu link adı
      * @param subText submenu link adı
      */
     public void clickTopSubMenuElements(String text, String subText) {
@@ -265,11 +248,17 @@ public class Base_Mvt implements Locator {
     }
 
 
-    public void assertChangeColor(By locator, String expColor){
+    /**
+     * Bu metot elementin arka plan rengini assert eder.
+     *
+     * @param locator  By
+     * @param expColor String Hex Code ( #00adee gibi..)
+     */
+    public void assertChangeColor(By locator, String expColor) {
         WebElement element = driver.findElement(locator);
         String actColorRGB = element.getCssValue("color");
         String actColorHEX = Color.fromString(actColorRGB).asHex();
-        Assert.assertEquals(actColorHEX,expColor);// mevcut renk istenen renkle aynı mı ?
+        Assert.assertEquals(actColorHEX, expColor);// mevcut renk istenen renkle aynı mı ?
         // #00adee -> hover edince oluşan renk kodu
 
     }
@@ -277,16 +266,14 @@ public class Base_Mvt implements Locator {
 
     /**
      * Bu metot girilen menu ye ait submenu locator ını getirir.
-     * @param textMenu String
+     *
+     * @param textMenu    String
      * @param textSubMenu String
      * @return By
      */
-    public By topSubMenuXpath(String textMenu, String textSubMenu){
+    public By topSubMenuXpath(String textMenu, String textSubMenu) {
         return By.xpath("//li[.//div[text()='" + textMenu + "']]//div[contains(.,'" + textSubMenu + "')]");
     }
-
-
-
 
 
 }
