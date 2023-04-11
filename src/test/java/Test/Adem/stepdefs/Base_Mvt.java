@@ -20,8 +20,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Base_Mvt implements Locator {
-    private  WebDriver driver;
-    private  WebDriverWait wait;
+    private WebDriver driver;
+    private WebDriverWait wait;
 
     /*
     @BeforeTest
@@ -65,6 +65,7 @@ public class Base_Mvt implements Locator {
     public void visible(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
     public void visible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -107,7 +108,7 @@ public class Base_Mvt implements Locator {
 
     }
 
-    public void hoverOver(WebElement element,String text){
+    public void hoverOver(WebElement element, String text) {
         new Actions(driver)
                 .moveToElement(element)
                 .click(homePageMenu(text))
@@ -115,8 +116,8 @@ public class Base_Mvt implements Locator {
                 .perform();
     }
 
-    public void hoverAll(By locator){
-        List<WebElement> list=driver.findElements(locator);
+    public void hoverAll(By locator) {
+        List<WebElement> list = driver.findElements(locator);
 
         for (WebElement element : list) {
             new Actions(driver)
@@ -141,7 +142,8 @@ public class Base_Mvt implements Locator {
     }
 
 
-    /** Bu metot element e sırasıyla Selenium, Actions ve JS ile click etmeyi dener.
+    /**
+     * Bu metot element e sırasıyla Selenium, Actions ve JS ile click etmeyi dener.
      *
      * @param element WebElement
      */
@@ -178,8 +180,9 @@ public class Base_Mvt implements Locator {
 
     /**
      * Bu metot element e sırasıyla Selenium, Actions ve JS ile sendKeys etmeyi dener.
+     *
      * @param element WebElement
-     * @param text String
+     * @param text    String
      */
     public void sendKeys(WebElement element, String text) {
         wait.until(driver1 -> {// Aslında yukarıda wait e verilen driverla aynıdır. Lambda metodu kullandık.
@@ -208,6 +211,43 @@ public class Base_Mvt implements Locator {
 
     public void pause(long millis) {
         new Actions(driver).pause(millis).perform();
+    }
+
+
+    // //nav[@class='primary-menu']/ul//li/a/div[contains(text(),'Min')]//ancestor::a
+    // Engin beydeki locator
+
+    /**
+     * Bu metot topMenudeki elementlerin locator ını döndürür.
+     * text teki kelimelerin ilk harfleri büyük olmalı.
+     *
+     * @param text String path
+     * @return By
+     */
+    public WebElement topMenuElement(String text) {
+        WebElement element = driver.findElement(By.xpath("//div[text()='" + text + "']"));
+        return element;
+
+    }
+
+
+    /**
+     * Bu metot top menu altındaki açılır menulerin listesini döndürür.
+     *
+     * @param text subMenu adi
+     * @return List<WebElement>
+     * Eğer subMenude element yoksa bile exc. fırlatmaz çünkü liste boş olabilir.
+     */
+    public List<WebElement> topSubMenuElements(String text) {
+        // xpath -> Bağlısının text i "..." div olan "li" altındaki ul altındaki li leri arıyorum.
+        List<WebElement> elements = driver.findElements(By.xpath("//li[.//div[text()='" + text + "']]/ul/li"));
+        return elements;
+    }
+
+    public void clickTopSubMenuelements(String text, String subText) {
+        WebElement element = driver.findElement(By.xpath("//li[.//div[text()='" + text + "']]//div[contains(.,'" + subText + "')]"));
+        element.click();
+
     }
 
 

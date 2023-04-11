@@ -1,12 +1,10 @@
 package Test;
 
-import Test.Adem.stepdefs.BaseMovita;
+import Test.Adem.stepdefs.Base_Mvt;
 import org.testng.annotations.*;
-import stepdefs.BaseSteps;
 
-import static java.nio.channels.SocketChannel.open;
 
-public class Test1 extends BaseMovita {
+public class Test1 extends Base_Mvt {
 
 
     @Test(priority = 0)

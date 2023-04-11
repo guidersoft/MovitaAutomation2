@@ -13,11 +13,13 @@ Feature: Movita Test
     Then Türkce “Mobil Vasita izleme takip Sistemi” yazisi gözükmeli
 
 
+    """
   Scenario: ANA SAYFA
 
     Given Ana sayfa linkine hover over olunca yazisi renk degistirmeli
     When Clickable olmalidir
     Then Click yapınca “Mobil Vasita izleme takip Sistemi” yazisi ekranda cikmali
+    """
 
 
 

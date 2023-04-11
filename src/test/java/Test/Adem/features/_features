@@ -1,0 +1,31 @@
+ KURUMSAL
+
+Hover over yapinca 6 secenek cikmali:
+
+HAKKIMIZDA
+
+BELGERIMIZ
+
+BAYILIK BASVURUSU
+
+DEMO BASVURUSU
+
+CEREZ POLITIKASI
+
+KVKK
+
+bu seceneklerin hepsi clickable olmali ve hover yapinca renkleri degismeli.
+
+Her bir secenege tiklayinca sirasiyla asagidaki String’ler verify edilmeli
+
+HAKKIMIZDA → HAKKIMIZDA
+
+BELGERIMIZ → BELGELERIMIZ
+
+BAYILIK BASVURUSU → BAYILIK BASVURUSU
+
+DEMO BASVURUSU → DEMO BASVURUSU
+
+CEREZ POLITIKASI → CEREZ POLITIKASI
+
+KVKK → KİŞİSEL VERİLERİN İŞLENME POLİTİKASI"
