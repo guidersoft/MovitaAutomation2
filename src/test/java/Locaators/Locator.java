@@ -22,12 +22,13 @@ public interface Locator {
     By lSubMenuKurumsal=By.xpath("(//ul[@class='sub-menu-container'])[1]//div");
 
     By lMovitaLogo=By.xpath("//a[@class='retina-logo']/img[@alt='Canvas Logo']");
-    By lMovitaLogoText=By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobil Vasıta İzleme Takip Sistemi')]");
+
 
     By lFlagButton=By.id("dropdownMenuButton");
     By lMobilVehicleTrackingText = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobile Vehicle')]");
 
     By lMobilVasitaIzlemeText = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobil Vasıta İzleme Takip Sistemi')]");
+
     WebElement homePageMenu(String text);
 
 

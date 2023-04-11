@@ -20,8 +20,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class BaseMovita implements Locator {
-    private  WebDriver driver;
-    private  WebDriverWait wait;
+    protected   WebDriver driver;
+    protected   WebDriverWait wait;
 
 
     public BaseMovita(){
@@ -29,8 +29,6 @@ public class BaseMovita implements Locator {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
-
-
 
 
 
@@ -177,5 +175,13 @@ public class BaseMovita implements Locator {
 
     public void waitForVisibility(WebElement webElement) {
         wait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+    public WebElement menuLocator(String text){
+        WebElement element = driver.findElement(By.xpath("//nav[@class='primary-menu']/ul//li/a/div[contains(text(),'" + text + "')]//ancestor::a"));
+        return element;
+    }
+    public void hover(WebElement element){
+        new Actions(driver)
+                .moveToElement(element).perform();
     }
 }
