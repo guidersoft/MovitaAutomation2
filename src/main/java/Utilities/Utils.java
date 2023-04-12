@@ -13,15 +13,14 @@ import java.time.format.DateTimeFormatter;
 public class Utils {
 
     public static String getCurrentDateTime() {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-        return now.format(formatter);
+
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MM_yyyy"));
     }
 
     public static void getElementScreenshotsAs(WebElement currentElement) {
         File screenshotAs = currentElement.getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(screenshotAs, new File("screenShots/"+ RandomStringUtils.randomAlphanumeric(5) +"screenshot.png"));
+            FileUtils.copyFile(screenshotAs, new File("screenShots/"+ getCurrentDateTime() +"-screenshot.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

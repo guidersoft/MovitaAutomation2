@@ -8,6 +8,7 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import static Utilities.Driver.quitDriver;
 
 
 public class Hooks {
@@ -35,7 +36,7 @@ public class Hooks {
     @After(order = 0)
     public void after(){
 
-        Driver.quitDriver();
+        quitDriver();
     }
 }
 
