@@ -9,19 +9,19 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Properties;
 
 public class Utils {
 
     public static String getCurrentDateTime() {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-        return now.format(formatter);
+
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MM_yyyy"));
     }
 
     public static void getElementScreenshotsAs(WebElement currentElement) {
         File screenshotAs = currentElement.getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(screenshotAs, new File("screenShots/"+ RandomStringUtils.randomAlphanumeric(5) +"screenshot.png"));
+            FileUtils.copyFile(screenshotAs, new File("screenShots/"+ getCurrentDateTime() +"-screenshot.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -32,6 +32,18 @@ public class Utils {
             Thread.sleep(milis);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+
+    public static void readSystem(String[] args) {
+        // Sistem özelliklerini al
+        Properties props = System.getProperties();
+
+        // Tüm anahtar-değer çiftlerini yazdır
+        for (String key : props.stringPropertyNames()) {
+            String value = props.getProperty(key);
+            System.out.println(key + ": " + value);
         }
     }
 }

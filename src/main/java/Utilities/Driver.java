@@ -15,7 +15,7 @@ import static Utilities.DriverFactory.*;
 
 public class Driver {
 
-    private static ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
+    public static ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
     private static ThreadLocal<WebDriverWait> waits = new ThreadLocal<>();
 
     public static WebDriver getDriver(){
