@@ -6,15 +6,10 @@ import ReuseableClass.BaseClass;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
-
 import java.io.IOException;
-
 import static ReuseableClass._Conditions.urlToBe;
 import static ReuseableClass._Conditions.visibilty;
 
