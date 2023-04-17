@@ -19,6 +19,7 @@ public interface HomePageLocator {
 
     String loginInput="//form//input[@id=\"{0}\"]";
     String ALL_Locator="//*[contains(text(),\"{0}\")]";
+    By movitaLogo= By.xpath("//img[@alt=\"movita\"]");
 
 
 

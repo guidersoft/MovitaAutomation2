@@ -7,5 +7,6 @@ public enum _Conditions {
     urlContains,
     visibilityOfNestedElementsLocatedBy,
     alerispreses,
-    textToBe;
+    textToBe,
+    urlToBe;
 }

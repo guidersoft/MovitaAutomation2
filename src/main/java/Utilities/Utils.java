@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Properties;
 
 public class Utils {
 
@@ -31,6 +32,18 @@ public class Utils {
             Thread.sleep(milis);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+
+    public static void readSystem(String[] args) {
+        // Sistem özelliklerini al
+        Properties props = System.getProperties();
+
+        // Tüm anahtar-değer çiftlerini yazdır
+        for (String key : props.stringPropertyNames()) {
+            String value = props.getProperty(key);
+            System.out.println(key + ": " + value);
         }
     }
 }
