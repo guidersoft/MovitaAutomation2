@@ -1,0 +1,279 @@
+package Test.Adem.stepdefs;
+
+import Locators.Locator;
+import Utilities.Driver;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import readers.property.PropertyReader;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+public class Base_Mvt implements Locator {
+    private WebDriver driver = Driver.getDriver();
+    private WebDriverWait wait = Driver.getWait();
+
+    /*
+    @BeforeTest
+    @Parameters("browser")
+    public void beforeTest(@Optional("CHROME") String browser) {
+        driver = Driver.getDriver(Browsers.valueOf(browser));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+    }
+     */
+/*
+    {
+        driver = Driver.getDriver(Browsers.EDGE);
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+ */
+
+
+    public void open() {
+        driver.get(PropertyReader.read().get("url"));
+    }
+
+
+    public void visible(By locator) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public void visible(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void assertElement(By locator, String str) {
+
+        WebElement element = driver.findElement(locator);
+        String text = element.getText();
+        System.out.println(text);
+        //bekle(1000);
+        Assert.assertEquals(text, str);
+
+
+    }
+
+    public void bekle(long milis) {
+        try {
+            Thread.sleep(milis);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void getScreenShot(String name) {
+
+        String isim = "screenShots/" + name + " " + LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("dd_MM_yyyy")) + ".png";
+
+        TakesScreenshot takesScreenshot = ((TakesScreenshot) driver);
+
+        File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
+        File target = new File(isim);
+
+        try {
+            FileUtils.copyFile(source, target);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void hoverOver(WebElement element, String text) {
+        new Actions(driver)
+                .moveToElement(element)
+                .click(homePageMenu(text))
+                .build()
+                .perform();
+    }
+
+    public void hoverAll(By locator) {
+        List<WebElement> list = driver.findElements(locator);
+
+        for (WebElement element : list) {
+            new Actions(driver)
+                    .moveToElement(element)
+                    .build()
+                    .perform();
+        }
+    }
+
+
+    @Override
+    public WebElement homePageMenu(String text) {
+        WebElement element = driver.findElement(By.xpath("//ul[@class='menu-container']//div[text()='" + text + "']"));
+
+        return element;
+
+    }
+
+    public void click(By locator) {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        click(element);
+    }
+
+
+    /**
+     * Bu metot element e sırasıyla Selenium, Actions ve JS ile click etmeyi dener.
+     *
+     * @param element WebElement
+     */
+    public void click(WebElement element) {// totalde 100 ms aralıklarla 10 sn tıklamayı dener, bu metot çalışır.
+        wait.until(driver1 -> {// Aslında yukarıda wait e verilen driverla aynıdır. Lambda metodu kullandık. Istersek
+            // driver1 yerine "e" ya da istenen değişken adı yazılabilir. list.forEach(e-> sout(e.getText)) kullanımı gibi.
+            // Lambda da -> { } kullanılırsa bir değer return etmek zorundadır.
+            try {
+                element.click();// önce elemente selenium ile click etmeyi dener.
+                return true;
+            } catch (Exception e) {
+                try {// selenium tıklayamazsa Actions Class tan actions la click deneyelim.
+                    new Actions(driver1).moveToElement(element).click().perform();
+                    return true;
+                } catch (Exception e2) {
+                    try {// actions da tıklayamazsa en son JS ile click deneyelim.
+                        ((JavascriptExecutor) driver1).executeScript("arguments[0].click();", element);
+                        return true;
+                    } catch (Exception e3) {
+                        return false;
+                    }
+                }
+
+            }
+        });
+
+    }
+
+    public void sendKeys(By locator, String text) {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        sendKeys(element, text);
+    }
+
+
+    /**
+     * Bu metot element e sırasıyla Selenium, Actions ve JS ile sendKeys etmeyi dener.
+     *
+     * @param element WebElement
+     * @param text    String
+     */
+    public void sendKeys(WebElement element, String text) {
+        wait.until(driver1 -> {// Aslında yukarıda wait e verilen driverla aynıdır. Lambda metodu kullandık.
+            try {
+                element.clear();
+                element.sendKeys(text);
+                return true;
+            } catch (Exception e) {
+                try {// selenium tıklayamazsa action la deneyelim.
+                    element.clear();
+                    new Actions(driver1).moveToElement(element).sendKeys(text).perform();
+                    return true;
+                } catch (Exception e2) {
+                    try {// action da tıklayamazsa JS ile click deneyelim.
+                        element.clear();
+                        ((JavascriptExecutor) driver1).executeScript("arguments[0].value=" + text, element);
+                        return true;
+                    } catch (Exception e3) {
+                        return false;
+                    }
+                }
+
+            }
+        });
+    }
+
+    public void pause(long millis) {
+        new Actions(driver).pause(millis).perform();
+    }
+
+
+    /**
+     * Bu metot topMenudeki elementlerin locator ını döndürür.
+     * text teki kelimelerin ilk harfleri büyük olmalı.
+     *
+     * @param text String path
+     * @return By
+     */
+    public WebElement topMenuElement(String text) {
+        WebElement element = driver.findElement(By.xpath("//div[text()='" + text + "']"));
+        return element;
+
+    }
+
+
+    /**
+     * Bu metot top menu locator larını getirir.
+     *
+     * @param text String
+     * @return By xpath
+     */
+    public By topMenuXpath(String text) {
+        return By.xpath("//div[text()='" + text + "']");
+    }
+
+
+    /**
+     * Bu metot top menu altındaki açılır menulerin listesini döndürür.
+     *
+     * @param text subMenu adi
+     * @return List<WebElement>
+     * Eğer subMenude element yoksa bile exc. fırlatmaz çünkü liste boş olabilir.
+     */
+    public List<WebElement> topSubMenuElements(String text) {
+        // xpath -> Bağlısının text i "..." div olan "li" altındaki ul altındaki li leri arıyorum.
+        List<WebElement> elements = driver.findElements(By.xpath("//li[.//div[text()='" + text + "']]/ul/li"));
+        return elements;
+    }
+
+    /**
+     * Bu metot topmenu altındaki submenulere click eder
+     *
+     * @param text    menu link adı
+     * @param subText submenu link adı
+     */
+    public void clickTopSubMenuElements(String text, String subText) {
+        WebElement element = driver.findElement(By.xpath("//li[.//div[text()='" + text + "']]//div[contains(.,'" + subText + "')]"));
+        element.click();
+
+    }
+
+
+    /**
+     * Bu metot elementin arka plan rengini assert eder.
+     *
+     * @param locator  By
+     * @param expColor String Hex Code ( #00adee gibi..)
+     */
+    public void assertChangeColor(By locator, String expColor) {
+        WebElement element = driver.findElement(locator);
+        String actColorRGB = element.getCssValue("color");
+        String actColorHEX = Color.fromString(actColorRGB).asHex();
+        Assert.assertEquals(actColorHEX, expColor);// mevcut renk istenen renkle aynı mı ?
+        // #00adee -> hover edince oluşan renk kodu
+
+    }
+
+
+    /**
+     * Bu metot girilen menu ye ait submenu locator ını getirir.
+     *
+     * @param textMenu    String
+     * @param textSubMenu String
+     * @return By
+     */
+    public By topSubMenuXpath(String textMenu, String textSubMenu) {
+        return By.xpath("//li[.//div[text()='" + textMenu + "']]//div[contains(.,'" + textSubMenu + "')]");
+    }
+
+
+}
