@@ -68,7 +68,7 @@ Feature: functionality of links on the homepage
       | Yük ve Eşya Taşıyan Araçlar  |
       | Belediye ve Halk Otobüsleri  |
 
-    When the "Çözümler" link is hovered and the links in the drop-down list are clicked, the following data must be verified
+  When the "Çözümler" link is hovered and the links in the drop-down list are clicked, the following data must be verified
 
       | Taksi ve Özel Araçlar        |
       | Minibüsler ve Midibüsler     |

@@ -1,38 +1,57 @@
 package stepdefs;
 
+import Readers.PropertyReader;
 import Utilities.Driver;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import readers.property.PropertyReader;
 
-public class Hooks {// Cucumber notasyonları, varsa TestNG notasyonlarından sonra çalışırlar.
+import java.util.Properties;
+
+import static Utilities.Driver.*;
+
+
+public class Hooks {
+
+    @AfterStep
+    public void after1(Scenario scenario){
+
+        boolean scrShot = PropertyReader.read().get("takescreenshot").equalsIgnoreCase("true");
+        String takeScrOn = PropertyReader.read().get("takescreenshot.on");
+        if (scrShot) {
+            if (takeScrOn.equalsIgnoreCase("fail")){
+                if (scenario.isFailed()) {
+                    byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+                    scenario.attach(screenshot, "image/png", scenario.getName());
+                }
+            }else{
+                byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+
+            }
+        }
+
+    }
+//    @After(order = -1)
+//    public void after2(Scenario scenario) {
+//      {
+//            System.out.println("Senaryo " + scenario.getName() + " başarısız oldu.");
+//            System.out.println("Kullanılan tarayıcı: " + getDriver().toString());
+//            System.out.println("İşletim sistemi: " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
+//
+//        }
+//
+//
+//    }
+
+
+
 
     @After(order = 0)
-    public void quit() {// Her senaryodan sonra çalışır.
-        Driver.quitDriver();
+    public void after(){
+        quitDriver();
     }
-
-    @After()// After her senaryo sonrası çalışır. -> AfterStep dersek her step sonu çalışır.
-    public void after1(Scenario scenario) {
-        boolean screenShot = PropertyReader.read().get("takescreenshot").equalsIgnoreCase("true");
-        boolean screenShotOn = PropertyReader.read().get("takescreenshot.on").equalsIgnoreCase("true");
-        if (screenShot) {// Feature daki  bir Senaryodaki herhangi bir step fail olursa senaryo biter ve devreye girer
-            if (screenShotOn) {// step step SS alınacaksa bu bloğa girer -> tabi önce AfterStep diyerek bu metotu step step çalıştırmalıyız.
-                if (scenario.isFailed()) {// Senaryo fail ise bu bloğa girer.
-                    byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
-                    // ekran fotosunu file değilde byte olarak(0 ve 1 ler gibi sayısal olark) tutar.
-                    scenario.attach(screenshot, "image/png", scenario.getName());
-                    // senaryomuza attach(ekleme) ediyoruz; screenshot, media tip ve senaryo adını giriyoruz.
-                    // Bu ekran fotosunu raporda görebilieceğiz.
-                }
-            } else {// step step çekilmeyecekse bu bloğa girer, senaryo bitimi hata varsa SS alır.
-                byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
-                scenario.attach(screenshot, "image/png", scenario.getName());
-            }
-
-        }
-    }
-
 }
+
+

@@ -133,6 +133,9 @@ public class BaseClass {
             case urlContains:
                 new WebDriverWait(driver,duration).until(ExpectedConditions.urlContains(text));
                 break;
+            case urlToBe:
+                new WebDriverWait(driver,duration).until(ExpectedConditions.urlToBe(text));
+                break;
             case visibilityOfNestedElementsLocatedBy:
                 new WebDriverWait(driver,duration).until(ExpectedConditions.visibilityOfNestedElementsLocatedBy(element,By.xpath(text)));
                 break;
@@ -234,6 +237,9 @@ public class BaseClass {
     }
 
     public static String getElementCssProperty(WebElement element, String cssValue ){
+        return element.getCssValue(cssValue);
+    }
+    public String getElementCssProperty(String cssValue ){
         return element.getCssValue(cssValue);
     }
 }

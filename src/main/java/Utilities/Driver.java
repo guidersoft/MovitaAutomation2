@@ -11,57 +11,49 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static Utilities.DriverFactory.*;
+
 public class Driver {
 
-    //private static WebDriver driver;
-    private static ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
+    public static ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
     private static ThreadLocal<WebDriverWait> waits = new ThreadLocal<>();
 
-    public static WebDriver getDriver() {
-        return getDriver(Browsers.CHROME);
+    public static WebDriver getDriver(){
+        return getDriver(Browsers.chrome);
     }
-
-    public static WebDriver getDriver(Browsers browsers) {
-        if (drivers.get() == null) {
-            switch (browsers) {
-                case EDGE:
-                    WebDriverManager.edgedriver().setup();
-                    drivers.set(new EdgeDriver());
+    public static WebDriver getDriver(Browsers browser){
+        if (drivers.get() == null){
+            switch (browser){
+                case firefox:
+                    drivers.set(createFirefox());
                     break;
-                case SAFARI:
-                    WebDriverManager.safaridriver().setup();
-                    drivers.set(new SafariDriver());
+                case edge:
+                    drivers.set(createEdge());
                     break;
-                case FIREFOX:
-                    WebDriverManager.firefoxdriver().setup();
-                    drivers.set(new FirefoxDriver());
+                case ie:
+                    drivers.set(createIe());
+                    break;
+                case safari:
+                    drivers.set(createSafari());
                     break;
                 default:
-                    WebDriverManager.chromedriver().setup();
-                    ChromeOptions options = new ChromeOptions();
-                    options.addArguments("--remote-allow-origins=*");
-                    //options.addArguments("--headles");
-                    drivers.set(new ChromeDriver(options));
+                    drivers.set(createChrome());
                     break;
-
             }
-
         }
-        waits.set(new WebDriverWait(drivers.get(), Duration.ofSeconds(10)));// waits i set ettik.
-        drivers.get().manage().window().maximize();
+        waits.set(new WebDriverWait(drivers.get(), Duration.ofSeconds(10)));
         return drivers.get();
-
     }
 
-    public static WebDriverWait getWait() {
-        return waits.get();// listenin tek elemanı vardır ve onu getirir. index yazmaya gerek yoktur.
+    public static WebDriverWait getWait(){
+        return waits.get();
     }
 
-    public static void quitDriver() {
+    public static void quitDriver(){
         if (drivers.get() != null) {
             drivers.get().quit();
             drivers.set(null);
-
+            waits.set(null);
         }
     }
 }

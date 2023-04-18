@@ -52,6 +52,7 @@ public class HomePagefunc extends BaseClass implements HomePageLocator {
     @When("user clicks dropdown button")
     public void userClicksDropdownButton() {
         $(llanguageDropdown).click();
+        getElementScreenshotsAs($(llanguageDropdown).getCurrentElement());
 
     }
 
@@ -132,9 +133,8 @@ public class HomePagefunc extends BaseClass implements HomePageLocator {
             $(xpath(ALL_A,links)).hower();
             drobdownElements = $(xpath(ALL_A, links)).getCurrentElement().findElements(By.xpath(drobdownList));
             $(drobdownElements.get(i)).click().
-                    $(xpath(ALLVerifyText,list.get(i))).waitFor(visibilty,null);
+            $(xpath(ALLVerifyText,list.get(i))).waitFor(visibilty,null);
         }
     }
-
 
 }
