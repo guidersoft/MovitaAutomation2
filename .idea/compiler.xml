@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="MovitaAutomation" />
+        <module name="MovitaAutomation2" />
       </profile>
     </annotationProcessing>
   </component>

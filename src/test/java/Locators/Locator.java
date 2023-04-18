@@ -28,4 +28,5 @@ public interface Locator {
     By lSubMenuKurumsal = By.xpath("(//ul[@class='sub-menu-container'])[1]//div");
 
 
+    WebElement homePageMenu(String text);
 }

@@ -1,10 +1,10 @@
 package Utilities;
 
 public enum Browsers {
-    chrome,
-    edge,
-    safari,
-    firefox,
-    ie
-    ;
+    CHROME,
+    EDGE,
+    SAFARI,
+    FIREFOX,
+    IE
+
 }
