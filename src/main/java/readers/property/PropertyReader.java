@@ -7,49 +7,47 @@ import java.util.Properties;
 
 public class PropertyReader {
 
-    Properties prop = new Properties();
-    FileReader fileReader;
-    FileWriter fileWriter;
+    Properties properties = new Properties();
     String file;
 
-    public static PropertyReader read(){
+    public static PropertyReader read() {
         return read("config");
     }
 
-    public static PropertyReader read(String fileName){
+    public static PropertyReader read(String fileName) {
         return new PropertyReader(fileName);
     }
 
-    private PropertyReader(String fileName){
+    private PropertyReader(String fileName) {// fileName -> config, config2 ...
         try {
-            this.file = "src/test/resources/datafiles/" + fileName + ".properties";
-            fileReader = new FileReader(file);
-            prop.load(fileReader);
+            this.file = "src/test/resources/datafiles/" + fileName + ".properties"; // .json, .xml ...
+            FileReader fileReader = new FileReader(file);
+            properties.load(fileReader);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    public String get(String key){
-        return prop.getProperty(key);
+    public String get(String key) {
+        return properties.getProperty(key);
     }
 
 
-    public void set(String key, String value){
-        prop.setProperty(key, value);
+    public void set(String key, String value) {
+        properties.setProperty(key, value);
     }
 
 
-    public void del(String key){
-        prop.remove(key);
+    public void del(String key) {
+        properties.remove(key);
     }
 
-    public void store(String comment){
+    public void store(String comment) {
         try {
-            fileWriter = new FileWriter(file);
-            prop.store(fileWriter, comment);
-        }catch (Exception e){
+            FileWriter fileWriter = new FileWriter(file);
+            properties.store(fileWriter, comment);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
