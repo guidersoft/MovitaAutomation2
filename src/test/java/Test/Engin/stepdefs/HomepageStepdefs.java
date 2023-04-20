@@ -100,7 +100,7 @@ public class HomepageStepdefs extends BaseMovita{
         try {
             Assert.assertTrue(driver.getPageSource().contains(text));
         }catch (Exception e){
-            getScreenshot("spring 1");
+            getScreenshot("spring");
         }
 
     }
