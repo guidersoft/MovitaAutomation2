@@ -51,6 +51,7 @@ public class HomepageStepdefs extends BaseMovita{
     @And("user cliks {string} buttun")
     public void userCliksButtun(String text) {
         By locator=By.xpath("//a[@class='dropdown-item' and contains(.,'" + text + "')]");
+
         click(locator);
     }
 
@@ -84,7 +85,7 @@ public class HomepageStepdefs extends BaseMovita{
         hover(menuLocator(text));
         String color2=menuLocator(text).getCssValue("Color");
         afterColor=Color.fromString(color2).asHex();
-        System.out.println(afterColor);
+
     }
 
 

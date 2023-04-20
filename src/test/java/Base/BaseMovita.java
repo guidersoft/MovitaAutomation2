@@ -180,6 +180,7 @@ public class BaseMovita implements Locator {
         WebElement element = driver.findElement(By.xpath("//nav[@class='primary-menu']/ul//li/a/div[contains(text(),'" + text + "')]//ancestor::a"));
         return element;
     }
+    By ele=By.xpath("//nav[@class='primary-menu']/ul//li/a/div[contains(text(),'Produckt')]//ancestor::a");
     public void hover(WebElement element){
         new Actions(driver)
                 .moveToElement(element).perform();
