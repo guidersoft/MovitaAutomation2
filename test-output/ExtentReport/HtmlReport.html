@@ -49,7 +49,7 @@
 		<!-- nav-right -->
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<a href='#!'>
-			<span class='label blue darken-3 suite-start-time'>Nis 11, 2023 04:02:31 ÖS</span>
+			<span class='label blue darken-3 suite-start-time'>Apr. 20, 2023 06:53:34 PM</span>
 			</a>
 		</ul>
 	</div>
@@ -76,7 +76,7 @@
 				<i class='material-icons'>local_offer</i> Category
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
-					<li><a href='#'>@LanguageOptions</a></li>
+					<li><a href='#'>@LoginPage</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
 				</ul>
@@ -157,7 +157,7 @@
                 </div>
                 <div class='block text-small'>
                     <span class='tooltipped' data-position='top' data-tooltip='100%'>
-                    <span class='strong'>6</span> steps passed</span>
+                    <span class='strong'>3</span> steps passed</span>
                 </div>
                 <div class='block text-small'>
                     <span class='strong tooltipped' data-position='top' data-tooltip='0%'>
@@ -186,8 +186,8 @@
 			<ul id='test-collection' class='test-collection'>
 				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>Movita Homepage</span>
-						<span class='test-time'>Nis 11, 2023 04:02:32 ÖS</span>
+						<span class='test-name'>Login Page</span>
+						<span class='test-time'>Apr. 20, 2023 06:53:35 PM</span>
 						<span class='test-status right pass'>Pass</span>
 					</div>
 					<div class='test-content hide'>
@@ -200,46 +200,32 @@
 
 <div class='scenario node' test-id='2' status='pass'>
 
-	<span class='duration right label'>00 00 20.536</span>
+	<span class='duration right label'>00 00 22.421</span>
 	<div class="bdd-test">
-		<div class="scenario-name"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span> Scenario: Language option on Homepage</div>
+		<div class="scenario-name"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span> Scenario: login</div>
 	</div>
 	
 	
 		<div class='category-list'>
-				<span class='category label'>@LanguageOptions</span>
+				<span class='category label'>@LoginPage</span>
 		</div>
 	
 	<ul class='steps'>
-		<li test-id='3' class='node when Pass' status='Pass'>
-			<div class="step-name" title="(Test.Adem.stepdefs.MyStepdefs_Mvt.userIsOnHomepage())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>When user is on homepage</div>
+		<li test-id='3' class='node given Pass' status='Pass'>
+			<div class="step-name" title="(Test.Engin.stepdefs.HomepageStepdefs.userIsHomepage())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given user is homepage</div>
 
 
 		</li>
-		<li test-id='4' class='node given Pass' status='Pass'>
-			<div class="step-name" title="(Test.Adem.stepdefs.MyStepdefs_Mvt.clickableOlmali())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given Clickable olmali</div>
+		<li test-id='4' class='node when Pass' status='Pass'>
+			<div class="step-name" title="(Test.Engin.stepdefs.LoginPageStepDefs.userClicksGirisYapMenu())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>When user clicks giris yap menu</div>
 
 
 		</li>
-		<li test-id='5' class='node when Pass' status='Pass'>
-			<div class="step-name" title="(Test.Adem.stepdefs.MyStepdefs_Mvt.kullanıcıButonunaTıklar(java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>When Kullanıcı "English" butonuna tıklar</div>
+		<li test-id='5' class='node and Pass' status='Pass'>
+			<div class="step-name" title="(Test.Engin.stepdefs.LoginPageStepDefs.userTypeTheTextAsAFallowingTable(io.cucumber.datatable.DataTable))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And user type the text as a fallowing table</div>
 
 
-		</li>
-		<li test-id='6' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(Test.Adem.stepdefs.MyStepdefs_Mvt.yazisiGözükmeli(java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And "Mobile Vehicle" yazisi gözükmeli</div>
-
-
-		</li>
-		<li test-id='7' class='node when Pass' status='Pass'>
-			<div class="step-name" title="(Test.Adem.stepdefs.MyStepdefs_Mvt.kullanıcıButonunaTıklar(java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>When Kullanıcı "Türkçe" butonuna tıklar</div>
-
-
-		</li>
-		<li test-id='8' class='node then Pass' status='Pass'>
-			<div class="step-name" title="(Test.Adem.stepdefs.MyStepdefs_Mvt.yazisiGözükmeli(java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Then "Mobil Vasıta" yazisi gözükmeli</div>
-
-
+					<div class="node-step"><table class='markup-table table '><tr><td>username</td><td>password</td><td>Status</td></tr><tr><td>demomovita1</td><td>1192movita</td><td>false</td></tr><tr><td>demomovita</td><td>1192movita1</td><td>false</td></tr><tr><td>demomovita1</td><td>1192movita1</td><td>false</td></tr><tr><td>demomovita</td><td></td><td>false</td></tr><tr><td></td><td>1192movita</td><td>false</td></tr><tr><td></td><td></td><td>false</td></tr><tr><td>demomovita</td><td>1192movita</td><td>true</td></tr></table></div>
 		</li>
 	</ul>
 </div>
@@ -287,7 +273,7 @@
 			<ul id='category-collection' class='category-collection'>
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@LanguageOptions</span>
+						<span class='category-name'>@LoginPage</span>
 						<span class='category-status right'>
 						<span class='label pass'>1</span>
 						</span>
@@ -309,8 +295,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Nis 11, 2023 04:02:32 ÖS</td>
-										<td class='linked' test-id='2'>Language option on Homepage</td>
+										<td>Apr. 20, 2023 06:53:35 PM</td>
+										<td class='linked' test-id='2'>login</td>
 										<td><span class='test-status Pass'>Pass</span></td>
 									</tr>
 								</tbody>
@@ -347,25 +333,25 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>6</div>
+					<div class='panel-lead'>3</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Nis 11, 2023 04:02:31 ÖS</div>
+					<div class='panel-lead'>Apr. 20, 2023 06:53:34 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Nis 11, 2023 04:02:52 ÖS</div>
+			 		<div class='panel-lead'>Apr. 20, 2023 06:53:58 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>00 00 21.401</div>
+					<div class='panel-lead'>00 00 23.634</div>
 				</div>
 			</div>
 			<div class='col s6'>
@@ -381,7 +367,7 @@
 							<th>Passed %</th>
 						</tr>
 						<tr>
-							<td>@LanguageOptions</td>
+							<td>@LoginPage</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
@@ -415,8 +401,8 @@
 				warningChild: 0,
 				skipChild: 0,
 				infoChild: 0,
-				grandChildCount: 6,
-				passGrandChild: 6,
+				grandChildCount: 3,
+				passGrandChild: 3,
 				failGrandChild: 0,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,
@@ -428,7 +414,7 @@
 		
 		<script>
 			var timeline = {
-			        "Movita Homepage":20.539
+			        "Login Page":22.425
 			};
 		</script>
 		

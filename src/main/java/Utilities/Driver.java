@@ -19,21 +19,21 @@ public class Driver {
     private static ThreadLocal<WebDriverWait> waits = new ThreadLocal<>();
 
     public static WebDriver getDriver(){
-        return getDriver(Browsers.chrome);
+        return getDriver(Browsers.CHROME);
     }
     public static WebDriver getDriver(Browsers browser){
         if (drivers.get() == null){
             switch (browser){
-                case firefox:
+                case FIREFOX:
                     drivers.set(createFirefox());
                     break;
-                case edge:
+                case EDGE:
                     drivers.set(createEdge());
                     break;
-                case ie:
+                case IE:
                     drivers.set(createIe());
                     break;
-                case safari:
+                case SAFARI:
                     drivers.set(createSafari());
                     break;
                 default:
