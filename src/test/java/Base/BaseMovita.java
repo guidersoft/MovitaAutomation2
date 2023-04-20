@@ -176,6 +176,10 @@ public class BaseMovita implements Locator {
     public void waitForVisibility(WebElement webElement) {
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
+    public void waitForVisibility(By locator) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
     public WebElement menuLocator(String text){
         WebElement element = driver.findElement(By.xpath("//nav[@class='primary-menu']/ul//li/a/div[contains(text(),'" + text + "')]//ancestor::a"));
         return element;

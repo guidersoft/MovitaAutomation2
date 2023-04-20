@@ -28,6 +28,17 @@ public interface Locator {
     By lMobilVehicleTrackingText = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobile Vehicle')]");
 
     By lMobilVasitaIzlemeText = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobil Vasıta İzleme Takip Sistemi')]");
+    By lGirisYapButton=By.xpath("//div[@class='header-row']/a");
+    By lHataMessageoneorTwoFalse=By.xpath("//div[@class='toast-message']");
+    By lHataMessageSifre=By.xpath("//div[contains(text(),'Lütfen şifre girin!')]");
+    By lHataMessageKullanici=By.xpath("//div[contains(text(),'Lütfen kullanıcı adı')]");
+    By lLoginSubmitButton=By.xpath("//button[@type='submit']");
+    By lLoginSuccess=By.id("ic-logo");
+    By lUserName=By.id("username");
+    By lPassword=By.id("password");
+    By lDemoFiloButton=By.cssSelector(".user-name");
+    By lLogOut=By.xpath("(//a[@class='dropdown-item'])[4]");
+
 
     WebElement homePageMenu(String text);
 
