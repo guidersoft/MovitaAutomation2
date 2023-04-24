@@ -1,2 +1,5 @@
 .idea
+.gitignore
 /target
+/test-output
+MovitaAutomation.iml
