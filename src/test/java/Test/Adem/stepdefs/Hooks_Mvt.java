@@ -1,6 +1,7 @@
 package Test.Adem.stepdefs;
 
 import Utilities.Driver;
+import Utilities.Utils;
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
@@ -15,7 +16,7 @@ public class Hooks_Mvt {// Cucumber notasyonları, varsa TestNG notasyonlarında
     }
 
 
-    //@After()// After her senaryo sonrası çalışır. -> AfterStep dersek her step sonu çalışır.
+    @After()// After her senaryo sonrası çalışır. -> AfterStep dersek her step sonu çalışır.
     public void afterScreenShot(Scenario scenario) {
         boolean screenShot = PropertyReader.read().get("takescreenshot").equalsIgnoreCase("true");// true -> Bu senaryoda SS alınacak.
         boolean screenShotOn = PropertyReader.read().get("takescreenshot.on").equalsIgnoreCase("false");// false -> Ama her stepte SS alınmasın.

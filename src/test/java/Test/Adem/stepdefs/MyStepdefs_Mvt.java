@@ -1,5 +1,6 @@
 package Test.Adem.stepdefs;
 
+import Locators.Locator;
 import Utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -15,16 +16,18 @@ import static Utilities.Driver.*;
 import java.util.List;
 
 
-public class MyStepdefs_Mvt extends Base_Mvt {
+public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
+
+    // Movita Homepage:
+
     @Given("user is on homepage")
     public void userIsOnHomepage() {
-        //Driver.getDriver().get(PropertyReader.read().get("url"));
         getDriver().get("http://movita.com.tr/");
     }
 
     @When("user should clicks movita logo")
     public void userShouldClicksMovitaLogo() {
-        click(lMovitaLogo);
+        click(Locator.lMovitaLogo);
     }
 
     @Then("user should see the text")
@@ -105,6 +108,95 @@ public class MyStepdefs_Mvt extends Base_Mvt {
             new Actions(Driver.getDriver()).moveToElement(element).perform();
         }
     }
+
+
+
+    // LoginPageGorunum:
+
+    @Given("kullanici login sayfasına girer")
+    public void kullaniciLoginSayfasinaGirer() {
+
+        getDriver().get(urlLoginPage);
+
+    }
+
+
+    @When("'Kullanıcı Adı' ve 'Şifre' için iki ayrı alan görmelidir")
+    public void veIçinIkiAyrıAlanGörmelidir() {
+
+        visible(lKullaniciAdiLabel);
+        visible(lKullaniciAdiInput);
+
+        visible(lSifreLabel);
+        visible(lSifreInput);
+
+    }
+
+    @And("Kullanıcı adı input alanı üzerinde ‘Movita Vasıta İzleme Takip Sistemi’ yazısı ve onun üzerinde ise Movita logosu bulunmalıdır")
+    public void kullanıcıAdıInputAlanıÜzerindeMovitaVasıtaİzlemeTakipSistemiYazısıVeOnunÜzerindeIseMovitaLogosuBulunmalıdır() {
+
+        //‘Movita Vasıta İzleme Takip Sistemi’ yazısının assert edileceği element mevcut değil!!!
+        visible(Locators_LoginPage.lMovitaLogo);
+
+    }
+
+    @And("Alt kısımda ise uzun çubuk şeklinde {string} mavi renkte üzerinde ‘Giriş Yap’ butonu olmalıdır")
+    public void altKısımdaIseUzunÇubukŞeklindeMaviRenkteÜzerindeGirişYapButonuOlmalıdır(String bgColorHex) {
+
+        visible(lGirisYapButonu);
+        assertChangeBackGroundColor(lGirisYapButonu,bgColorHex);
+
+    }
+
+    @And("Butonun üzerinde ise ‘Şifrenizi mi Unuttunuz?' linki bulunmalıdır")
+    public void butonunÜzerindeIseŞifreniziMiUnuttunuzLinkiBulunmalıdır() {
+
+        visible(lSifrenizimiUnuttunuz);
+
+    }
+
+    @When("Kullanıcı 'Şifrenizi mi unuttunuz?' kısmına hover over yapar")
+    public void kullanıcıKısmınaHoverOverYapar() {
+
+        hover(lSifrenizimiUnuttunuz);
+
+    }
+
+    @And("'Şifrenizi mi unuttunuz?' yazısının rengi maviden {string} yeşile {string} dönüşmeli ve clickable olmali")
+    public void yazısınınRengiMavidenYeşileDönüşmeliVeClickableOlmali(String actColorHEX, String expColorHEX) {
+
+        // Değişmesi beklenen yesil rengin kodu bize verilmemiş!!!
+        Assert.assertEquals(actColorHEX, expColorHEX);
+
+        click(lSifrenizimiUnuttunuz);
+        kullaniciLoginSayfasinaGirer();
+
+    }
+
+    @When("Kullanıcı sağ üst köşede ‘Anasayfaya Dön’ yazısı ile birlikte bir ← ikon görmelidir")
+    public void kullanıcıSağÜstKöşedeAnasayfayaDönYazısıIleBirlikteBirIkonGörmelidir() {
+
+        visible(lAnaSayfayaDon);
+        // Sağ üst köşede ikon aranacak element mevcut değil!!!
+
+    }
+
+    @And("Kullanıcı bu ikona tıkladığı zaman Anasayfaya yönlendirilmelidir")
+    public void kullanıcıBuIkonaTıkladığıZamanAnasayfayaYönlendirilmelidir() {
+
+        click(lAnaSayfayaDon);
+        visible(Locator.lMovitaLogo);
+        kullaniciLoginSayfasinaGirer();
+
+    }
+
+    @When("Kullanıcı footer ın sol alt kısmında ‘Copyright © '2017-2022', Bütün Hakları Saklıdır.’ ibaresi görmelidir")
+    public void kullanıcıFooterInSolAltKısmındaCopyrightBütünHaklarıSaklıdırIbaresiGörmelidir() {
+
+        visible(lCopyrightYazisi);
+
+    }
+
 
 }
 

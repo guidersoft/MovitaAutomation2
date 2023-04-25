@@ -53,7 +53,13 @@ public class Base_Mvt implements Locator {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void assertElement(By locator, String str) {
+
+    /**
+     * Bu metot elementin text ini assert eder. 
+     * @param locator
+     * @param str
+     */
+    public void assertElementText(By locator, String str) {
 
         WebElement element = driver.findElement(locator);
         String text = element.getText();
@@ -64,13 +70,26 @@ public class Base_Mvt implements Locator {
 
     }
 
-    public void bekle(long milis) {
+    /**
+     * Bu metot Threat.sleep() kullanır.
+     * @param milis
+     */
+    public void bekleThreat(long milis) {
         try {
             Thread.sleep(milis);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+
+    /**
+     * Bu metot Actions.pause() kullanır.
+     * @param milis long
+     */
+    public void bekleActions(long milis) {
+        new Actions(driver).pause(milis).perform();
     }
 
     public void getScreenShot(String name) {
@@ -91,7 +110,23 @@ public class Base_Mvt implements Locator {
 
     }
 
-    public void hoverOver(WebElement element, String text) {
+
+    public void hover(By locator) {
+        WebElement webElement = driver.findElement(locator);
+
+            new Actions(driver)
+                    .moveToElement(webElement)
+                    .build()
+                    .perform();
+
+    }
+
+    /**
+     * Bu metot ana sayfada ismi girilen, header menuye ait elementlere hover over yapar
+     * @param element ana sayfada header menuye ait
+     * @param text menu elemntelerini ismidir. -> KURUMSAL gibi..
+     */
+    public void hoverOverAnaSayfa(WebElement element, String text) {
         new Actions(driver)
                 .moveToElement(element)
                 .click(homePageMenu(text))
@@ -249,7 +284,7 @@ public class Base_Mvt implements Locator {
 
 
     /**
-     * Bu metot elementin arka plan rengini assert eder.
+     * Bu metot elementin text rengini assert eder.
      *
      * @param locator  By
      * @param expColor String Hex Code ( #00adee gibi..)
@@ -260,6 +295,21 @@ public class Base_Mvt implements Locator {
         String actColorHEX = Color.fromString(actColorRGB).asHex();
         Assert.assertEquals(actColorHEX, expColor);// mevcut renk istenen renkle aynı mı ?
         // #00adee -> hover edince oluşan renk kodu
+
+    }
+
+    /**
+     * Bu metot elementin arka plan rengini assert eder.
+     *
+     * @param locator  By
+     * @param expBackgroundColorHEX String Hex Code ( #00adee gibi..)
+     */
+    public void assertChangeBackGroundColor(By locator, String expBackgroundColorHEX) {
+        WebElement element = driver.findElement(locator);
+        String actColorRGBA = element.getCssValue("background-color");
+        String actBackgroundColorHEX = Color.fromString(actColorRGBA).asHex();
+        Assert.assertEquals(actBackgroundColorHEX, expBackgroundColorHEX);// mevcut renk istenen renkle aynı mı ?
+        // #00adee -> Elementin arka plan hex renk kodu
 
     }
 
