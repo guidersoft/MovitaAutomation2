@@ -38,6 +38,10 @@ public interface Locator {
     By lPassword=By.id("password");
     By lDemoFiloButton=By.cssSelector(".user-name");
     By lLogOut=By.xpath("(//a[@class='dropdown-item'])[4]");
+    By lLoginPageMovitaLogo=By.xpath("(//div/a)[2]");
+    By lLoginPageSifrenizimiUnuttunuz=By.xpath("(//div/a)[3]");
+    By lLoginPageAnaSayfayaDon=By.xpath("(//div/a)[1]");
+    By lLoginPageGirisYapButton=By.xpath("//button[text()='Giriş Yap']");
 
 
     WebElement homePageMenu(String text);

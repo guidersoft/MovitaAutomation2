@@ -75,11 +75,42 @@ public class BaseMovita implements Locator {
     public void getScreenshot(String name) {
 
         String isim = "screenShots/" + name + " " + LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("dd_MM_yyyy")) + ".png";
+                .format(DateTimeFormatter.ofPattern("dd_MM_yyyy HH_mm_ss")) + ".png";
 
         TakesScreenshot takesScreenshot = ((TakesScreenshot) driver);
 
         File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
+        File target = new File(isim);
+
+        try {
+            FileUtils.copyFile(source, target);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public void getScreenshotElement(WebElement element,String name) {
+
+        String isim = "screenShots/" + name + " " + LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("dd_MM_yyyy HH_mm_ss")) + ".png";
+
+        File source = element.getScreenshotAs(OutputType.FILE);
+        File target = new File(isim);
+
+        try {
+            FileUtils.copyFile(source, target);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public void getScreenshotElement(By locator,String name) {
+        WebElement element = driver.findElement(locator);
+
+        String isim = "screenShots/" + name + " " + LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("dd_MM_yyyy HH_mm_ss")) + ".png";
+
+        File source = element.getScreenshotAs(OutputType.FILE);
         File target = new File(isim);
 
         try {
@@ -96,6 +127,16 @@ public class BaseMovita implements Locator {
                 .build()
                 .perform();
     }
+    public void hoverOver(By locator,String text){
+        WebElement element = driver.findElement(locator);
+        new Actions(driver)
+                .moveToElement(element)
+                .click(homePageMenu(text))
+                .build()
+                .perform();
+    }
+
+
     public void hoverAll(By locator){
         List<WebElement> list=driver.findElements(locator);
 
@@ -188,5 +229,17 @@ public class BaseMovita implements Locator {
     public void hover(WebElement element){
         new Actions(driver)
                 .moveToElement(element).perform();
+    }
+    public void hover(By locator){
+        WebElement element = driver.findElement(locator);
+        new Actions(driver)
+                .moveToElement(element).perform();
+    }
+    public void sleep(long mls){
+        try {
+            Thread.sleep(mls);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
