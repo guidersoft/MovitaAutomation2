@@ -17,6 +17,9 @@ boş bırakılan alanin altında ‘Lütfen kullanıcı adınızı girdiğinizde
 çalışmamalıdır.
 
 
+Username: demomovita
+Password: 1192movita
+
 
 
 MANUEL TEST CASE:
