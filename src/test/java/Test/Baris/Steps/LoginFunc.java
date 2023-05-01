@@ -1,5 +1,5 @@
 
-package stepdefs;
+package Test.Baris.Steps;
 
 import Locaators.HomePageLocator;
 import ReuseableClass.BaseClass;

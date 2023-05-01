@@ -1,4 +1,4 @@
-package stepdefs;
+package Test.Baris.Steps;
 
 import Readers.PropertyReader;
 import Utilities.Driver;
