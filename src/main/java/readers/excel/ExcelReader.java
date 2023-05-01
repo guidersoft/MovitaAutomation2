@@ -1,4 +1,4 @@
-package readers.excel;
+package Readers.excel;
 
 public class ExcelReader {
 

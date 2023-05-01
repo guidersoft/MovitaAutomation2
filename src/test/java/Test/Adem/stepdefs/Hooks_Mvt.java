@@ -6,7 +6,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import readers.property.PropertyReader;
+import Readers.property.PropertyReader;
 
 public class Hooks_Mvt {// Cucumber notasyonları, varsa TestNG notasyonlarından sonra çalışırlar.
 

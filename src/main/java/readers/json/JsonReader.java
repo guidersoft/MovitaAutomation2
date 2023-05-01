@@ -1,4 +1,4 @@
-package readers.json;
+package Readers.json;
 
 public class JsonReader {
 }

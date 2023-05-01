@@ -1,4 +1,4 @@
-package readers.yaml;
+package Readers.yaml;
 
 public class YamlReader {
 }

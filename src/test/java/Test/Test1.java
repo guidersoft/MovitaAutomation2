@@ -15,7 +15,7 @@ public class Test1 extends Base_Mvt {
     @Test(priority = 1, dependsOnMethods = "openMovita")
     public void logo() {
         click(llogo);
-        bekle(3000);
+        bekleThreat(3000);
         visible(lMobilVasitaIzlemeTakipText);
 
         //assertElement(lMobilVasıta,str);
@@ -27,9 +27,9 @@ public class Test1 extends Base_Mvt {
     public void enterButton() {
         click(lEnterButton);
         click(lTurkishLang);
-        bekle(500);
+        bekleThreat(500);
         getScreenShot("login");
-        bekle(500);
+        bekleThreat(500);
 
     }
 
@@ -37,7 +37,7 @@ public class Test1 extends Base_Mvt {
     public void enterButton2() {
         click(lEnterButton);
         click(lEnglishLang);
-        bekle(500);
+        bekleThreat(500);
         getScreenShot("Giris");
 
 
@@ -45,14 +45,14 @@ public class Test1 extends Base_Mvt {
 
     @Test(priority = 4, dependsOnMethods = "openMovita")
     public void homePage() {
-        hoverOver(homePageMenu("Ana Sayfa"), "Ana Sayfa");
+        //hoverOver(homePageMenu("Ana Sayfa"), "Ana Sayfa");
         visible(lMobilVasitaIzlemeTakipText);
 
     }
 
     @Test(priority = 5, dependsOnMethods = "openMovita")
     public void kurumsal() {
-        hoverOver(homePageMenu("Kurumsal"), "Kurumsal");
+        //hoverOver(homePageMenu("Kurumsal"), "Kurumsal");
         hoverAll(lSubMenuKurumsal);
 
     }

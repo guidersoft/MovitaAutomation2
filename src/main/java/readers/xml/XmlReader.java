@@ -1,4 +1,4 @@
-package readers.xml;
+package Readers.xml;
 
 public class XmlReader {
 }

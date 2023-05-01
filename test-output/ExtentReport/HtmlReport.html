@@ -49,7 +49,7 @@
 		<!-- nav-right -->
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<a href='#!'>
-			<span class='label blue darken-3 suite-start-time'>Apr. 29, 2023 07:13:31 PM</span>
+			<span class='label blue darken-3 suite-start-time'>Mai 1, 2023 12:30:41 PM</span>
 			</a>
 		</ul>
 	</div>
@@ -76,7 +76,7 @@
 				<i class='material-icons'>local_offer</i> Category
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
-					<li><a href='#'>@LoginPageFeatures</a></li>
+					<li><a href='#'>@rapor</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
 				</ul>
@@ -157,7 +157,7 @@
                 </div>
                 <div class='block text-small'>
                     <span class='tooltipped' data-position='top' data-tooltip='100%'>
-                    <span class='strong'>10</span> steps passed</span>
+                    <span class='strong'>5</span> steps passed</span>
                 </div>
                 <div class='block text-small'>
                     <span class='strong tooltipped' data-position='top' data-tooltip='0%'>
@@ -186,8 +186,8 @@
 			<ul id='test-collection' class='test-collection'>
 				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>Login Page</span>
-						<span class='test-time'>Apr. 29, 2023 07:13:32 PM</span>
+						<span class='test-name'>User page main menu</span>
+						<span class='test-time'>Mai 1, 2023 12:30:41 PM</span>
 						<span class='test-status right pass'>Pass</span>
 					</div>
 					<div class='test-content hide'>
@@ -200,64 +200,41 @@
 
 <div class='scenario node' test-id='2' status='pass'>
 
-	<span class='duration right label'>00 00 14.471</span>
+	<span class='duration right label'>00 00 33.094</span>
 	<div class="bdd-test">
-		<div class="scenario-name"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span> Scenario: Login Page features</div>
+		<div class="scenario-name"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span> Scenario: verify raporlar menu</div>
 	</div>
 	
 	
 		<div class='category-list'>
-				<span class='category label'>@LoginPageFeatures</span>
+				<span class='category label'>@rapor</span>
 		</div>
 	
 	<ul class='steps'>
 		<li test-id='3' class='node given Pass' status='Pass'>
-			<div class="step-name" title="(Test.Engin.stepdefs.HomepageStepdefs.userIsHomepage())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given user is homepage</div>
+			<div class="step-name" title="(Test.yusuf.stepdefs.RaporlarStepdefs.userLogsInFormWithTheFollowingData(io.cucumber.datatable.DataTable))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given user logs in form with the following data</div>
+
+
+					<div class="node-step"><table class='markup-table table '><tr><td>username</td><td>demomovita</td></tr><tr><td>password</td><td>1192movita</td></tr></table></div>
+		</li>
+		<li test-id='4' class='node given Pass' status='Pass'>
+			<div class="step-name" title="(Test.yusuf.stepdefs.RaporlarStepdefs.userClickOnTheInMainMenu(java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given user click on the "Raporlar" in main menu</div>
 
 
 		</li>
-		<li test-id='4' class='node when Pass' status='Pass'>
-			<div class="step-name" title="(Test.Engin.stepdefs.LoginPageStepDefs.userClicksGirisYapMenu())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>When user clicks giris yap menu</div>
+		<li test-id='5' class='node then Pass' status='Pass'>
+			<div class="step-name" title="(Test.yusuf.stepdefs.RaporlarStepdefs.userShouldSeeSubmenuUnderThe(int,java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Then user should see 11 submenu under the "Raporlar"</div>
 
 
 		</li>
-		<li test-id='5' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(Test.Engin.stepdefs.LoginPageStepDefs.userShouldSeeTwoInputFeld())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And user should see two input feld</div>
+		<li test-id='6' class='node when Pass' status='Pass'>
+			<div class="step-name" title="(Test.yusuf.stepdefs.RaporlarStepdefs.userClickOnTheSubMenuAndAssertChangedColor(io.cucumber.datatable.DataTable))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>When user click on the sub menu and assert changed color</div>
 
 
+					<div class="node-step"><table class='markup-table table '><tr><td>Araç Bazlı Rapor</td></tr><tr><td>Yakıt Entegrasyon Raporu</td></tr><tr><td>Günlük Seyahat Raporu</td></tr><tr><td>Aktivite Detay Raporu</td></tr><tr><td>Araç Karne</td></tr><tr><td>Filo Bazlı Rapor</td></tr><tr><td>Grup Bazlı Rapor</td></tr><tr><td>Alarm Log Raporu</td></tr><tr><td>Şoför Log Raporu</td></tr><tr><td>Sensör Log Raporu</td></tr><tr><td>Arıza Log Raporu</td></tr></table></div>
 		</li>
-		<li test-id='6' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(Test.Engin.stepdefs.LoginPageStepDefs.userShouldSeeLogoUndTheText(java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And user should see Logo und the text"Movita Vasıta İzleme Takip Sistemi"</div>
-
-
-		</li>
-		<li test-id='7' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(Test.Engin.stepdefs.LoginPageStepDefs.userShouldSeeGirisYapButton())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And user should see Giris Yap button</div>
-
-
-		</li>
-		<li test-id='8' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(Test.Engin.stepdefs.LoginPageStepDefs.userShouldSeeAboveTheGirisYapButtonTheText(java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And user should see above the Giris Yap button the text"Şifrenizi mi unuttunuz?"</div>
-
-
-		</li>
-		<li test-id='9' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(Test.Engin.stepdefs.LoginPageStepDefs.theButtonsColorShouldBeChanceAndBeClickable())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And the Buttons color should be chance and be clickable</div>
-
-
-		</li>
-		<li test-id='10' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(Test.Engin.stepdefs.HomepageStepdefs.userShouldSee(java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And user should see "Ana sayfaya dön"</div>
-
-
-		</li>
-		<li test-id='11' class='node then Pass' status='Pass'>
-			<div class="step-name" title="(Test.Engin.stepdefs.HomepageStepdefs.userShouldSee(java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Then user should see "Copyright © 2017 - 2022"</div>
-
-
-		</li>
-		<li test-id='12' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(Test.Engin.stepdefs.LoginPageStepDefs.userClicksTheButton())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And user clicks the button</div>
+		<li test-id='7' class='node then Pass' status='Pass'>
+			<div class="step-name" title="(Test.yusuf.stepdefs.RaporlarStepdefs.userShouldSeeSubmenuUnderThe(int,java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Then user should see 11 submenu under the "Raporlar"</div>
 
 
 		</li>
@@ -307,7 +284,7 @@
 			<ul id='category-collection' class='category-collection'>
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@LoginPageFeatures</span>
+						<span class='category-name'>@rapor</span>
 						<span class='category-status right'>
 						<span class='label pass'>1</span>
 						</span>
@@ -329,8 +306,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Apr. 29, 2023 07:13:32 PM</td>
-										<td class='linked' test-id='2'>Login Page features</td>
+										<td>Mai 1, 2023 12:30:41 PM</td>
+										<td class='linked' test-id='2'>verify raporlar menu</td>
 										<td><span class='test-status Pass'>Pass</span></td>
 									</tr>
 								</tbody>
@@ -367,25 +344,25 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>10</div>
+					<div class='panel-lead'>5</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Apr. 29, 2023 07:13:31 PM</div>
+					<div class='panel-lead'>Mai 1, 2023 12:30:41 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Apr. 29, 2023 07:13:46 PM</div>
+			 		<div class='panel-lead'>Mai 1, 2023 12:31:14 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>00 00 15.583</div>
+					<div class='panel-lead'>00 00 33.877</div>
 				</div>
 			</div>
 			<div class='col s6'>
@@ -401,7 +378,7 @@
 							<th>Passed %</th>
 						</tr>
 						<tr>
-							<td>@LoginPageFeatures</td>
+							<td>@rapor</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
@@ -435,8 +412,8 @@
 				warningChild: 0,
 				skipChild: 0,
 				infoChild: 0,
-				grandChildCount: 10,
-				passGrandChild: 10,
+				grandChildCount: 5,
+				passGrandChild: 5,
 				failGrandChild: 0,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,
@@ -448,7 +425,7 @@
 		
 		<script>
 			var timeline = {
-			        "Login Page":14.474
+			        "User page main menu":33.097
 			};
 		</script>
 		
