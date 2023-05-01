@@ -1,4 +1,4 @@
-package stepdefs;
+package Test.Baris.Steps;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
