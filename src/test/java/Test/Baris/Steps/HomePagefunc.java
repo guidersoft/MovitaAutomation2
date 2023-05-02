@@ -109,17 +109,6 @@ public class HomePagefunc extends BaseClass implements HomePageLocator {
             Assert.assertNotEquals(newcolor, color);
         }
 
-
-//        for (String drobdownTex : drobdownTexs) {
-//
-//            WebElement currentElement = $(xpath(ALL_A, drobdownTex)).getCurrentElement();
-//            color = getElementCssProperty(currentElement, "color");
-//            $(currentElement).hower();
-//            getElementScreenshotsAs(currentElement);
-//            threadSleep(500);
-//            newcolor = getElementCssProperty(currentElement, "color");
-//            Assert.assertNotEquals(newcolor, color);
-//        }
     }
 
 

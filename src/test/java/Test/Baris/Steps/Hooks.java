@@ -33,18 +33,6 @@ public class Hooks {
         }
 
     }
-//    @After(order = -1)
-//    public void after2(Scenario scenario) {
-//      {
-//            System.out.println("Senaryo " + scenario.getName() + " başarısız oldu.");
-//            System.out.println("Kullanılan tarayıcı: " + getDriver().toString());
-//            System.out.println("İşletim sistemi: " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
-//
-//        }
-//
-//
-//    }
-
 
 
 
