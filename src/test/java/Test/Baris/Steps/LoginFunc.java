@@ -1,12 +1,17 @@
 
 package Test.Baris.Steps;
 
+import Locaators.AccountPageLocators;
 import Locaators.HomePageLocator;
 import ReuseableClass.BaseClass;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+
+import java.util.Map;
 
 import static ReuseableClass._Conditions.*;
 
@@ -14,7 +19,7 @@ public class LoginFunc extends BaseClass implements HomePageLocator {
 
     @Given("user on login Page")
     public void userOnLoginPage() {
-        $(By.xpath("//div[text()=\"GİRİŞ Yap\"]")).click().waitFor(urlContains,"login");
+        $(By.xpath("//div[text()=\"GİRİŞ Yap\"]")).click().waitFor(urlContains, "login");
     }
 
     @Then("user logs in with {string} and  {string}, {string} user should see {string} message")
@@ -78,8 +83,6 @@ public class LoginFunc extends BaseClass implements HomePageLocator {
     }
 
 
-
-
     @Then("{string} link should be available.")
     public void şifreniziMiUnuttunuzLinkShouldBeAvailable(String text) {
         $(xpath(ALL_A, text)).waitFor(visibilty, null);
@@ -87,18 +90,18 @@ public class LoginFunc extends BaseClass implements HomePageLocator {
 
     @Then("There should be a {string} button in blue colour in the form of a long bar.")
     public void thereShouldBeALoginButtonInBlueColourInTheFormOfALongBar(String text) {
-        String expectedResult="rgb(0, 173, 238)";
+        String expectedResult = "rgb(0, 173, 238)";
         String style = $(xpath(ALL_A, "Şifrenizi mi unuttunuz?")).getCurrentElement().getAttribute("style");
-        if (! style.contains(expectedResult)) {
+        if (!style.contains(expectedResult)) {
             Assert.fail();
         }
     }
 
     @Then("and when hover over, the colour of the text should change from blue to green and it should be clickable")
     public void andWhenHoverOverTheColourOfTheTextShouldChangeFromBlueToGreenAndItShouldBeClickable() {
-        String expectedResult="rgba(0, 255, 0, 1)";
+        String expectedResult = "rgba(0, 255, 0, 1)";
         String style = $(xpath(ALL_A, "Şifrenizi mi unuttunuz?")).hower().getCurrentElement().getAttribute("style");
-        if (! style.contains(expectedResult)) {
+        if (!style.contains(expectedResult)) {
             Assert.fail();
         }
     }
@@ -116,4 +119,15 @@ public class LoginFunc extends BaseClass implements HomePageLocator {
     }
 
 
+    @And("user successfully logs in with followind data")
+    public void userSuccessfullyLogsInWithFollowindData(DataTable table) {
+        Map<String, String> userInfo = table.asMap();
+
+        $(xpath(loginInput, "username")).sendKeys(userInfo.get("username")).
+        $(xpath(loginInput, "password")).sendKeys(userInfo.get("password")).
+        $(xpath(ALL_BUTTON, "Giriş Yap")).click();
+        $(xpath(ALL_Locator, userInfo.get("verification text"))).waitFor(visibilty, null);
+
+
+    }
 }
