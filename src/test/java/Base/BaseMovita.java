@@ -6,11 +6,12 @@ import Utilities.Driver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import readers.property.PropertyReader;
+import Readers.property.PropertyReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -241,5 +242,20 @@ public class BaseMovita implements Locator {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void assertChangeColor(By locator, String color) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        assertChangeColor(element, color);
+    }
+
+    public void assertChangeColor(WebElement element, String color) {
+        String bgColorRGB = element.getCssValue("color");
+        String bgColorHex = Color.fromString(bgColorRGB).asHex();
+        Assert.assertEquals(bgColorHex, color);
+    }
+
+    public By xpath(String locator, String text) {
+        return By.xpath(String.format(locator, text));
     }
 }

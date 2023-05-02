@@ -1,4 +1,4 @@
-package readers.property;
+package Readers.property;
 
 import java.io.FileReader;
 import java.io.FileWriter;
