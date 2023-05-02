@@ -1,4 +1,4 @@
-package stepdefs;
+package Test.Baris.Steps;
 
 import Locaators.HomePageLocator;
 import ReuseableClass.BaseClass;
@@ -59,6 +59,7 @@ public class HomePagefunc extends BaseClass implements HomePageLocator {
     @And("user clicks english section")
     public void userClicksEnglishSection() {
        $(xpath(ALL_A, "English")).waitFor(visibilty,null).click();
+
     }
 
     @When("user clicks türkçe section")
@@ -136,5 +137,4 @@ public class HomePagefunc extends BaseClass implements HomePageLocator {
             $(xpath(ALLVerifyText,list.get(i))).waitFor(visibilty,null);
         }
     }
-
 }
