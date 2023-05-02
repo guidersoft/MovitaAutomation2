@@ -23,6 +23,7 @@ public class Test1 extends Base_Mvt {
         getScreenShot("MobilVasıta");
     }
 
+
     @Test(priority = 3)
     public void enterButton() {
         click(lEnterButton);
@@ -45,14 +46,14 @@ public class Test1 extends Base_Mvt {
 
     @Test(priority = 4, dependsOnMethods = "openMovita")
     public void homePage() {
-        //hoverOver(homePageMenu("Ana Sayfa"), "Ana Sayfa");
+
         visible(lMobilVasitaIzlemeTakipText);
 
     }
 
     @Test(priority = 5, dependsOnMethods = "openMovita")
     public void kurumsal() {
-        //hoverOver(homePageMenu("Kurumsal"), "Kurumsal");
+
         hoverAll(lSubMenuKurumsal);
 
     }
