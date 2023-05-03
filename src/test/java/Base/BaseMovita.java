@@ -258,4 +258,16 @@ public class BaseMovita implements Locator {
     public By xpath(String locator, String text) {
         return By.xpath(String.format(locator, text));
     }
+    public void hoverOverByAction(WebElement element) {
+        new Actions(driver)
+                .moveToElement(element)
+                .pause(500)
+                .build()
+                .perform();
+    }
+
+    public void hoverOverByAction(By locator) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        hoverOverByAction(element);
+    }
 }
