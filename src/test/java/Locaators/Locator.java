@@ -45,6 +45,9 @@ public interface Locator {
 
 
     WebElement homePageMenu(String text);
+    String TOP_MENU = "//*[@id='header-wrap']//a[contains(.,'%s')]";
+    By lLanguageOptionButton = By.xpath("//div[@class='dropdown dropdown-langs']//button");
+    By lTextOfMobilVasıtaİzlemeTakipSistemi = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobil')]");
 
 
 }
