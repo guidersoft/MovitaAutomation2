@@ -3,7 +3,7 @@ package Locators;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public interface Locator {
+public interface Locators {
 
     By llogo = By.xpath("//a[@class='standard-logo']");
     String str = "Mobil Vasıta İzleme Takip Sistemi";
