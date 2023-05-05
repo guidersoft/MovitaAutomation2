@@ -17,17 +17,16 @@ public class Hooks {
 
 
     @After
-    public void after1(Scenario scenario){
-        if (scenario.isFailed()) {
+    public void after1(Scenario scenario) {
+       if (scenario.isFailed()) {
             byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", scenario.getName());
         }
     }
 
 
-
     @After(order = 0)
-    public void after(){
+    public void after() {
         quitDriver();
     }
 }

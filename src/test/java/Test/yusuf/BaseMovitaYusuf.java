@@ -1,6 +1,6 @@
 package Test.yusuf;
 
-import Locaators.Locator;
+
 import Readers.MyPojo;
 import Utilities.Driver;
 import com.fasterxml.jackson.databind.ObjectMapper;

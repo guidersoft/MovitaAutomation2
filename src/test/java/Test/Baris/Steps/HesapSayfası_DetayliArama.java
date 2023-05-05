@@ -27,6 +27,9 @@ import static Test.Baris.Locators.HesapSayfasiLocators.detayliAramaInput;
 
 public class HesapSayfası_DetayliArama extends BaseClass implements HomePageLocator, AccountPageLocators {
     String text = "";
+    private String tarihText;
+    private String startWorkTime;
+    private String finishWorkTime;
 
 
     @Then("The input field in the following table must be verified to be side by side")
@@ -52,47 +55,9 @@ public class HesapSayfası_DetayliArama extends BaseClass implements HomePageLoc
         Map<String, String> dateText = table.asMap();
         selectDate(dateText.get("Start Date"), startDate, selectyearDate_1, selectmonthDate_1, dayselectDate_1);
         selectDate(dateText.get("Finish Date"), fnishDate, selectyearDate_2, selectmonthDate_2, dayselectDate_2);
+
+
     }
-
-    @And("user clicks {string} links")
-    public void userClicksLinks(String linkText) {
-        $(xpath(raporlarLink, linkText)).click();
-    }
-
-
-    @Then("the ordered list containing the searched text should be visible")
-    public void theOrderedListShouldBeSeenToBeReflesh() {
-        String text = this.text;
-        for (WebElement element : $(araclistesi).getElementList()) {
-            try {
-                switch (System.getProperty("LinkType")) {
-                    case "Tarih":
-                        element.findElement(xpath(aracListesi_Tarih, text));
-                        break;
-                    case "İşe Başlama":
-                        element.findElement(xpath(aracListesi_IseBaslama, text));
-                        break;
-                    case "İş Bitiş":
-                        element.findElement(xpath(aracListesi_IseBitis, text));
-                        break;
-                    default:
-
-                        break;
-                }
-            } catch (Exception e) {
-                Assert.fail();
-            }
-        }
-    }
-
-    @And("User sends to the {string} value {string} section of the Detayli Arama section")
-    public void userSendsToTheSectionOfTheDetayliAramaSection(String time, String link) throws InterruptedException {
-        $(leftMenuIkon).click();
-        $(xpath(detayliAramaInput, link)).click().sendKeys(time);
-        System.setProperty("LinkType", link);
-        this.text = time;
-    }
-
 
     private String removeLeadingZeros(String str) {
         if (str.startsWith("0")) {
@@ -111,4 +76,54 @@ public class HesapSayfası_DetayliArama extends BaseClass implements HomePageLoc
         $(xpath(dayElement, selectDate[2])).waitFor(visibilty, null).click();
     }
 
+    @And("user clicks {string} links")
+    public void userClicksLinks(String linkText) {
+        $(xpath(raporlarLink, linkText)).click();
+    }
+
+
+    @And("User sends to the {string} value {string} section of the Detayli Arama section")
+    public void userSendsToTheSectionOfTheDetayliAramaSection(String time, String link) throws InterruptedException {
+        if (time.isEmpty()) {
+            return;
+        }
+        $(xpath(detayliAramaInput, link)).click().sendKeys(time);
+        switch (link) {
+            case "Tarih": {
+                this.tarihText = time;
+                break;
+            }
+            case "İşe Başlama": {
+                this.startWorkTime = time;
+                break;
+            }
+            case "İş Bitiş": {
+                this.finishWorkTime = time;
+                break;
+            }
+        }
+        System.setProperty("LinkType", link);
+    }
+
+
+    @Then("The ordered list with the text {string} or {string} or {string} should be visible")
+    public void theOrderedListWithTheTextOrOrShouldBeVisible(String Datetext, String startTime, String finisTime) {
+        for (WebElement element : $(araclistesi).getElementList()) {
+            try {
+                if ((tarihText == null || element.findElement(xpath(aracListesi_Tarih, tarihText)) != null) &&
+                        (startWorkTime == null || element.findElement(xpath(aracListesi_IseBaslama, startWorkTime)) != null) &&
+                        (finishWorkTime == null || element.findElement(xpath(aracListesi_IseBitis, finishWorkTime)) != null)) {
+                }
+            } catch (Exception e) {
+                $(leftMenuIkon).click();
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                Assert.fail();
+            }
+        }
+    }
 }
