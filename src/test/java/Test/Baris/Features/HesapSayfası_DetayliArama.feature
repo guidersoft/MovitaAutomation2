@@ -6,7 +6,6 @@ Feature: Detayli Arama func
     And user on accaunt Page
     And user clicks "Raporlar" link
     And user clicks "Araç Bazlı Rapor" link
-    Then user confirms that he is on the desired page
     Given user clicks "Detaylı Filtre" link
     Then The input field in the following table must be verified to be side by side
       | Tarih       |
@@ -15,6 +14,12 @@ Feature: Detayli Arama func
 
 
   Scenario:Placeholder control of the Tarih entry
+    Given user on homepage
+    And user on login Page
+    And user on accaunt Page
+    And user clicks "Raporlar" link
+    And user clicks "Araç Bazlı Rapor" link
+    Given user clicks "Detaylı Filtre" link
     Then The format of the data to be entered as "Tarih"  should be shown to the user as "yyyy-MM-dd".
 
   @detY

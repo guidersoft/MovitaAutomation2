@@ -28,10 +28,6 @@ import static Test.Baris.Locators.HesapSayfasiLocators.detayliAramaInput;
 public class HesapSayfası_DetayliArama extends BaseClass implements HomePageLocator, AccountPageLocators {
     String text = "";
 
-    @Then("user confirms that he is on the desired page")
-    public void userConfirmsThatHeIsOnTheDesiredPage() {
-        waitFor(urlContains, "arac_rapor");
-    }
 
     @Then("The input field in the following table must be verified to be side by side")
     public void theInputFieldInTheFollowingTableMustBeVerifiedToBeSideBySide(DataTable table) {
@@ -40,16 +36,16 @@ public class HesapSayfası_DetayliArama extends BaseClass implements HomePageLoc
 
     @Then("The format of the data to be entered as {string}  should be shown to the user as {string}.")
     public void theFormatOfTheDataToBeEnteredAsShouldBeShownToTheUserAs(String inputName, String dateFormatText) {
-        String actuelResult = $(xpath(detayliAramaInput, inputName)).getCurrentElement().getAttribute("placeholder");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String actuelResult = $(xpath(detayliAramaInput, inputName))
+                .waitFor(visibilty, null)
+                .getCurrentElement().getAttribute("placeholder");
         try {
             LocalDate.parse(actuelResult, formatter);
         } catch (DateTimeParseException e) {
             Assert.fail();
         }
-
     }
-
 
     @When("the user selects start date and finish date from the following table")
     public void theUserSelectsStartDateAndFinishDateFromTheFollowingTable(DataTable table) {
