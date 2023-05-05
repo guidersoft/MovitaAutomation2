@@ -1,21 +1,12 @@
 Feature: Detayli Arama func
 
-  Background: Detayli Arama Background Scenario
+  Scenario: : Control of Detaylı Filtre inputs
     Given user on homepage
     And user on login Page
-    And user successfully logs in with followind data
-      | username          | demomovita |
-      | password          | 1192movita |
-      | verification text | Demo Filo  |
+    And user on accaunt Page
     And user clicks "Raporlar" link
     And user clicks "Araç Bazlı Rapor" link
     Then user confirms that he is on the desired page
-    When the user selects start date and finish date from the following table
-      | Start Date  | 2021-01-01 |
-      | Finish Date | 2022-12-31 |
-    And user clicks "Rapor Al" links
-
-  Scenario:Control of Detaylı Filtre inputs
     Given user clicks "Detaylı Filtre" link
     Then The input field in the following table must be verified to be side by side
       | Tarih       |
@@ -26,27 +17,34 @@ Feature: Detayli Arama func
   Scenario:Placeholder control of the Tarih entry
     Then The format of the data to be entered as "Tarih"  should be shown to the user as "yyyy-MM-dd".
 
-
-  Scenario: Data entry control to Tarih Section
+  @detY
+  Scenario Outline: Functionality of the inputs of the Detayli Arama section
+    Given user on homepage
+    And user on login Page
+    And user on accaunt Page
+    And user clicks "Raporlar" link
+    And user clicks "Araç Bazlı Rapor" link
     When the user selects start date and finish date from the following table
       | Start Date  | 2021-01-01 |
       | Finish Date | 2022-12-31 |
     And user clicks "Rapor Al" links
-
-  @Detayli
-  Scenario: Functionality of the inputs of the Detayli Arama section
     When user clicks "Detaylı Filtre" link
-    And User sends Date value to the "Tarih" section of the Detayli Arama section
-      | 2021       |
-      | 2021-11    |
-      | 2021-11-05 |
-    And User sends starttime value to the "İşe Başlama" section of the Detayli Arama section
-      | 12         |
-      | 00:00      |
-      | 2021-11-05 |
+    And User sends to the "<text>" value "<section>" section of the Detayli Arama section
+    Then the ordered list containing the searched text should be visible
+    Examples:
+      | text       | section     |
+      | 2022       | Tarih       |
+      | 2022-10    | Tarih       |
+      | 2022-10-12 | Tarih       |
+      | 09         | İşe Başlama |
+      | 09:06      | İşe Başlama |
+      | 09:06:31   | İşe Başlama |
+      | 09         | İş Bitiş    |
+      | 09:07      | İş Bitiş    |
+      | 09:07:49   | İş Bitiş    |
 
-    And User sends finishtime value to the "İş Bitiş" section of the Detayli Arama section
-      | 23       |
-      | 23:59    |
-      | 23:59:18 |
+
+
+
+
 

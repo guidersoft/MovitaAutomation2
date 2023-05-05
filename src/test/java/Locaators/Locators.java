@@ -3,9 +3,7 @@ package Locaators;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.io.StringReader;
-
-public interface Locator {
+public interface Locators {
 
 
     By llogo = By.xpath("//a[@class='standard-logo']");

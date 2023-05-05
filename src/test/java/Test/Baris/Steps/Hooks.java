@@ -15,23 +15,13 @@ import static Utilities.Driver.*;
 
 public class Hooks {
 
-    @AfterStep
+
+    @After
     public void after1(Scenario scenario){
-
-        boolean scrShot = PropertyReader.read().get("takescreenshot").equalsIgnoreCase("true");
-        String takeScrOn = PropertyReader.read().get("takescreenshot.on");
-        if (scrShot) {
-            if (takeScrOn.equalsIgnoreCase("fail")){
-                if (scenario.isFailed()) {
-                    byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
-                    scenario.attach(screenshot, "image/png", scenario.getName());
-                }
-            }else{
-                byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
-
-            }
+        if (scenario.isFailed()) {
+            byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/png", scenario.getName());
         }
-
     }
 
 

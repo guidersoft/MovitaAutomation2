@@ -1,8 +1,7 @@
 
 package Test.Baris.Steps;
 
-import Locaators.AccountPageLocators;
-import Locaators.HomePageLocator;
+import Test.Baris.Locators.HomePageLocator;
 import ReuseableClass.BaseClass;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -17,6 +16,7 @@ import static ReuseableClass._Conditions.*;
 
 public class LoginFunc extends BaseClass implements HomePageLocator {
 
+
     @Given("user on login Page")
     public void userOnLoginPage() {
         $(By.xpath("//div[text()=\"GİRİŞ Yap\"]")).click().waitFor(urlContains, "login");
@@ -29,7 +29,7 @@ public class LoginFunc extends BaseClass implements HomePageLocator {
             $(xpath(loginInput, "username")).sendKeys(username).
                     $(xpath(loginInput, "password")).sendKeys(password).
                     $(xpath(ALL_BUTTON, "Giriş Yap")).click().
-                    $(xpath(ALL_Locator, message)).waitFor(visibilty, null).
+                    $(xpath(ALL_Locator, message)).waitFor(visibilty, null);
                     $(xpath(ALL_Locator, message)).click().
                     $(xpath(ALL_A, "")).click();
         }
@@ -64,6 +64,8 @@ public class LoginFunc extends BaseClass implements HomePageLocator {
         }
 
     }
+
+
 
     @Given("should see two separate fields for username and password.")
     public void shouldSeeTwoSeparateFieldsForUsernameAndPassword() {
@@ -128,6 +130,18 @@ public class LoginFunc extends BaseClass implements HomePageLocator {
         $(xpath(ALL_BUTTON, "Giriş Yap")).click();
         $(xpath(ALL_Locator, userInfo.get("verification text"))).waitFor(visibilty, null);
 
+
+    }
+    public void successfulyLogin(){
+        $(xpath(loginInput, "username")).sendKeys("demomovita").
+                $(xpath(loginInput, "password")).sendKeys("1192movita").
+                $(xpath(ALL_BUTTON, "Giriş Yap")).click().
+                $(xpath(ALL_Locator, "Demo Filo")).waitFor(visibilty, null);
+    }
+
+    @And("user on accaunt Page")
+    public void userSuccessfullyLogin() {
+        successfulyLogin();
 
     }
 }

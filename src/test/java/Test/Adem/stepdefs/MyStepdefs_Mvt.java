@@ -1,6 +1,7 @@
 package Test.Adem.stepdefs;
 
-import Locators.Locator;
+
+import Locators.Locators;
 import Utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -10,7 +11,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-
 import static Utilities.Driver.*;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
 
     @When("user should clicks movita logo")
     public void userShouldClicksMovitaLogo() {
-        click(Locator.lMovitaLogo);
+        click(Locators.lMovitaLogo);
     }
 
     @Then("user should see the text")
@@ -185,7 +185,7 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     public void kullanıcıBuIkonaTıkladığıZamanAnasayfayaYönlendirilmelidir() {
 
         click(lAnaSayfayaDon);
-        visible(Locator.lMovitaLogo);
+        visible(Locators.lMovitaLogo);
         kullaniciLoginSayfasinaGirer();
 
     }
