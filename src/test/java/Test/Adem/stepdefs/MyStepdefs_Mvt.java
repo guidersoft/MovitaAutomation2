@@ -1,6 +1,6 @@
 package Test.Adem.stepdefs;
 
-import Locaators.Locator;
+import Locators.Locators;
 import Utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -13,9 +13,8 @@ import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import java.util.List;
 
-import static Locators.Locators.lLanguageButton;
-import static Locators.Locators.lMobilVasitaIzlemeTakipText;
 import static Utilities.Driver.getDriver;
+
 
 
 public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
@@ -31,7 +30,7 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
 
     @When("user should clicks movita logo")
     public void userShouldClicksMovitaLogo() {
-        click(Locator.lMovitaLogo);
+        click(Locators.lMovitaLogo);
     }
 
     @Then("user should see the text")
@@ -189,7 +188,7 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     public void kullanıcıBuIkonaTıkladığıZamanAnasayfayaYönlendirilmelidir() {
 
         click(lAnaSayfayaDon);
-        visible(Locator.lMovitaLogo);
+        visible(Locators.lMovitaLogo);
         kullaniciLoginSayfasinaGirer();
 
     }
