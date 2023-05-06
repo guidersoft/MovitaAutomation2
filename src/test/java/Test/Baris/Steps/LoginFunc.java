@@ -1,8 +1,7 @@
 
 package Test.Baris.Steps;
 
-import Locaators.AccountPageLocators;
-import Locaators.HomePageLocator;
+import Test.Baris.Locators.HomePageLocator;
 import ReuseableClass.BaseClass;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -17,6 +16,7 @@ import static ReuseableClass._Conditions.*;
 
 public class LoginFunc extends BaseClass implements HomePageLocator {
 
+
     @Given("user on login Page")
     public void userOnLoginPage() {
         $(By.xpath("//div[text()=\"GİRİŞ Yap\"]")).click().waitFor(urlContains, "login");
@@ -25,45 +25,32 @@ public class LoginFunc extends BaseClass implements HomePageLocator {
     @Then("user logs in with {string} and  {string}, {string} user should see {string} message")
     public void userLogsInWithAndUserShouldSeeMessage(String username, String password, String status, String message) {
 
-        if (status.equalsIgnoreCase("true")) {
-            $(xpath(loginInput, "username")).sendKeys(username).
-                    $(xpath(loginInput, "password")).sendKeys(password).
-                    $(xpath(ALL_BUTTON, "Giriş Yap")).click().
-                    $(xpath(ALL_Locator, message)).waitFor(visibilty, null).
-                    $(xpath(ALL_Locator, message)).click().
-                    $(xpath(ALL_A, "")).click();
-        }
-        if (status.equals("false")) {
-            if (!username.isEmpty() & !password.isEmpty()) {
-                $(xpath(loginInput, "username")).sendKeys(username).
-                        $(xpath(loginInput, "password")).sendKeys(password).
-                        $(xpath(ALL_BUTTON, "Giriş Yap")).click().
-                        $(xpath(ALL_Locator, message)).waitFor(visibilty, null);
+        if (!status.equalsIgnoreCase("true")) {
+            if (!username.isEmpty()) {
+                $(xpath(loginInput, "username")).sendKeys(username);
             }
-            if (username.isEmpty() & !password.isEmpty()) {
-                $(xpath(loginInput, "password")).sendKeys(password).
-                        $(xpath(ALL_BUTTON, "Giriş Yap")).click().
-                        $(xpath(ALL_Locator, message)).waitFor(visibilty, null);
+            if (!password.isEmpty()) {
+                $(xpath(loginInput, "password")).sendKeys(password);
             }
-            if (password.isEmpty() & !username.isEmpty()) {
-                $(xpath(loginInput, "username")).sendKeys(username).
-                        $(xpath(ALL_BUTTON, "Giriş Yap")).click().
-                        $(xpath(ALL_Locator, message)).waitFor(visibilty, null);
-            }
-            if (password.isEmpty() & username.isEmpty()) {
+            $(xpath(ALL_BUTTON, "Giriş Yap")).click();
 
-                String[] messagepart = message.split(" and ");
-                for (String s : messagepart) {
-                    s = s.trim();
+            if (!message.isEmpty()) {
+                String[] messageParts = message.split(" and ");
+                for (String part : messageParts) {
+                    $(xpath(ALL_Locator, part.trim())).waitFor(visibilty, null);
                 }
-
-                $(xpath(ALL_BUTTON, "Giriş Yap")).click().
-                        $(xpath(ALL_Locator, messagepart[0])).waitFor(visibilty, null);
-                $(xpath(ALL_Locator, messagepart[1])).waitFor(visibilty, null);
             }
+        } else {
+            $(xpath(loginInput, "username")).sendKeys(username);
+            $(xpath(loginInput, "password")).sendKeys(password);
+            $(xpath(ALL_BUTTON, "Giriş Yap")).click();
+            $(xpath(ALL_Locator, message)).waitFor(visibilty, null);
+            $(xpath(ALL_Locator, message)).click();
+            $(xpath(ALL_A, "")).click();
         }
 
     }
+
 
     @Given("should see two separate fields for username and password.")
     public void shouldSeeTwoSeparateFieldsForUsernameAndPassword() {
@@ -124,10 +111,23 @@ public class LoginFunc extends BaseClass implements HomePageLocator {
         Map<String, String> userInfo = table.asMap();
 
         $(xpath(loginInput, "username")).sendKeys(userInfo.get("username")).
-        $(xpath(loginInput, "password")).sendKeys(userInfo.get("password")).
-        $(xpath(ALL_BUTTON, "Giriş Yap")).click();
+                $(xpath(loginInput, "password")).sendKeys(userInfo.get("password")).
+                $(xpath(ALL_BUTTON, "Giriş Yap")).click();
         $(xpath(ALL_Locator, userInfo.get("verification text"))).waitFor(visibilty, null);
 
+
+    }
+
+    public void successfulyLogin() {
+        $(xpath(loginInput, "username")).sendKeys("demomovita").
+                $(xpath(loginInput, "password")).sendKeys("1192movita").
+                $(xpath(ALL_BUTTON, "Giriş Yap")).click().
+                $(xpath(ALL_Locator, "Demo Filo")).waitFor(visibilty, null);
+    }
+
+    @And("user on accaunt Page")
+    public void userSuccessfullyLogin() {
+        successfulyLogin();
 
     }
 }
