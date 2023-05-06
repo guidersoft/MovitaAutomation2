@@ -1,6 +1,5 @@
 package Test.Adem.stepdefs;
 
-
 import Locators.Locators;
 import Utilities.Driver;
 import io.cucumber.java.en.And;
@@ -11,12 +10,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-import static Utilities.Driver.*;
-
+import org.testng.asserts.SoftAssert;
 import java.util.List;
+
+import static Utilities.Driver.getDriver;
+
 
 
 public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
+
+    static SoftAssert softAssert = new SoftAssert();
 
     // Movita Homepage:
 
@@ -110,7 +113,6 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     }
 
 
-
     // LoginPageGorunum:
 
     @Given("kullanici login sayfasına girer")
@@ -144,7 +146,7 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     public void altKısımdaIseUzunÇubukŞeklindeMaviRenkteÜzerindeGirişYapButonuOlmalıdır(String bgColorHex) {
 
         visible(lGirisYapButonu);
-        assertChangeBackGroundColor(lGirisYapButonu,bgColorHex);
+        assertChangeBackGroundColor(lGirisYapButonu, bgColorHex);
 
     }
 
@@ -166,7 +168,8 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     public void yazısınınRengiMavidenYeşileDönüşmeliVeClickableOlmali(String actColorHEX, String expColorHEX) {
 
         // Değişmesi beklenen yesil rengin kodu bize verilmemiş!!!
-        Assert.assertEquals(actColorHEX, expColorHEX);
+        //Assert.assertEquals(actColorHEX, expColorHEX);
+        softAssert.assertEquals(actColorHEX, expColorHEX,"Step : 'Şifrenizi mi unuttunuz?' yazısının renk değişimi");
 
         click(lSifrenizimiUnuttunuz);
         kullaniciLoginSayfasinaGirer();
@@ -194,6 +197,58 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     public void kullanıcıFooterInSolAltKısmındaCopyrightBütünHaklarıSaklıdırIbaresiGörmelidir() {
 
         visible(lCopyrightYazisi);
+
+    }
+
+
+    // Login Page Giris:
+
+    @When("Olasi tüm {string} ve {string} girerek {string} uygun assertion yapar")
+    public void olasiVeKombinasyonlariniGirerekLoginButonunaClickYapar(String username, String password, String expectedResult) {
+
+        sendKeys(lKullaniciAdiInput, username);
+        sendKeys(lSifreInput, password);
+        click(lGirisYapButonu);
+
+        boolean expResult = Boolean.parseBoolean(expectedResult);
+
+        if (expResult) { // DD
+            assertVisibility(lDashboard, Visibility.VISIBLE);
+            click(lDashboardLogout);
+
+        } else {
+
+            if (username.isEmpty() ^ password.isEmpty()) {// -D, D-, -Y, Y-
+
+                if (username.isEmpty()) {
+                    visible(lKullaniciAdiGirinUyarisi);
+                } else {
+                    visible(lSifreGirinUyarisi);
+                }
+
+            }
+
+            if (username.isEmpty() & password.isEmpty()) {// --
+                visible(lKullaniciAdiGirinUyarisi);
+                visible(lSifreGirinUyarisi);
+            }
+
+
+            if (username.equals("demomovita")) {// DY
+                Assert.assertEquals(getWebElement(lSagUstKosedekiMesaj).getText(), "Kullanıcı giriş yapamadı");
+                assertVisibility(lDashboard, Visibility.INVISIBLE);
+            }
+
+
+            if (username.equals("qwerty") & !password.isEmpty()) {// YD, YY
+                Assert.assertEquals(getWebElement(lSagUstKosedekiMesaj).getText(), "Kullanıcı Adı Yada Şifre Hatalı");
+                assertVisibility(lSagUstKosedekiMesaj, Visibility.VISIBLE);
+                assertVisibility(lDashboard, Visibility.INVISIBLE);
+            }
+
+
+        }
+
 
     }
 
