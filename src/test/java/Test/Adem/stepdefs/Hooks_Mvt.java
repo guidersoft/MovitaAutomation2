@@ -1,16 +1,15 @@
 package Test.Adem.stepdefs;
 
+import Readers.property.PropertyReader;
 import Utilities.Driver;
-import Utilities.Utils;
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import Readers.property.PropertyReader;
 
 public class Hooks_Mvt {// Cucumber notasyonları, varsa TestNG notasyonlarından sonra çalışırlar.
 
-    @After(order = 1)// Her senaryo sonrası çalışır.
+    @After(order = 2)// Her senaryo sonrası çalışır.
     public void quit() {// Her senaryodan sonra çalışır.
         Driver.quitDriver();
     }
@@ -35,6 +34,11 @@ public class Hooks_Mvt {// Cucumber notasyonları, varsa TestNG notasyonlarında
             }
 
         }
+    }
+
+    @After(order = 1)
+    public void softAssertAll(Scenario scenario){
+        MyStepdefs_Mvt.softAssert.assertAll("Senaryo : " + scenario.getName());
     }
 
 }

@@ -3,6 +3,8 @@ package Test;
 import Test.Adem.stepdefs.Base_Mvt;
 import org.testng.annotations.*;
 
+import static Locators.Locators.lMobilVasitaIzlemeTakipText;
+
 
 public class Test1 extends Base_Mvt {
 

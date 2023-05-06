@@ -1,3 +1,4 @@
+@LoginPageGorunum
 Feature:  Login sayfasının default görünümü ve sayfadaki özelliklerin kullanılabilirliği
 
   Scenario: Login sayfasına girildiğinde görülmesi gerekenler ve özelliklerin aktifliği
