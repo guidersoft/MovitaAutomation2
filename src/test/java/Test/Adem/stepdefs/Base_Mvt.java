@@ -1,6 +1,7 @@
 package Test.Adem.stepdefs;
 
-import Locators.Locator;
+
+import Locators.Locators;
 import Utilities.Driver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class Base_Mvt implements Locator {
+public class Base_Mvt implements Locators {
     private WebDriver driver = Driver.getDriver();
     private WebDriverWait wait = Driver.getWait();
 

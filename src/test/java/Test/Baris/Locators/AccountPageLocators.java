@@ -1,9 +1,10 @@
-package Locaators;
+package Test.Baris.Locators;
 
 import org.openqa.selenium.By;
 
 public interface AccountPageLocators {
 
+    By leftMenuIkon=By.xpath("//i[@class='ft-menu']");
     By startDate= By.id("tarih1");
     By fnishDate= By.id("tarih2");
     By inputDate=By.xpath("//input[contains(@value,\"-\")]");
@@ -18,6 +19,7 @@ public interface AccountPageLocators {
     String aracListesi_Tarih=".//td[contains(.,\"{0}\")][1]";
     String aracListesi_IseBaslama=".//td[11][contains(.,\"{0}\")]";
     String aracListesi_IseBitis=".//td[12][contains(.,\"{0}\")]";
+    String raporlarLink="(//div[contains(.,\"{0}\")])[11]";
 
 
 
