@@ -1,6 +1,7 @@
 package Test.Adem.stepdefs;
 
 import Locators.Locators;
+import Test.Adem.locators.Locators_LoginPage;
 import Utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -11,10 +12,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
+
 import java.util.List;
 
 import static Utilities.Driver.getDriver;
-
 
 
 public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
@@ -87,9 +88,11 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
 
 
     @Then("kullanici {string} görmeli")
-    public void kullaniciGörmeli(String text) {
-        By xpath = By.xpath("//h1[contains(text(),'" + text + "')]");
-        visible(xpath);
+    public void kullaniciGörmeli(String expText) {
+        By lhTextActuel = By.xpath("//h1 | //h2 | //h3");
+        String hTextActuel = getDriver().findElement(lhTextActuel).getText();
+        System.out.println("hTextActuel = " + hTextActuel);
+        Assert.assertEquals(hTextActuel,expText);
     }
 
 
@@ -134,7 +137,8 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
 
     }
 
-    @And("Kullanıcı adı input alanı üzerinde ‘Movita Vasıta İzleme Takip Sistemi’ yazısı ve onun üzerinde ise Movita logosu bulunmalıdır")
+    @And("Kullanıcı adı input alanı üzerinde ‘Movita Vasıta İzleme Takip Sistemi’ yazısı ve onun üzerinde ise Movita " +
+            "logosu bulunmalıdır")
     public void kullanıcıAdıInputAlanıÜzerindeMovitaVasıtaİzlemeTakipSistemiYazısıVeOnunÜzerindeIseMovitaLogosuBulunmalıdır() {
 
         //‘Movita Vasıta İzleme Takip Sistemi’ yazısının assert edileceği element mevcut değil!!!
@@ -169,7 +173,7 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
 
         // Değişmesi beklenen yesil rengin kodu bize verilmemiş!!!
         //Assert.assertEquals(actColorHEX, expColorHEX);
-        softAssert.assertEquals(actColorHEX, expColorHEX,"Step : 'Şifrenizi mi unuttunuz?' yazısının renk değişimi");
+        softAssert.assertEquals(actColorHEX, expColorHEX, "Step : 'Şifrenizi mi unuttunuz?' yazısının renk değişimi");
 
         click(lSifrenizimiUnuttunuz);
         kullaniciLoginSayfasinaGirer();
@@ -204,7 +208,8 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     // Login Page Giris:
 
     @When("Olasi tüm {string} ve {string} girerek {string} uygun assertion yapar")
-    public void olasiVeKombinasyonlariniGirerekLoginButonunaClickYapar(String username, String password, String expectedResult) {
+    public void olasiVeKombinasyonlariniGirerekLoginButonunaClickYapar(String username, String password,
+                                                                       String expectedResult) {
 
         sendKeys(lKullaniciAdiInput, username);
         sendKeys(lSifreInput, password);

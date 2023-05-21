@@ -1,4 +1,4 @@
-package Test.Adem.stepdefs;
+package Test.Adem.locators;
 
 import org.openqa.selenium.By;
 
@@ -22,6 +22,10 @@ public interface Locators_LoginPage {
     By lSifreGirinUyarisi = By.xpath("//div[@class='password-toggle']//div[1]");// Lütfen şifre girin!
     By lDashboard = By.xpath("//li[@id='anasayfa']");// Kullanıcı hesabına girdiğinde görür
     By lDashboardLogout = By.xpath("//a[contains(text(),'Çıkış Yap')]");// Dashboard dan çıkış yapar
+
+    By lMovitaMNVRileTumAraclarText = By.xpath("//div[@class='tp-mask-wrap']/div[contains(.,'movita MNVR ile tüm araçları" +
+            " izleyip')]");
+
 
 
 
