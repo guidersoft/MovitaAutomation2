@@ -39,7 +39,6 @@ Feature: Movita Homepage
 
 
 
-    # topMenudeki submenulere click ederek sayfa url ve actual text'leri assert edeceğiz.
   @TopMenuClick
   Scenario Outline: Header Menudeki "<Menu>" ve "<Submenu>" clickable olmalıdır
     #Given user is on homepage "<url>"
@@ -47,25 +46,23 @@ Feature: Movita Homepage
     And "<Menu>" deki renk değişmeli
     Given kullanici "<Menu>" deki "<Submenu>" ye click yapar
     Then kullanici "<expText>" görmeli
-    # And sayfa adresi "<expUrl>" olmalı
-    # Hata verdiği ve de zaten üstte assert ettiğim için kullanmadım.
 
 
     #list of maps
     Examples:
       | Menu     | Submenu                      | expUrl                                      | expText                              |
-      | Kurumsal | Hakkımızda                   | https://www.movita.com.tr/about             | Hakkımızda                           |
+      | Kurumsal | Hakkımızda                   | https://www.movita.com.tr/about             | HAKKIMIZDA                           |
       | Kurumsal | Belgelerimiz                 | https://www.movita.com.tr/belgelerimiz      | BELGELERİMİZ                         |
-      | Kurumsal | Bayilik Başvurusu            | https://www.movita.com.tr/bayi_basvuru      | Bayilik Başvuru                      |
-      | Kurumsal | Demo Başvrusu                | https://www.movita.com.tr/demo_basvuru      | Demo Başvuru                         |
-      | Kurumsal | Çerez Politikası             | https://www.movita.com.tr/cerez             | Çerez Politikası                     |
+      | Kurumsal | Bayilik Başvurusu            | https://www.movita.com.tr/bayi_basvuru      | BAYILIK BAŞVURU                      |
+      | Kurumsal | Demo Başvrusu                | https://www.movita.com.tr/demo_basvuru      | DEMO BAŞVURU                         |
+      | Kurumsal | Çerez Politikası             | https://www.movita.com.tr/cerez             | ÇEREZ POLITIKASI                     |
       | Kurumsal | KVKK                         | https://www.movita.com.tr/kvkk              | KİŞİSEL VERİLERİN İŞLENME POLİTİKASI |
       | Ürünler  | MNVR                         | https://movita.com.tr/mnvr                  | MNVR                                 |
       | Ürünler  | MNVR Pro                     | https://movita.com.tr/mnvr_pro              | MNVR Pro                             |
       | Ürünler  | MNVR AI                      | https://movita.com.tr/mnvr_ai               | MNVR AI                              |
-      | Ürünler  | Araç Takip Cihazı            | https://movita.com.tr/arac_takip_cihazi     | Araç Takip Cihazı                    |
-      | Ürünler  | Cam Tracker                  | https://movita.com.tr/urunler               | Ürünler                              |
-      | Ürünler  | Akıllı Direk Sistemi         | https://movita.com.tr/akilli_direk          | Akıllı Direk Sistemi                 |
+      | Ürünler  | Araç Takip Cihazı            | https://movita.com.tr/arac_takip_cihazi     | ARAÇ TAKIP CIHAZI                    |
+      | Ürünler  | Cam Tracker                  | https://movita.com.tr/urunler               | ÜRÜNLER                              |
+      | Ürünler  | Akıllı Direk Sistemi         | https://movita.com.tr/akilli_direk          | AKILLI DIREK SISTEMI                 |
       | Çözümler | Taksi ve Özel Araçlar        | https://movita.com.tr/taksi-ozel-arac       | Taksi ve Özel Araçlar                |
       | Çözümler | Minibüsler ve Midibüsler     | https://movita.com.tr/minibus-midibus       | Minibüsler ve Midibüsler             |
       | Çözümler | Şehirler Arası Otobüsler     | https://movita.com.tr/sehirler-arasi-otobus | Şehirler Arası Otobüsler             |
