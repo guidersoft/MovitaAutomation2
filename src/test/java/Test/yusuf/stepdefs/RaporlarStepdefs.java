@@ -48,8 +48,8 @@ public class RaporlarStepdefs extends BaseMovitaYusuf {
         Assert.assertEquals(elements.size(), sizeElement);
     }
 
-    @When("user click on the sub menu and assert changed color")
-    public void userClickOnTheSubMenuAndAssertChangedColor(DataTable table) {
+    @When("user click on the sub menu with the following data and assert changed color")
+    public void userClickOnTheSubMenuWithTheFollowingDataAndAssertChangedColor(DataTable table) {
         List<String> menus = table.asList();
         for (String menu : menus) {
             hoverOverByAction(xpath(MAIN_MENU, menu));
