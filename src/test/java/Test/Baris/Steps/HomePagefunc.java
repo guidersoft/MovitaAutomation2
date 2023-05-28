@@ -1,23 +1,20 @@
 package Test.Baris.Steps;
 
-import Locaators.HomePageLocator;
+import Test.Baris.Locators.HomePageLocator;
 import ReuseableClass.BaseClass;
-import ReuseableClass._Conditions;
+import Utilities.Driver;
+import com.beust.ah.A;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -109,17 +106,6 @@ public class HomePagefunc extends BaseClass implements HomePageLocator {
             Assert.assertNotEquals(newcolor, color);
         }
 
-
-//        for (String drobdownTex : drobdownTexs) {
-//
-//            WebElement currentElement = $(xpath(ALL_A, drobdownTex)).getCurrentElement();
-//            color = getElementCssProperty(currentElement, "color");
-//            $(currentElement).hower();
-//            getElementScreenshotsAs(currentElement);
-//            threadSleep(500);
-//            newcolor = getElementCssProperty(currentElement, "color");
-//            Assert.assertNotEquals(newcolor, color);
-//        }
     }
 
 
@@ -137,4 +123,5 @@ public class HomePagefunc extends BaseClass implements HomePageLocator {
             $(xpath(ALLVerifyText,list.get(i))).waitFor(visibilty,null);
         }
     }
+
 }

@@ -1,7 +1,6 @@
 package Base;
 
-import Locaators.Locator;
-import Utilities.Browsers;
+import Locaators.Locators;
 import Utilities.Driver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -10,7 +9,6 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.*;
 import Readers.property.PropertyReader;
 
 import java.io.File;
@@ -20,7 +18,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class BaseMovita implements Locator {
+public class BaseMovita implements Locators {
     protected   WebDriver driver;
     protected   WebDriverWait wait;
 
@@ -257,5 +255,17 @@ public class BaseMovita implements Locator {
 
     public By xpath(String locator, String text) {
         return By.xpath(String.format(locator, text));
+    }
+    public void hoverOverByAction(WebElement element) {
+        new Actions(driver)
+                .moveToElement(element)
+                .pause(500)
+                .build()
+                .perform();
+    }
+
+    public void hoverOverByAction(By locator) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        hoverOverByAction(element);
     }
 }

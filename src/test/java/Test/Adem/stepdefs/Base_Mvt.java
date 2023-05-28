@@ -1,6 +1,7 @@
 package Test.Adem.stepdefs;
 
-import Locators.Locator;
+import Locators.Locators;
+import Readers.property.PropertyReader;
 import Utilities.Driver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -9,35 +10,19 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import Readers.property.PropertyReader;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class Base_Mvt implements Locator {
+import static Utilities.Driver.getWait;
+
+public class Base_Mvt implements Locators {
+
     private WebDriver driver = Driver.getDriver();
+
     private WebDriverWait wait = Driver.getWait();
-
-    /*
-    @BeforeTest
-    @Parameters("browser")
-    public void beforeTest(@Optional("CHROME") String browser) {
-        driver = Driver.getDriver(Browsers.valueOf(browser));
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-    }
-     */
-/*
-    {
-        driver = Driver.getDriver(Browsers.EDGE);
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
-
- */
 
 
     public void open() {
@@ -49,13 +34,40 @@ public class Base_Mvt implements Locator {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+
+
     public void visible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
 
+
     /**
-     * Bu metot elementin text ini assert eder. 
+     * Bu metot girilen locator a ait elementin visible ya da invisible olma durumunu assert eder.
+     * @param locator By
+     * @param visibility ENUM
+     */
+    public void assertVisibility(By locator, Visibility visibility) {
+
+        switch (visibility) {
+
+            case VISIBLE -> getWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
+            case INVISIBLE -> getWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
+
+        }
+
+    }
+
+
+
+    public WebElement getWebElement(By locator) {
+        WebElement webElement = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        return webElement;
+    }
+
+
+    /**
+     * Bu metot elementin text ini assert eder.
      * @param locator
      * @param str
      */
@@ -72,7 +84,7 @@ public class Base_Mvt implements Locator {
 
     /**
      * Bu metot Threat.sleep() kullanır.
-     * @param milis
+     * @param milis long
      */
     public void bekleThreat(long milis) {
         try {
@@ -91,6 +103,7 @@ public class Base_Mvt implements Locator {
     public void bekleActions(long milis) {
         new Actions(driver).pause(milis).perform();
     }
+
 
     public void getScreenShot(String name) {
 
@@ -120,6 +133,7 @@ public class Base_Mvt implements Locator {
                     .perform();
 
     }
+
 
     /**
      * Bu metot ana sayfada ismi girilen, header menuye ait elementlere hover over yapar
@@ -153,6 +167,7 @@ public class Base_Mvt implements Locator {
         return element;
 
     }
+
 
     public void click(By locator) {
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -190,8 +205,10 @@ public class Base_Mvt implements Locator {
 
     }
 
+
     public void sendKeys(By locator, String text) {
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        element.clear();
         sendKeys(element, text);
     }
 
@@ -226,6 +243,7 @@ public class Base_Mvt implements Locator {
             }
         });
     }
+
 
     public void pause(long millis) {
         new Actions(driver).pause(millis).perform();
@@ -270,6 +288,7 @@ public class Base_Mvt implements Locator {
         return elements;
     }
 
+
     /**
      * Bu metot topmenu altındaki submenulere click eder
      *
@@ -297,6 +316,7 @@ public class Base_Mvt implements Locator {
         // #00adee -> hover edince oluşan renk kodu
 
     }
+
 
     /**
      * Bu metot elementin arka plan rengini assert eder.

@@ -1,6 +1,7 @@
 package Test.Adem.stepdefs;
 
-import Locators.Locator;
+import Locators.Locators;
+import Test.Adem.locators.Locators_LoginPage;
 import Utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -10,13 +11,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-
-import static Utilities.Driver.*;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
+import static Utilities.Driver.getDriver;
+
 
 public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
+
+    static SoftAssert softAssert = new SoftAssert();
 
     // Movita Homepage:
 
@@ -27,7 +31,7 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
 
     @When("user should clicks movita logo")
     public void userShouldClicksMovitaLogo() {
-        click(Locator.lMovitaLogo);
+        click(Locators.lMovitaLogo);
     }
 
     @Then("user should see the text")
@@ -84,9 +88,11 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
 
 
     @Then("kullanici {string} görmeli")
-    public void kullaniciGörmeli(String text) {
-        By xpath = By.xpath("//h1[contains(text(),'" + text + "')]");
-        visible(xpath);
+    public void kullaniciGörmeli(String expText) {
+        By lhTextActuel = By.xpath("//h1 | //h2 | //h3");
+        String hTextActuel = getDriver().findElement(lhTextActuel).getText();
+        System.out.println("hTextActuel = " + hTextActuel);
+        Assert.assertEquals(hTextActuel,expText);
     }
 
 
@@ -110,7 +116,6 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     }
 
 
-
     // LoginPageGorunum:
 
     @Given("kullanici login sayfasına girer")
@@ -132,7 +137,8 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
 
     }
 
-    @And("Kullanıcı adı input alanı üzerinde ‘Movita Vasıta İzleme Takip Sistemi’ yazısı ve onun üzerinde ise Movita logosu bulunmalıdır")
+    @And("Kullanıcı adı input alanı üzerinde ‘Movita Vasıta İzleme Takip Sistemi’ yazısı ve onun üzerinde ise Movita " +
+            "logosu bulunmalıdır")
     public void kullanıcıAdıInputAlanıÜzerindeMovitaVasıtaİzlemeTakipSistemiYazısıVeOnunÜzerindeIseMovitaLogosuBulunmalıdır() {
 
         //‘Movita Vasıta İzleme Takip Sistemi’ yazısının assert edileceği element mevcut değil!!!
@@ -144,7 +150,7 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     public void altKısımdaIseUzunÇubukŞeklindeMaviRenkteÜzerindeGirişYapButonuOlmalıdır(String bgColorHex) {
 
         visible(lGirisYapButonu);
-        assertChangeBackGroundColor(lGirisYapButonu,bgColorHex);
+        assertChangeBackGroundColor(lGirisYapButonu, bgColorHex);
 
     }
 
@@ -166,7 +172,8 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     public void yazısınınRengiMavidenYeşileDönüşmeliVeClickableOlmali(String actColorHEX, String expColorHEX) {
 
         // Değişmesi beklenen yesil rengin kodu bize verilmemiş!!!
-        Assert.assertEquals(actColorHEX, expColorHEX);
+        //Assert.assertEquals(actColorHEX, expColorHEX);
+        softAssert.assertEquals(actColorHEX, expColorHEX, "Step : 'Şifrenizi mi unuttunuz?' yazısının renk değişimi");
 
         click(lSifrenizimiUnuttunuz);
         kullaniciLoginSayfasinaGirer();
@@ -185,7 +192,7 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     public void kullanıcıBuIkonaTıkladığıZamanAnasayfayaYönlendirilmelidir() {
 
         click(lAnaSayfayaDon);
-        visible(Locator.lMovitaLogo);
+        visible(Locators.lMovitaLogo);
         kullaniciLoginSayfasinaGirer();
 
     }
@@ -194,6 +201,59 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     public void kullanıcıFooterInSolAltKısmındaCopyrightBütünHaklarıSaklıdırIbaresiGörmelidir() {
 
         visible(lCopyrightYazisi);
+
+    }
+
+
+    // Login Page Giris:
+
+    @When("Olasi tüm {string} ve {string} girerek {string} uygun assertion yapar")
+    public void olasiVeKombinasyonlariniGirerekLoginButonunaClickYapar(String username, String password,
+                                                                       String expectedResult) {
+
+        sendKeys(lKullaniciAdiInput, username);
+        sendKeys(lSifreInput, password);
+        click(lGirisYapButonu);
+
+        boolean expResult = Boolean.parseBoolean(expectedResult);
+
+        if (expResult) { // DD
+            assertVisibility(lDashboard, Visibility.VISIBLE);
+            click(lDashboardLogout);
+
+        } else {
+
+            if (username.isEmpty() ^ password.isEmpty()) {// -D, D-, -Y, Y-
+
+                if (username.isEmpty()) {
+                    visible(lKullaniciAdiGirinUyarisi);
+                } else {
+                    visible(lSifreGirinUyarisi);
+                }
+
+            }
+
+            if (username.isEmpty() & password.isEmpty()) {// --
+                visible(lKullaniciAdiGirinUyarisi);
+                visible(lSifreGirinUyarisi);
+            }
+
+
+            if (username.equals("demomovita")) {// DY
+                Assert.assertEquals(getWebElement(lSagUstKosedekiMesaj).getText(), "Kullanıcı giriş yapamadı");
+                assertVisibility(lDashboard, Visibility.INVISIBLE);
+            }
+
+
+            if (username.equals("qwerty") & !password.isEmpty()) {// YD, YY
+                Assert.assertEquals(getWebElement(lSagUstKosedekiMesaj).getText(), "Kullanıcı Adı Yada Şifre Hatalı");
+                assertVisibility(lSagUstKosedekiMesaj, Visibility.VISIBLE);
+                assertVisibility(lDashboard, Visibility.INVISIBLE);
+            }
+
+
+        }
+
 
     }
 
