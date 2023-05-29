@@ -1,6 +1,5 @@
 package Test.Baris.ExtendReportÖrneği;
 
-import ReuseableClass.ExtendBaseClass;
 import Utilities.Driver;
 import org.openqa.selenium.By;
 import org.testng.Assert;
