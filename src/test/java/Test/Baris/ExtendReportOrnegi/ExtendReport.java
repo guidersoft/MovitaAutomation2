@@ -1,4 +1,4 @@
-package Test.Baris.ExtendReportÖrneği;
+package Test.Baris.ExtendReportOrnegi;
 
 import Utilities.Driver;
 import org.openqa.selenium.By;
@@ -15,7 +15,7 @@ public class ExtendReport extends ExtendBaseClass {
 
     @Test
     public void test1(){
-        extentTest= extentReports.createTest("window handle","title ile ikinci sayfaya gecis yapildigi test edildi");
+        extentTest= extentReports.createTest("window handle","title ile ikinci sayfaya gecis yapildigi test edildii");
         Driver.getDriver().get("https://the-internet.herokuapp.com/windows");
         extentTest.info("Herokuapp sayfasina gidildi");
         Driver.getDriver().findElement(By.linkText("Click Here")).click();

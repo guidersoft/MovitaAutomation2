@@ -30,7 +30,7 @@ public class ExtendBaseClass {
         // İstediğiniz bilgileri buraya ekeyebiliyorsunuz. Statictir. Her yerde yaparsınız
 //        extentReports.setSystemInfo("Enviroment","QA");
 //        extentReports.setSystemInfo("Browser", ConfigReader.getProperty("browser")); // chrome, firefox
-//        extentReports.setSystemInfo("Automation Engineer", "ABC");
+//        extentReports.setSystemInfo("Automation Engineer", "ABCD");
 //        extentHtmlReporter.config().setDocumentTitle("Son Test");
 //        extentHtmlReporter.config().setReportName("TestNG reports");
     }
