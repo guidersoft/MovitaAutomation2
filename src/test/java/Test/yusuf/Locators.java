@@ -21,5 +21,7 @@ public class Locators {
 
     public static final String MAIN_MENU = "//*[@id='main-menu-navigation']//a[contains(.,'%s')]";
     public static final String SUB_MENUS = "//*[@class='nav-item has-sub open' and contains(.,'Raporlar')]//li";
+    public static final String FOOTER_MENU = "//footer//*[text()='%s']";
+    public static final String TITLE = "//h1[text()='%s']";
 
 }
