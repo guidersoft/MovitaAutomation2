@@ -10,7 +10,7 @@ Feature: User page main menu
   Scenario: verify raporlar menu
     Given user click on the "Raporlar" in main menu
     Then  user should see 11 submenu under the "Raporlar"
-    When  user click on the sub menu and assert changed color
+    When  user click on the sub menu with the following data and assert changed color
       | Araç Bazlı Rapor         |
       | Yakıt Entegrasyon Raporu |
       | Günlük Seyahat Raporu    |

@@ -20,9 +20,9 @@ import static Utilities.Driver.getWait;
 
 public class Base_Mvt implements Locators {
 
-    private WebDriver driver = Driver.getDriver();
+     WebDriver driver = Driver.getDriver();
 
-    private WebDriverWait wait = Driver.getWait();
+     WebDriverWait wait = Driver.getWait();
 
 
     public void open() {
