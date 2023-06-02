@@ -31,12 +31,12 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
 
     @When("user should clicks movita logo")
     public void userShouldClicksMovitaLogo() {
-        click(Locators.lMovitaLogo);
+        click(Locaators.Locators.lMovitaLogo);
     }
 
     @Then("user should see the text")
     public void userShouldSeeTheText() {
-        visible(lMobilVasitaIzlemeTakipText);
+        visible(lMobilVasitaIzlemeText);
     }
 
     @Given("Clickable olmali")
@@ -70,7 +70,7 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
 
     @And("user should see {string} text")
     public void userShouldSeeText(String text) {
-        visible(lMobilVasitaIzlemeTakipText);
+        visible(lMobilVasitaIzlemeText);
     }
 
 
@@ -192,7 +192,7 @@ public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
     public void kullanıcıBuIkonaTıkladığıZamanAnasayfayaYönlendirilmelidir() {
 
         click(lAnaSayfayaDon);
-        visible(Locators.lMovitaLogo);
+        visible(Locaators.Locators.lMovitaLogo);
         kullaniciLoginSayfasinaGirer();
 
     }

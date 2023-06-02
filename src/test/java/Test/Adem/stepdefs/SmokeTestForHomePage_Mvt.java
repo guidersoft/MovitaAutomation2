@@ -31,7 +31,7 @@ public class SmokeTestForHomePage_Mvt extends Base_Mvt implements Locators_Login
 
     @Then("kullanici ana sayfanin ortasinda mobil vasita takip yazilarini gormeli")
     public void kullaniciAnaSayfaninOrtasindaMobilVasitaTakipYazilariniGormeli() {
-        visible(lMobilVasitaIzlemeTakipText);
+        visible(lMobilVasitaIzlemeText);
         visible(lMovitaMNVRileTumAraclarText);
     }
 
