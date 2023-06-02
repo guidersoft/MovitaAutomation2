@@ -5,15 +5,17 @@ import io.cucumber.testng.CucumberOptions;
 
 
 @CucumberOptions(
-        features = {"src/test/resources/features/MVT-T79.feature"},
-        glue = {"stepdefs"},
+        features = {"src/test/java/Test/Baris/Features/DetaylıArama.feature"},
+        glue = {"Test/Baris/Steps"},
+        tags = "",
         plugin = {"pretty",
                 "json:test-output/cucumber-reports/cucumber.json",
                 "html:test-output/cucumber-reports/cucumberreport.html",
-                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
-
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+        }
 )
-public class loginRunners extends AbstractTestNGCucumberTests {
+
+public class RunnerBaris extends AbstractTestNGCucumberTests {
 
 
 }

@@ -1,6 +1,6 @@
 package Test.Adem.stepdefs;
 
-import Locators.Locators;
+import Locaators.Locators;
 import Readers.property.PropertyReader;
 import Utilities.Driver;
 import org.apache.commons.io.FileUtils;

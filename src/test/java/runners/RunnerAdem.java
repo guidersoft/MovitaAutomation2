@@ -7,7 +7,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = {"src/test/java/Test/Adem/features"},
         glue = {"Test/Adem/stepdefs"},
-        tags = "@SmokeTestForMovita2",
+        tags = "",
         dryRun = false,
         plugin = { "pretty",
                 "json:test-output/cucumber-reports/cucumber.json",

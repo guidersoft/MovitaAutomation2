@@ -13,6 +13,6 @@ import io.cucumber.testng.CucumberOptions;
                 "html:test-output/cucumber-reports/cucumberreport.html",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
 )
-public class RunnerLogin extends AbstractTestNGCucumberTests {
+public class RunnerEngin extends AbstractTestNGCucumberTests {
 
 }
