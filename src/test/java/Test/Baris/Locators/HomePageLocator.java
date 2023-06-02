@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 
 import java.text.MessageFormat;
 
-public interface HomePageLocator {
+public interface HomePageLocator extends BaseLocator{
     String url = "https://movita.com.tr/";
 
     By llogo = By.xpath("//a[@class='standard-logo']");
@@ -22,13 +22,5 @@ public interface HomePageLocator {
     String loginInput="//form//input[@id=\"{0}\"]";
     String ALL_Locator="//*[contains(text(),\"{0}\")]";
     By movitaLogo= By.xpath("//img[@alt=\"movita\"]");
-
-
-
-
-     default By xpath(String locator, String value){
-
-        return By.xpath(MessageFormat.format(locator,value));
-    }
 
 }

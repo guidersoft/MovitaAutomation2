@@ -1,12 +1,16 @@
 package Test.Baris.Locators;
 
 import org.openqa.selenium.By;
+import org.testng.annotations.BeforeMethod;
 
-public interface AccountPageLocators {
+import java.text.MessageFormat;
+
+public interface AccountPageLocators extends BaseLocator {
 
     By leftMenuIkon=By.xpath("//i[@class='ft-menu']");
     By startDate= By.id("tarih1");
     By fnishDate= By.id("tarih2");
+    By selectCarDropdown= By.id("select2-aracSelect-container");
     By inputDate=By.xpath("//input[contains(@value,\"-\")]");
     By selectyearDate_1 =By.xpath("(//select[@class=\"yearselect\"])[1]");
     By selectyearDate_2 =By.xpath("(//select[@class=\"yearselect\"])[3]");
@@ -21,7 +25,6 @@ public interface AccountPageLocators {
     String aracListesi_IseBitis=".//td[12][contains(.,\"{0}\")]";
     String raporlarLink="(//div[contains(.,\"{0}\")])[11]";
 
-
-
+    String downloadReportIcon="//a[@title=\"{0}\"]";
 
 }
