@@ -1,6 +1,6 @@
 package Test.Adem.stepdefs;
 
-import Locators.Locators;
+import Locaators.Locators;
 import Test.Adem.locators.Locators_LoginPage;
 import Utilities.Driver;
 import io.cucumber.java.en.And;
