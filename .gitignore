@@ -3,3 +3,4 @@
 /test-output
 MovitaAutomation.iml
 screenShots
+src/test/java/runners/RunnerAdem.java
