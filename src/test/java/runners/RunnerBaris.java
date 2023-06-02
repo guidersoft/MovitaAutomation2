@@ -15,7 +15,7 @@ import io.cucumber.testng.CucumberOptions;
         }
 )
 
-public class Runner_Movita extends AbstractTestNGCucumberTests {
+public class RunnerBaris extends AbstractTestNGCucumberTests {
 
 
 }

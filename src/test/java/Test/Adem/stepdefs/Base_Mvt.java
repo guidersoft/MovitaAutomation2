@@ -1,6 +1,6 @@
 package Test.Adem.stepdefs;
 
-import Locators.Locators;
+import Locaators.Locators;
 import Readers.property.PropertyReader;
 import Utilities.Driver;
 import org.apache.commons.io.FileUtils;
@@ -20,9 +20,9 @@ import static Utilities.Driver.getWait;
 
 public class Base_Mvt implements Locators {
 
-    private WebDriver driver = Driver.getDriver();
+     WebDriver driver = Driver.getDriver();
 
-    private WebDriverWait wait = Driver.getWait();
+     WebDriverWait wait = Driver.getWait();
 
 
     public void open() {

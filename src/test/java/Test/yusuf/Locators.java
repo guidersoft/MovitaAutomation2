@@ -17,9 +17,12 @@ public class Locators {
     public static final By lDemoFileDropdownMenu = By.xpath("//a[contains(.,'Demo Filo (129)')]");
     public static final By lLoginFormAnaSayfayaDon = By.xpath("//a[contains(.,'Ana sayfaya dön')]");
     public static final By lLoginFormBackToHomepage = By.xpath("//a[contains(.,'back to home page')]");
+    public static final By lFooterMenuContaktInfo = By.xpath("//footer//div[@class = 'col-md-2']");
 
 
     public static final String MAIN_MENU = "//*[@id='main-menu-navigation']//a[contains(.,'%s')]";
     public static final String SUB_MENUS = "//*[@class='nav-item has-sub open' and contains(.,'Raporlar')]//li";
+    public static final String FOOTER_MENU = "//footer//*[text()='%s']";
+    public static final String TITLE = "//h1[text()='%s']";
 
 }

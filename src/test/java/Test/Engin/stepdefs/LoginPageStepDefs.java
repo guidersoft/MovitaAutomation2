@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
+
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +16,6 @@ import java.util.Objects;
 
 public class LoginPageStepDefs extends BaseMovita {
 
-    static SoftAssert softAssert = new SoftAssert();
 
     @When("user clicks giris yap menu")
     public void userClicksGirisYapMenu() {
@@ -108,5 +107,13 @@ public class LoginPageStepDefs extends BaseMovita {
         click(lLoginPageAnaSayfayaDon);
         wait.until(ExpectedConditions.urlToBe("https://movita.com.tr/"));
 
+    }
+
+    @And("user Login whit a valid username and password")
+    public void userLoginWhitAValidUsernameAndPassword() {
+        sendeys(lUserName, "demomovita");
+        sendeys(lPassword, "1192movita");
+        click(lLoginSubmitButton);
+        waitForVisibility(lLoginSuccess);
     }
 }
