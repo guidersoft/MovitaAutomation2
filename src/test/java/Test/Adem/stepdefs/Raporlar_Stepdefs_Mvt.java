@@ -1,6 +1,7 @@
 package Test.Adem.stepdefs;
 
 import Test.Adem.locators.Locators_Raporlar;
+import Utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -53,4 +54,8 @@ public class Raporlar_Stepdefs_Mvt extends Base_Mvt implements Locators_Raporlar
     }
 
 
+    @Given("Çıkış")
+    public void çıkış() {
+        // Runner da @RaporlarÇıkış tagı eklenirse test bitimi quit eder.
+    }
 }

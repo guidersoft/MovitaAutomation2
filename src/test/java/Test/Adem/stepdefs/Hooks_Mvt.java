@@ -10,12 +10,15 @@ import org.openqa.selenium.TakesScreenshot;
 public class Hooks_Mvt {// Cucumber notasyonları, varsa TestNG notasyonlarından sonra çalışırlar.
 
     @After(order = 2)// Her senaryo sonrası çalışır.
-    public void quit() {// Her senaryodan sonra çalışır.
-        Driver.quitDriver();
+    public void quit(Scenario scenario) {
+        if (!scenario.getSourceTagNames().contains("@Raporlar")) {// Bu tagli senaryo haricinde her senaryo bitimi quit eder.
+            Driver.quitDriver();
+        }
+
     }
 
 
-    @After()// After her senaryo sonrası çalışır. -> AfterStep dersek her step sonu çalışır.
+    @After()// After her senaryo sonrası çalışır. -> AfterStep dersek her step sonu, AfterAll dersek tüm senaryoların bitiminde çalışır.
     public void afterScreenShot(Scenario scenario) {
         boolean screenShot = PropertyReader.read().get("takescreenshot").equalsIgnoreCase("true");// true -> Bu senaryoda SS alınacak.
         boolean screenShotOn = PropertyReader.read().get("takescreenshot.on").equalsIgnoreCase("false");// false -> Ama her stepte SS alınmasın.
@@ -28,7 +31,7 @@ public class Hooks_Mvt {// Cucumber notasyonları, varsa TestNG notasyonlarında
                     // senaryomuza attach(ek) yapıyoruz; screenshot, media tip ve senaryo adını giriyoruz.
                     // Bu ekran fotosunu raporda görebileceğiz.
                 }
-            } else {// step step çekilmeyecekse bu bloğa girer, senaryo bitimi hata varsa SS alır.
+            } else {// step step SS alınmayacaksa bu bloğa girer, senaryo bitimi hata varsa SS alır.
                 byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
                 scenario.attach(screenshot, "image/png", scenario.getName());
             }
@@ -36,8 +39,8 @@ public class Hooks_Mvt {// Cucumber notasyonları, varsa TestNG notasyonlarında
         }
     }
 
-    @After(order = 1)
-    public void softAssertAll(Scenario scenario){
+    @After(value = "@LoginPageGorunum", order = 1)// Sadece bu tagli senaryo sonrası çalışır.
+    public void softAssertAll(Scenario scenario) {
         MyStepdefs_Mvt.softAssert.assertAll("Senaryo : " + scenario.getName());
     }
 
