@@ -134,6 +134,14 @@ public class Base_Mvt implements Locators {
 
     }
 
+    public void hover(WebElement element) {
+        new Actions(driver)
+                .moveToElement(element)
+                .build()
+                .perform();
+
+    }
+
 
     /**
      * Bu metot ana sayfada ismi girilen, header menuye ait elementlere hover over yapar
@@ -174,6 +182,12 @@ public class Base_Mvt implements Locators {
         click(element);
     }
 
+    public Base_Mvt click$(By locator) {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        click(element);
+        return this;
+    }
+
 
     /**
      * Bu metot element e sırasıyla Selenium, Actions ve JS ile click etmeyi dener.
@@ -202,6 +216,37 @@ public class Base_Mvt implements Locators {
 
             }
         });
+
+    }
+
+    /**
+     * Bu metot element e sırasıyla Selenium, Actions ve JS ile click etmeyi dener.
+     *
+     * @param element WebElement
+     */
+    public Base_Mvt click$(WebElement element) {// totalde 100 ms aralıklarla 10 sn tıklamayı dener, bu metot çalışır.
+        wait.until(driver1 -> {// Aslında yukarıda wait e verilen driverla aynıdır. Lambda metodu kullandık. Istersek
+            // driver1 yerine "e" ya da istenen değişken adı yazılabilir. list.forEach(e-> sout(e.getText)) kullanımı gibi.
+            // Lambda da -> { } kullanılırsa bir değer return etmek zorundadır.
+            try {
+                element.click();// önce elemente selenium ile click etmeyi dener.
+                return true;
+            } catch (Exception e) {
+                try {// selenium tıklayamazsa Actions Class tan actions la click deneyelim.
+                    new Actions(driver1).moveToElement(element).click().perform();
+                    return true;
+                } catch (Exception e2) {
+                    try {// actions da tıklayamazsa en son JS ile click deneyelim.
+                        ((JavascriptExecutor) driver1).executeScript("arguments[0].click();", element);
+                        return true;
+                    } catch (Exception e3) {
+                        return false;
+                    }
+                }
+
+            }
+        });
+        return new Base_Mvt();
 
     }
 
@@ -317,6 +362,37 @@ public class Base_Mvt implements Locators {
 
     }
 
+    /**
+     * Bu metot elementin text rengini assert eder.
+     *
+     * @param locator  By
+     * @param expColor String Hex Code ( #00adee gibi..)
+     */
+    public Base_Mvt assertChangeColor$(By locator, String expColor) {
+        WebElement element = driver.findElement(locator);
+        String actColorRGB = element.getCssValue("color");
+        String actColorHEX = Color.fromString(actColorRGB).asHex();
+        Assert.assertEquals(actColorHEX, expColor);// mevcut renk istenen renkle aynı mı ?
+        // #00adee -> hover edince oluşan renk kodu
+        return this;
+
+    }
+
+    /**
+     * Bu metot elementin text rengini assert eder.
+     *
+     * @param element WebElement
+     * @param expColor String Hex Code ( #00adee gibi..)
+     */
+    public Base_Mvt assertChangeColor$(WebElement element, String expColor) {
+        String actColorRGB = element.getCssValue("color");
+        String actColorHEX = Color.fromString(actColorRGB).asHex();
+        Assert.assertEquals(actColorHEX, expColor);// mevcut renk istenen renkle aynı mı ?
+        // #00adee -> hover edince oluşan renk kodu
+        return this;
+
+    }
+
 
     /**
      * Bu metot elementin arka plan rengini assert eder.
@@ -330,6 +406,21 @@ public class Base_Mvt implements Locators {
         String actBackgroundColorHEX = Color.fromString(actColorRGBA).asHex();
         Assert.assertEquals(actBackgroundColorHEX, expBackgroundColorHEX);// mevcut renk istenen renkle aynı mı ?
         // #00adee -> Elementin arka plan hex renk kodu
+
+    }
+
+    /**
+     * Bu metot elementin arka plan rengini assert eder.
+     *
+     * @param element  Webelement
+     * @param expBackgroundColorHEX String Hex Code ( #00adee gibi..)
+     */
+    public Base_Mvt assertChangeBackGroundColor$(WebElement element, String expBackgroundColorHEX) {
+        String actColorRGBA = element.getCssValue("background-color");
+        String actBackgroundColorHEX = Color.fromString(actColorRGBA).asHex();
+        Assert.assertEquals(actBackgroundColorHEX, expBackgroundColorHEX);// mevcut renk istenen renkle aynı mı ?
+        // #00adee -> Elementin arka plan hex renk kodu
+        return this;
 
     }
 
