@@ -16,5 +16,9 @@ public class EnginBase extends BaseMovita {
         return driver.findElement(By.xpath("//div[@id='accordion_filtre']//form/div/div/div/input[@id='"+text+"']"));
     }
 
+    public WebElement aracBazliDefaultLocator(String locator){
+        return driver.findElement(By.xpath("//div[@class='row']/div//div[contains(@class,'col-')]//div"+locator));
+    }
+
 
 }

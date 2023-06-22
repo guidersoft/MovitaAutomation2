@@ -116,4 +116,6 @@ public class LoginPageStepDefs extends BaseMovita {
         click(lLoginSubmitButton);
         waitForVisibility(lLoginSuccess);
     }
+
+
 }
