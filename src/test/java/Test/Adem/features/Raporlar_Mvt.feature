@@ -1,6 +1,7 @@
 Feature: Raporlar Ana Componenti
 
-  Background:
+  @Raporlar
+  Scenario: Senaryo baslangıcında calisir
     Given Kullanıcı siteye login olabilmeli
     When Raporlar menüsüne tıklamalı
 
@@ -23,6 +24,10 @@ Feature: Raporlar Ana Componenti
       | Alarm Log Raporu         |
       | Şoför Log Raporu         |
       | Sensör Log Raporu        |
+
+  @RaporlarÇıkış
+  Scenario: Senaryo bitiminde çalışır
+    Given Çıkış
 
 
 

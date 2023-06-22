@@ -7,9 +7,9 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = {"src/test/java/Test/Adem/features/"},
         glue = {"Test/Adem/stepdefs"},
-        tags = "@Raporlar",
+        tags = "@Raporlar or @RaporlarÇıkış",
         dryRun = false,
-        plugin = { "pretty",
+        plugin = {"pretty",
                 "json:test-output/cucumber-reports/cucumber.json",
                 "html:test-output/cucumber-reports/cucumberreport.html",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
