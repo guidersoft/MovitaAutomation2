@@ -10,6 +10,8 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -20,31 +22,34 @@ import static Utilities.Driver.getWait;
 
 public class Base_Mvt implements Locators {
 
-     WebDriver driver = Driver.getDriver();
+    WebDriver driver = Driver.getDriver();
 
-     WebDriverWait wait = Driver.getWait();
+    WebDriverWait wait = Driver.getWait();
+
+    static SoftAssert softAssert = new SoftAssert();
 
 
     public void open() {
         driver.get(PropertyReader.read().get("url"));
     }
 
-
     public void visible(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-
+    public Base_Mvt visible$(By locator) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return this;
+    }
 
     public void visible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-
-
     /**
      * Bu metot girilen locator a ait elementin visible ya da invisible olma durumunu assert eder.
-     * @param locator By
+     *
+     * @param locator    By
      * @param visibility ENUM
      */
     public void assertVisibility(By locator, Visibility visibility) {
@@ -58,16 +63,14 @@ public class Base_Mvt implements Locators {
 
     }
 
-
-
     public WebElement getWebElement(By locator) {
         WebElement webElement = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         return webElement;
     }
 
-
     /**
-     * Bu metot elementin text ini assert eder.
+     * Bu metot elementin text inin beklenen text olduğunu assert eder.
+     *
      * @param locator
      * @param str
      */
@@ -79,11 +82,27 @@ public class Base_Mvt implements Locators {
         //bekle(1000);
         Assert.assertEquals(text, str);
 
+    }
+
+    /**
+     * Bu metot elementin text inin beklenen text i içerdiğini assert eder.
+     *
+     * @param locator
+     * @param str
+     */
+    public void assertElementContainsText(By locator, String str) {
+
+        WebElement element = driver.findElement(locator);
+        String text = element.getText();
+        System.out.println(text);
+        //bekle(1000);
+        Assert.assertTrue(text.contains(str));
 
     }
 
     /**
      * Bu metot Threat.sleep() kullanır.
+     *
      * @param milis long
      */
     public void bekleThreat(long milis) {
@@ -95,15 +114,14 @@ public class Base_Mvt implements Locators {
 
     }
 
-
     /**
      * Bu metot Actions.pause() kullanır.
+     *
      * @param milis long
      */
     public void bekleActions(long milis) {
         new Actions(driver).pause(milis).perform();
     }
-
 
     public void getScreenShot(String name) {
 
@@ -123,14 +141,13 @@ public class Base_Mvt implements Locators {
 
     }
 
-
     public void hover(By locator) {
-        WebElement webElement = driver.findElement(locator);
+        WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 
-            new Actions(driver)
-                    .moveToElement(webElement)
-                    .build()
-                    .perform();
+        new Actions(driver)
+                .moveToElement(webElement)
+                .build()
+                .perform();
 
     }
 
@@ -142,11 +159,11 @@ public class Base_Mvt implements Locators {
 
     }
 
-
     /**
      * Bu metot ana sayfada ismi girilen, header menuye ait elementlere hover over yapar
+     *
      * @param element ana sayfada header menuye ait
-     * @param text menu elemntelerini ismidir. -> KURUMSAL gibi..
+     * @param text    menu elemntelerini ismidir. -> KURUMSAL gibi..
      */
     public void hoverOverAnaSayfa(WebElement element, String text) {
         new Actions(driver)
@@ -167,7 +184,6 @@ public class Base_Mvt implements Locators {
         }
     }
 
-
     @Override
     public WebElement homePageMenu(String text) {
         WebElement element = driver.findElement(By.xpath("//ul[@class='menu-container']//div[text()='" + text + "']"));
@@ -175,7 +191,6 @@ public class Base_Mvt implements Locators {
         return element;
 
     }
-
 
     public void click(By locator) {
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -188,15 +203,15 @@ public class Base_Mvt implements Locators {
         return this;
     }
 
-
     /**
      * Bu metot element e sırasıyla Selenium, Actions ve JS ile click etmeyi dener.
      *
      * @param element WebElement
      */
     public void click(WebElement element) {// totalde 100 ms aralıklarla 10 sn tıklamayı dener, bu metot çalışır.
-        wait.until(driver1 -> {// Aslında yukarıda wait e verilen driverla aynıdır. Lambda metodu kullandık. Istersek
-            // driver1 yerine "e" ya da istenen değişken adı yazılabilir. list.forEach(e-> sout(e.getText)) kullanımı gibi.
+        wait.until(driver1 -> {// Aslında yukarıda wait e verilen driverla aynıdır, diğer driverla karışmasın diye driver1 dedik.
+            // Lambda metodu kullandık. Istersek driver1 yerine "e" ya da istenen değişken adı yazılabilir.
+            // list.forEach(e-> sout(e.getText)) kullanımı gibi.
             // Lambda da -> { } kullanılırsa bir değer return etmek zorundadır.
             try {
                 element.click();// önce elemente selenium ile click etmeyi dener.
@@ -250,13 +265,11 @@ public class Base_Mvt implements Locators {
 
     }
 
-
     public void sendKeys(By locator, String text) {
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         element.clear();
         sendKeys(element, text);
     }
-
 
     /**
      * Bu metot element e sırasıyla Selenium, Actions ve JS ile sendKeys etmeyi dener.
@@ -289,11 +302,9 @@ public class Base_Mvt implements Locators {
         });
     }
 
-
     public void pause(long millis) {
         new Actions(driver).pause(millis).perform();
     }
-
 
     /**
      * Bu metot topMenudeki elementlerin locator ını döndürür.
@@ -308,7 +319,6 @@ public class Base_Mvt implements Locators {
 
     }
 
-
     /**
      * Bu metot top menu locator larını getirir.
      *
@@ -318,7 +328,6 @@ public class Base_Mvt implements Locators {
     public By topMenuXpath(String text) {
         return By.xpath("//div[text()='" + text + "']");
     }
-
 
     /**
      * Bu metot top menu altındaki açılır menulerin listesini döndürür.
@@ -333,7 +342,6 @@ public class Base_Mvt implements Locators {
         return elements;
     }
 
-
     /**
      * Bu metot topmenu altındaki submenulere click eder
      *
@@ -345,7 +353,6 @@ public class Base_Mvt implements Locators {
         element.click();
 
     }
-
 
     /**
      * Bu metot elementin text rengini assert eder.
@@ -381,7 +388,7 @@ public class Base_Mvt implements Locators {
     /**
      * Bu metot elementin text rengini assert eder.
      *
-     * @param element WebElement
+     * @param element  WebElement
      * @param expColor String Hex Code ( #00adee gibi..)
      */
     public Base_Mvt assertChangeColor$(WebElement element, String expColor) {
@@ -393,11 +400,10 @@ public class Base_Mvt implements Locators {
 
     }
 
-
     /**
      * Bu metot elementin arka plan rengini assert eder.
      *
-     * @param locator  By
+     * @param locator               By
      * @param expBackgroundColorHEX String Hex Code ( #00adee gibi..)
      */
     public void assertChangeBackGroundColor(By locator, String expBackgroundColorHEX) {
@@ -412,7 +418,7 @@ public class Base_Mvt implements Locators {
     /**
      * Bu metot elementin arka plan rengini assert eder.
      *
-     * @param element  Webelement
+     * @param element               Webelement
      * @param expBackgroundColorHEX String Hex Code ( #00adee gibi..)
      */
     public Base_Mvt assertChangeBackGroundColor$(WebElement element, String expBackgroundColorHEX) {
@@ -424,7 +430,6 @@ public class Base_Mvt implements Locators {
 
     }
 
-
     /**
      * Bu metot girilen menu ye ait submenu locator ını getirir.
      *
@@ -434,6 +439,17 @@ public class Base_Mvt implements Locators {
      */
     public By topSubMenuXpath(String textMenu, String textSubMenu) {
         return By.xpath("//li[.//div[text()='" + textMenu + "']]//div[contains(.,'" + textSubMenu + "')]");
+    }
+
+    /**
+     * Locator u girilen elementin mouse ile üstüne gelince Cursor un pointer simgesine dönüştüğünü assert eder.
+     *
+     * @param locator By
+     */
+    public void assertCursorIsPointer(By locator) {
+        hover(locator);
+        boolean b = getWebElement(locator).getCssValue("cursor").equals("pointer");
+        softAssert.assertTrue(b);
     }
 
 

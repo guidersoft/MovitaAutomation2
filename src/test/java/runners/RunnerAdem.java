@@ -7,8 +7,9 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = {"src/test/java/Test/Adem/features/"},
         glue = {"Test/Adem/stepdefs"},
-        tags = "@Raporlar or @RaporlarÇıkış",
-        dryRun = false,
+        tags = "@AracBazliRapor",
+        monochrome = false,// true olursa daha okunabilir konsol çıktısı sağlar
+        dryRun = false,// true ise tüm step def ler tanımlı mı diye bakar, default false dur.
         plugin = {"pretty",
                 "json:test-output/cucumber-reports/cucumber.json",
                 "html:test-output/cucumber-reports/cucumberreport.html",
