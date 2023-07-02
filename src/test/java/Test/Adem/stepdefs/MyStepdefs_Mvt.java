@@ -20,8 +20,6 @@ import static Utilities.Driver.getDriver;
 
 public class MyStepdefs_Mvt extends Base_Mvt implements Locators_LoginPage {
 
-    static SoftAssert softAssert = new SoftAssert();
-
     // Movita Homepage:
 
     @Given("user is on homepage")
