@@ -1,6 +1,7 @@
 package Test.Engin.stepdefs;
 
 import Base.BaseMovita;
+import Test.Engin.Base.EnginBase;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -13,8 +14,11 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import static Test.Engin.Locator.Locators.*;
 
 public class LoginPageStepDefs extends BaseMovita {
+
+    EnginBase eb = new EnginBase();
 
 
     @When("user clicks giris yap menu")
@@ -118,4 +122,28 @@ public class LoginPageStepDefs extends BaseMovita {
     }
 
 
+    @And("user click Detayli Arama button")
+    public void userClickDetayliAramaButton() {
+        click(lDetayliAramaButton);
+
+    }
+
+    @Then("user shoul see {string}")
+    public void userShoulSee(String text) {
+        wait.until(ExpectedConditions.textToBe(eb.detayliAramaSubMenu(text),text));
+    }
+
+    @And("user click Alarm Ekle button")
+    public void userClickAlarmEkleButton() {
+        click(lAlarmEkleButton);
+        String text = driver.findElement(lAlarmEkleNotifikation).getText();
+        Assert.assertEquals(text,"Dikkat!");
+
+    }
+
+    @Then("user should see as {string}")
+    public void userShouldSeeAs(String text) {
+        String text1 = driver.findElement(eb.alarmEkleSubMenuDefault(text)).getText();
+        Assert.assertTrue(text1.contains(text));
+    }
 }
