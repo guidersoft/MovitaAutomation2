@@ -148,4 +148,9 @@ public class RaporlarStepDefs extends BaseMovita {
         int sizeRight = driver.findElement(By.xpath("//div[@class='row']/div[@class='col-md-9']")).getSize().getHeight();
         Assert.assertEquals(sizeRight,sizeLeft);
     }
+
+    @And("user should have logged in Alarm")
+    public void userShouldHaveLoggedInAlarm() {
+        wait.until(ExpectedConditions.urlToBe("https://movita.com.tr/alarm-listesi"));
+    }
 }
