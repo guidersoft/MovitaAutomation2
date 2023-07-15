@@ -1,0 +1,228 @@
+Index: src/test/java/Test/Baris/Locators/BaseLocator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Test.Baris.Locators;\r\n\r\nimport org.openqa.selenium.By;\r\n\r\nimport java.text.MessageFormat;\r\n\r\npublic interface BaseLocator {\r\n    default By xpath(String locator, String value){\r\n        return By.xpath(MessageFormat.format(locator,value));\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/Test/Baris/Locators/BaseLocator.java b/src/test/java/Test/Baris/Locators/BaseLocator.java
+--- a/src/test/java/Test/Baris/Locators/BaseLocator.java	(revision ce9c2e0b2ba7bf27f935155790d45b71d207ac28)
++++ b/src/test/java/Test/Baris/Locators/BaseLocator.java	(date 1686520119108)
+@@ -5,6 +5,7 @@
+ import java.text.MessageFormat;
+ 
+ public interface BaseLocator {
++
+     default By xpath(String locator, String value){
+         return By.xpath(MessageFormat.format(locator,value));
+     }
+Index: src/test/java/Test/Baris/POM/INavigatePage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/Test/Baris/POM/INavigatePage.java b/src/test/java/Test/Baris/POM/INavigatePage.java
+new file mode 100644
+--- /dev/null	(date 1686517947949)
++++ b/src/test/java/Test/Baris/POM/INavigatePage.java	(date 1686517947949)
+@@ -0,0 +1,16 @@
++package Test.Baris.POM;
++
++import Test.Baris.Locators.BaseLocator;
++
++import java.lang.reflect.InvocationTargetException;
++
++public interface INavigatePage extends BaseLocator {
++
++    default   <T> T navigateTo(Class<T> clazz)  {
++        try {
++            return clazz.getDeclaredConstructor().newInstance();
++        } catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
++            throw new RuntimeException(e);
++        }
++    }
++}
+Index: src/test/java/Test/Baris/POM/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/Test/Baris/POM/Main.java b/src/test/java/Test/Baris/POM/Main.java
+new file mode 100644
+--- /dev/null	(date 1686519492718)
++++ b/src/test/java/Test/Baris/POM/Main.java	(date 1686519492718)
+@@ -0,0 +1,9 @@
++package Test.Baris.POM;
++
++public class Main {
++    public static void main(String[] args) {
++        new AccountPage()
++                .selectStartDate("")
++                .selectFinishDate("");
++    }
++}
+Index: src/test/java/Test/Baris/POM/LoginPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/Test/Baris/POM/LoginPage.java b/src/test/java/Test/Baris/POM/LoginPage.java
+new file mode 100644
+--- /dev/null	(date 1686521978658)
++++ b/src/test/java/Test/Baris/POM/LoginPage.java	(date 1686521978658)
+@@ -0,0 +1,81 @@
++package Test.Baris.POM;
++
++import ReuseableClass.BaseClass;
++
++import static ReuseableClass._Conditions.visibilty;
++
++public class LoginPage extends BaseClass implements INavigatePage {
++
++    private String loginInput="//form//input[@id=\"{0}\"]";
++    String ALL_BUTTON="//button[contains(.,\"{0}\")]";
++    String ALL_Locator="//*[contains(text(),\"{0}\")]";
++    String ALL_A= "//a[contains(., \"{0}\")]";
++
++
++
++    public void loginAndVerifyMessage(String username, String password, String status, String message) {
++
++        if (!status.equalsIgnoreCase("true")) {
++            if (!username.isEmpty()) {
++                $(xpath(loginInput, "username")).sendKeys(username);
++            }
++            if (!password.isEmpty()) {
++                $(xpath(loginInput, "password")).sendKeys(password);
++            }
++            $(xpath(ALL_BUTTON, "Giriş Yap")).click();
++
++            if (!message.isEmpty()) {
++                String[] messageParts = message.split(" and ");
++                for (String part : messageParts) {
++                    $(xpath(ALL_Locator, part.trim())).waitFor(visibilty, null);
++                }
++            }
++        } else {
++            $(xpath(loginInput, "username")).sendKeys(username);
++            $(xpath(loginInput, "password")).sendKeys(password);
++            $(xpath(ALL_BUTTON, "Giriş Yap")).click();
++            $(xpath(ALL_Locator, message)).waitFor(visibilty, null);
++            $(xpath(ALL_Locator, message)).click();
++            $(xpath(ALL_A, "")).click();
++        }
++
++    }
++    public LoginPage sendUsername(String username){
++        $(xpath(loginInput, "username")).sendKeys(username);
++        return this;
++    }
++    public LoginPage sendPassword(String password){
++        $(xpath(loginInput, "password")).sendKeys(password);
++        return this;
++    }
++
++
++    public  LoginPage clickToGirisYap(){
++        $(xpath(ALL_BUTTON, "Giriş Yap")).click();
++        return this;
++    }
++
++    public  LoginPage verifySuccessfulLogin(){
++        $(xpath(ALL_Locator, "Demo Filo")).waitFor(visibilty, null);
++        return  this;
++    }
++
++    /**
++     * Başarılı login Olur;
++     */
++    public LoginPage successfulyLogin() {
++        sendUsername("demomovita")
++        .sendPassword("1192movita")
++        .clickToGirisYap()
++        .verifySuccessfulLogin();
++        return this;
++    }
++
++    public static void main(String[] args) {
++        new LoginPage()
++                .successfulyLogin()
++                .navigateTo(AccountPage.class)
++                .selectStartDate("")
++                .selectFinishDate("");
++    }
++}
+Index: src/test/java/Test/Baris/POM/AccountPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/Test/Baris/POM/AccountPage.java b/src/test/java/Test/Baris/POM/AccountPage.java
+new file mode 100644
+--- /dev/null	(date 1686519492726)
++++ b/src/test/java/Test/Baris/POM/AccountPage.java	(date 1686519492726)
+@@ -0,0 +1,64 @@
++package Test.Baris.POM;
++
++import ReuseableClass.BaseClass;
++import org.openqa.selenium.By;
++import org.openqa.selenium.support.ui.Select;
++
++import static ReuseableClass._Conditions.visibilty;
++
++public class AccountPage extends BaseClass implements INavigatePage {
++
++    private By leftMenuIkon=By.xpath("//i[@class='ft-menu']");
++    private By startDate= By.id("tarih1");
++    private By fnishDate= By.id("tarih2");
++    private By selectCarDropdown= By.id("select2-aracSelect-container");
++    private By inputDate=By.xpath("//input[contains(@value,\"-\")]");
++    private By selectyearDate_1 =By.xpath("(//select[@class=\"yearselect\"])[1]");
++    private By selectyearDate_2 =By.xpath("(//select[@class=\"yearselect\"])[3]");
++    private By selectmonthDate_1 =By.xpath("(//select[@class=\"monthselect\"])[1]");
++    private By selectmonthDate_2 =By.xpath("(//select[@class=\"monthselect\"])[3]");
++    private String dayselectDate_1 ="((//div[@class=\"calendar left single\"])[1]//tbody//td[@class=\"available\" or @class=\"weekend available\" or @class=\"active start-date active end-date available\"])[{0}]";
++    private String dayselectDate_2="((//div[@class=\"calendar left single\"])[2]//tbody//td[@class=\"available\" or @class=\"weekend available\" or @class=\"active start-date active end-date available\" or @class=\"today available\"])[{0}]";
++
++   private By araclistesi =By.xpath("//table[@id='DataTables_Table_0']//tbody//tr");
++   private String aracListesi_Tarih=".//td[contains(.,\"{0}\")][1]";
++   private String aracListesi_IseBaslama=".//td[11][contains(.,\"{0}\")]";
++   private String aracListesi_IseBitis=".//td[12][contains(.,\"{0}\")]";
++   private String raporlarLink="(//div[contains(.,\"{0}\")])[11]";
++
++   private String downloadReportIcon="//a[@title=\"{0}\"]";
++
++
++
++
++    public AccountPage selectStartDate(String date) {
++        String[] selectDate = date.split("-");
++        selectDate[1] = removeLeadingZeros(selectDate[1]);
++        selectDate[2] = removeLeadingZeros(selectDate[2]);
++        $(startDate).click();
++        new Select($(selectyearDate_1).waitFor(visibilty, null).getCurrentElement()).selectByValue(selectDate[0]);
++        new Select($(selectmonthDate_1).waitFor(visibilty, null).getCurrentElement()).selectByValue(String.valueOf((Integer.parseInt(selectDate[1]) - 1)));
++        $(xpath(dayselectDate_1, selectDate[2])).waitFor(visibilty, null).click();
++        return this;
++    }
++
++    public AccountPage selectFinishDate(String date) {
++        String[] selectDate = date.split("-");
++        selectDate[1] = removeLeadingZeros(selectDate[1]);
++        selectDate[2] = removeLeadingZeros(selectDate[2]);
++        $(fnishDate).click();
++        new Select($(selectyearDate_2).waitFor(visibilty, null).getCurrentElement()).selectByValue(selectDate[0]);
++        new Select($(selectmonthDate_2).waitFor(visibilty, null).getCurrentElement()).selectByValue(String.valueOf((Integer.parseInt(selectDate[1]) - 1)));
++        $(xpath(dayselectDate_2, selectDate[2])).waitFor(visibilty, null).click();
++        return  this;
++    }
++
++    private String removeLeadingZeros(String str) {
++        if (str.startsWith("0")) {
++            return str.replaceFirst("^0+(?!$)", "");
++        }
++        return str;
++    }
++
++
++}
