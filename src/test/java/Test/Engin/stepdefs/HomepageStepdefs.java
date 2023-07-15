@@ -6,10 +6,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import org.checkerframework.checker.regex.qual.Regex;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
+
+
 
 public class HomepageStepdefs extends BaseMovita{
 
@@ -114,5 +118,8 @@ public class HomepageStepdefs extends BaseMovita{
     @And("SubMenu text color should be chanced")
     public void submenuTextColorShouldBeChanced() {
         Assert.assertNotEquals(beforColor, "#00adee");
+
     }
+
+
 }

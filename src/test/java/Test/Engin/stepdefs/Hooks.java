@@ -1,5 +1,6 @@
 package Test.Engin.stepdefs;
 
+import Base.BaseMovita;
 import Utilities.Driver;
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
@@ -14,12 +15,14 @@ public class Hooks {
         if (scenario.isFailed()) {
             byte[] screenshoot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshoot, "image/png", scenario.getName());
+            /*BaseMovita bs = new BaseMovita();
+            bs.getScreenshot("aaaa");*/
         }
 
     }
 
 
-    /*@After(order = 0)
+   /* @After(order = 0)
     public void after() {
         Driver.quitDriver();
     }*/

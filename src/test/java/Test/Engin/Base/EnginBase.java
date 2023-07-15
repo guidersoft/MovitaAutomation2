@@ -16,5 +16,15 @@ public class EnginBase extends BaseMovita {
         return driver.findElement(By.xpath("//div[@id='accordion_filtre']//form/div/div/div/input[@id='"+text+"']"));
     }
 
+    public WebElement aracBazliDefaultLocator(String locator){
+        return driver.findElement(By.xpath("//div[@class='row']/div//div[contains(@class,'col-')]//div"+locator));
+    }
+    public By detayliAramaSubMenu(String text){
+        return By.xpath("//div[@class='card']//div[@class='row']//div[contains(@class,'col')]//label[text()='"+text+"']");
+    }
+
+    public By alarmEkleSubMenuDefault(String text){
+        return By.xpath("//div[@class='row']/div[@class='col-md-12']//label[contains(.,'"+text+"')]");
+    }
 
 }
