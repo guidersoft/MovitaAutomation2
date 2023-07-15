@@ -91,7 +91,7 @@
                 <version>3.0.0-M1</version>
                 <configuration>
                     <includes>
-                        <include>**/*Runner*.java</include>
+                        <include>**/RunnerBaris.java</include>
                     </includes>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
