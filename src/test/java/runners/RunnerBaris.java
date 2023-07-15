@@ -5,9 +5,8 @@ import io.cucumber.testng.CucumberOptions;
 
 
     @CucumberOptions(
-        features = {"src/test/java/Test/Baris/Features/YeniTast.feature"},
+        features = {"src/test/java/Test/Baris/Features/MVT-T79.feature"},
         glue = {"Test/Baris/Steps"},
-        tags = "@Link",
         plugin = {"pretty",
                 "json:test-output/cucumber-reports/cucumber.json",
                 "html:test-output/cucumber-reports/cucumberreport.html",
