@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 
 @CucumberOptions(
-        features = {"src/test/java/Test/Baris/Features/DetaylıArama.feature"},
+        features = {"src/test/java/Test/Baris/Features"},
         glue = {"Test/Baris/Steps"},
         tags = "Smoke",
         plugin = {"pretty",
