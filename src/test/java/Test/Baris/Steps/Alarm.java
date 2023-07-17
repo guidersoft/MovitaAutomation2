@@ -130,6 +130,7 @@ public class Alarm extends BaseClass implements AlarmIslemleriLocators {
     @And("Eklenen alarmın silinebilir olduğunu doğrular")
     public void eklenenAlarmınSilinebilirOlduğunuDoğrular() {
         $(xpath(alarmSilmeIcon,yeniaciklama)).scrollByElement().click();
+        Assert.fail();
         try {
             $(xpath(getalarmkodu, yeniaciklama)).getCurrentElement();
             Assert.fail();
