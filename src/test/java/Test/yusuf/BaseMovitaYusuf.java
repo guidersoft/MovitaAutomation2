@@ -30,7 +30,7 @@ public class BaseMovitaYusuf {
     protected WebDriverWait wait;
 
     {
-        driver =Driver.getDriver();
+        driver = Driver.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
@@ -82,7 +82,6 @@ public class BaseMovitaYusuf {
         }
 
     }
-
 
 
     public void assertChangeColor(WebElement element, String color) {
@@ -178,15 +177,16 @@ public class BaseMovitaYusuf {
         String fileType = arr[arr.length - 1].toLowerCase();
         try {
             switch (fileType) {
-                case "json" -> {
+                case "json":
                     ObjectMapper mapperJson = new ObjectMapper();
                     return mapperJson.readValue(new FileReader(file), pojo.getClass());
-                }
-                case "yaml" -> {
+
+                case "yaml":
                     ObjectMapper mapperYaml = new ObjectMapper(new YAMLFactory());
                     return mapperYaml.readValue(new FileReader(file), pojo.getClass());
-                }
-                default -> throw new RuntimeException(file + " is not .yaml or .json file");
+
+                default:
+                    throw new RuntimeException(file + " is not .yaml or .json file");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
