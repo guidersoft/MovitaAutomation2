@@ -23,8 +23,7 @@ public interface Locators_LoginPage {
     By lDashboard = By.xpath("//li[@id='anasayfa']");// Kullanıcı hesabına girdiğinde görür
     By lDashboardLogout = By.xpath("//a[contains(text(),'Çıkış Yap')]");// Dashboard dan çıkış yapar
 
-    By lMovitaMNVRileTumAraclarText = By.xpath("//div[@class='tp-mask-wrap']/div[contains(.,'movita MNVR ile tüm araçları" +
-            " izleyip')]");
+    By lMovitaMNVRileTumAraclarText = By.xpath("//div[@class='tp-mask-wrap']/div[contains(.,'movita MNVR ile tüm araçları izleyip')]");
 
 
 

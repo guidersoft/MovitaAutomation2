@@ -119,7 +119,7 @@ public class Base_Mvt implements Locators {
      *
      * @param milis long
      */
-    public void bekleActions(long milis) {
+    public void bekleByActions(long milis) {
         new Actions(driver).pause(milis).perform();
     }
 
@@ -454,8 +454,9 @@ public class Base_Mvt implements Locators {
 
     /**
      * Dashboard Ana Menu de text i girilen sekmenin locatorını döndürür.
+     *
      * @param text String
-     * @return By
+     * @return By with xpath
      */
     public By dashboardAnaMenuXpathWithText(String text) {
         return By.xpath(String.format("//ul[@id='main-menu-navigation']/li/a[contains(.,'%s')]", text));
@@ -463,6 +464,7 @@ public class Base_Mvt implements Locators {
 
     /**
      * Dashboard Ana Menu text ve altındaki Submenu text i girilen sekmenin locatorını döndürür.
+     *
      * @param anamenutext String
      * @param submenutext String
      * @return By with xpath
@@ -473,6 +475,14 @@ public class Base_Mvt implements Locators {
         // preceding-sibling:: -> current elementten önceki kardeş childlardan seçer
     }
 
+    /**
+     * Text i içeren elementin locator unu xpath ile döndürür.
+     * @param text String
+     * @return By
+     */
+    public By xpathWithText(String text) {
+        return By.xpath("//a[contains(.,'" + text + "')]");
+    }
 
 
 }
