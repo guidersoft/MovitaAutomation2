@@ -452,5 +452,27 @@ public class Base_Mvt implements Locators {
         softAssert.assertTrue(b);
     }
 
+    /**
+     * Dashboard Ana Menu de text i girilen sekmenin locatorını döndürür.
+     * @param text String
+     * @return By
+     */
+    public By dashboardAnaMenuXpathWithText(String text) {
+        return By.xpath(String.format("//ul[@id='main-menu-navigation']/li/a[contains(.,'%s')]", text));
+    }
+
+    /**
+     * Dashboard Ana Menu text ve altındaki Submenu text i girilen sekmenin locatorını döndürür.
+     * @param anamenutext String
+     * @param submenutext String
+     * @return By with xpath
+     */
+    public By dashboardSubMenuXpathWithText(String anamenutext, String submenutext) {
+        return By.xpath("//a[contains(.,'" + anamenutext + "')]/following-sibling::ul//a[contains(.,'" + submenutext + "')]");
+        // following-sibling:: -> current elementten sonraki kardeş childlardan seçer
+        // preceding-sibling:: -> current elementten önceki kardeş childlardan seçer
+    }
+
+
 
 }

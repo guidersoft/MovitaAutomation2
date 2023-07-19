@@ -32,11 +32,12 @@ public class Hooks_Mvt {// Cucumber notasyonları, varsa TestNG notasyonlarında
                     // ekran fotosunu file değilde byte olarak(0 ve 1 ler gibi sayısal olarak) tutar.
                     scenario.attach(screenshot, "image/png", scenario.getName());
                     // senaryomuza attach(ek) yapıyoruz; screenshot, media tip ve senaryo adını giriyoruz.
-                    // Bu ekran fotosunu raporda görebileceğiz.
+                    // Bu ekran fotosunu raporlarda görebileceğiz.
                 }
             } else {// step step SS alınmayacaksa bu bloğa girer, senaryo bitimi hata varsa SS alır.
                 byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
                 scenario.attach(screenshot, "image/png", scenario.getName());
+                // Cucumber ve Extent Report'a SS ve senaryo ismini ekler.
             }
 
         }
