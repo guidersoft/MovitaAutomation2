@@ -5,9 +5,9 @@ import io.cucumber.testng.CucumberOptions;
 
 
 @CucumberOptions(
-        features = {"src/test/java/Test/Baris/Features/DetaylıArama.feature"},
+        features = {"src/test/java/Test/Baris/Features"},
         glue = {"Test/Baris/Steps"},
-        tags = "",
+        tags = "@TestCaseKey=MVT-T86",
         plugin = {"pretty",
                 "json:test-output/cucumber-reports/cucumber.json",
                 "html:test-output/cucumber-reports/cucumberreport.html",

@@ -26,7 +26,7 @@ public interface HomePageLocator {
 
 
 
-     default By xpath(String locator, String value){
+     default By xpath(String locator, String... value){
 
         return By.xpath(MessageFormat.format(locator,value));
     }

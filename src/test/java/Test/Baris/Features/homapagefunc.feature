@@ -1,5 +1,5 @@
 Feature: functionality of links on the homepage
-
+  @Smoke
   Scenario: is the movita logo clickable
     Given user on homepage
     When user clicks on the movita logo

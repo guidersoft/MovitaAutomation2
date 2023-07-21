@@ -72,7 +72,16 @@
             <artifactId>poi-ooxml</artifactId>
             <version>4.1.0</version>
         </dependency>
-</dependencies>
+
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-maven-plugin -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok-maven-plugin</artifactId>
+            <version>1.18.20.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
 
     <build>
         <plugins>
@@ -82,7 +91,7 @@
                 <version>3.0.0-M1</version>
                 <configuration>
                     <includes>
-                        <include>**/*Runner*.java</include>
+                        <include>**/RunnerBaris.java</include>
                     </includes>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>

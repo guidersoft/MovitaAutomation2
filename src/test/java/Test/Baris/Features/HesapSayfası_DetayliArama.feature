@@ -1,3 +1,4 @@
+
 Feature: Testing of the 'Detaylı Arama' function in 'Araç Bazlı Raporlar'
 
   Background: Clicks Until 'Araç Bazlı Rapor' link
