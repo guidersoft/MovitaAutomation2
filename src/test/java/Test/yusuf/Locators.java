@@ -21,8 +21,16 @@ public class Locators {
 
 
     public static final String MAIN_MENU = "//*[@id='main-menu-navigation']//a[contains(.,'%s')]";
-    public static final String SUB_MENUS = "//*[@class='nav-item has-sub open' and contains(.,'Raporlar')]//li";
+    public static final String RAPORLAR_SUB_MENUS = "//*[@class='nav-item has-sub open' and contains(.,'Raporlar')]//li";
     public static final String FOOTER_MENU = "//footer//*[text()='%s']";
     public static final String TITLE = "//h1[text()='%s']";
+    public static final String ALARM_ISLEMLERI = "//*[@id='basic-form-layouts']//*[contains(text(),'%s')]";
+    public static final String lAlarmIslemleriAlarmTipi = "//div[@id='user-profile']//select[@id='kural_tipi']";
+    public static final String lAlarmIslemleriSmsBildirimi = "//div[@id='user-profile']//select[@id='kural_sms']";
+    public static final String lAlarmIslemleriAktifGunler = "//div[@id='user-profile']//select[@id='kural_gun']";
+    public static final String lAlarmIslemleriKaydetButton = "//*[@id='basic-form-layouts']//button[contains(.,'Kaydet')]";
+    public static final String lAlarmIslemleriAlarmListesi = "//div[@class='table-responsive']//tbody/tr";
+    public static final String lAlarmIslemleriAlarmSil = "//div[@class='table-responsive']//tbody/tr/td//i[@class='icon-trash']";
+    public static final String lAlarmIslemleriAlarmEdit = "//div[@class='table-responsive']//tbody/tr/td//i[@class='icon-pencil']";
 
 }

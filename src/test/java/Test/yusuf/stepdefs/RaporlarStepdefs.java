@@ -2,7 +2,6 @@ package Test.yusuf.stepdefs;
 
 import Test.yusuf.BaseMovitaYusuf;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -44,7 +43,7 @@ public class RaporlarStepdefs extends BaseMovitaYusuf {
     @Then("user should see {int} submenu under the {string}")
     public void userShouldSeeSubmenuUnderThe(int sizeElement, String text) {
         hoverOverByAction(xpath(MAIN_MENU, "Araç Bazlı Rapor"));
-        List<WebElement> elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(xpath(SUB_MENUS, text)));
+        List<WebElement> elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(xpath(RAPORLAR_SUB_MENUS, text)));
         Assert.assertEquals(elements.size(), sizeElement);
     }
 

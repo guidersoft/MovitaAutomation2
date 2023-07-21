@@ -56,8 +56,8 @@ public class Base_Mvt implements Locators {
 
         switch (visibility) {
 
-            case VISIBLE -> getWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
-            case INVISIBLE -> getWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
+            case VISIBLE :  getWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
+            case INVISIBLE : getWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
 
         }
 
