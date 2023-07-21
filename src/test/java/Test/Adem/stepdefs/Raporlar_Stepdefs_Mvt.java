@@ -1,7 +1,6 @@
 package Test.Adem.stepdefs;
 
-import Test.Adem.locators.Locators_Raporlar;
-import Utilities.Driver;
+import Test.Adem.locators.Locators_Dashboard;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,7 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static Test.Adem.locators.Locators_LoginPage.*;
 
-public class Raporlar_Stepdefs_Mvt extends Base_Mvt implements Locators_Raporlar {
+public class Raporlar_Stepdefs_Mvt extends Base_Mvt implements Locators_Dashboard {
 
     @Given("Kullanıcı siteye login olabilmeli")
     public void kullanıcıSiteyeLoginOlabilmeli() {
