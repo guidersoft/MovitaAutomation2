@@ -2,6 +2,7 @@ package Test.Engin.Base;
 
 import Base.BaseMovita;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 
@@ -26,5 +27,9 @@ public class EnginBase extends BaseMovita {
     public By alarmEkleSubMenuDefault(String text){
         return By.xpath("//div[@class='row']/div[@class='col-md-12']//label[contains(.,'"+text+"')]");
     }
+    public void getScrollToElement (WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", element);
 
+    }
 }
