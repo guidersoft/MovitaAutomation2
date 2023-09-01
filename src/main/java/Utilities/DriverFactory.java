@@ -18,7 +18,7 @@ import org.openqa.selenium.safari.SafariOptions;
 public class DriverFactory {
 
     public static WebDriver createChrome(){
-        WebDriverManager.chromedriver().setup();
+       // WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         PropertyReader pr = PropertyReader.read();
         for (String s : pr.get("chrome.options").split(",")) {
