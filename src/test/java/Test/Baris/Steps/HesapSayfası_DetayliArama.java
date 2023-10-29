@@ -26,6 +26,10 @@ import static ReuseableClass._Conditions.visibilty;
 import static Test.Baris.Locators.HesapSayfasiLocators.detayliAramaInput;
 
 public class HesapSayfası_DetayliArama extends BaseClass implements HomePageLocator, AccountPageLocators {
+    public static void main(String[] args) {
+        System.out.println("Jira-Githup bağlantısı için deneme pull request");
+    }
+
     String text = "";
     private String tarihText;
     private String startWorkTime;
