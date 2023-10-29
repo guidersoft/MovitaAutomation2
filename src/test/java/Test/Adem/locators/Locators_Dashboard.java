@@ -2,8 +2,13 @@ package Test.Adem.locators;
 
 import org.openqa.selenium.By;
 
-public interface Locators_AracBazliRapor {
+public interface Locators_Dashboard {
 
+    // Raporlar:
+    By lRaporlarAnaMenu = By.xpath("//span[text()='Raporlar']");
+
+
+    // Raporlar > Araç Bazlı Rapor:
     By lRaporlarSidebar = By.xpath("//a[contains(.,'Raporlar')]");
     By lAracBazliRaporAltMenu = By.xpath("//a[contains(.,'Araç Bazlı Rapor')]");
     By lSolBlokAracSelectMenu = By.xpath("//select[@id='aracSelect']");
@@ -21,9 +26,10 @@ public interface Locators_AracBazliRapor {
     By lSagBlokSonrakiButton = By.xpath("//li[@id='DataTables_Table_0_next']");
 
 
-
-
-
+    // Guzergah İşlemleri:
+    String strAracBazliGuzergahTablosu = "//div[@class='table-responsive']//th[contains(.,'%s')]";
+    By lAracBazliGuzergahListesi = By.xpath("//div[@id='map_plaka_list_panel']//a");
+    By lAracBazliGuzergahHaritaListesi = By.xpath("//div[@class='table-responsive']//tbody/tr");
 
 
 }

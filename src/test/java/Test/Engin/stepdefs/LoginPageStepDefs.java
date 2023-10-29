@@ -6,6 +6,9 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -145,5 +148,42 @@ public class LoginPageStepDefs extends BaseMovita {
     public void userShouldSeeAs(String text) {
         String text1 = driver.findElement(eb.alarmEkleSubMenuDefault(text)).getText();
         Assert.assertTrue(text1.contains(text));
+    }
+
+    @Then("user should see on the page {string}")
+    public void userShouldSeeOnThePage(String text) {
+        String text1 = driver.findElement(lAlarmBilgisiText).getText();
+        Assert.assertEquals(text1,text);
+    }
+
+    @Then("user should see fallowing")
+    public void userShouldSeeFallowing(DataTable table) {
+        Map<String,String> map =table.asMap();
+
+        map.forEach((k,v)->{
+            List<WebElement> elements = driver.findElements(lSelectMenus);
+            for (WebElement element : elements) {
+                String text1 = element.getText();
+                if (text1.equalsIgnoreCase(map.get(v)))
+                    Assert.assertEquals(text1,map.get(v));
+                }
+        });
+
+    }
+
+    @And("Alarm should be saved")
+    public void alarmShouldBeSaved() {
+        List<WebElement> elements = driver.findElements(lSelectMenus);
+        sendeys(driver.findElement(By.id("aciklama")),"Engin");
+        for (WebElement element : elements) {
+           click(element);
+        }
+        WebElement Element = driver.findElement(By.xpath("//button[contains(.,'Kaydet')]"));
+        eb.getScrollToElement(Element);
+        click(By.xpath("//button[contains(.,'Kaydet')]"));
+        wait.until(ExpectedConditions.urlToBe("https://movita.com.tr/alarm-listesi"));
+        Assert.assertTrue(driver.getPageSource().contains("Engin"));
+        getScreenshot("Alarm");
+
     }
 }

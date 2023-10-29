@@ -1,6 +1,6 @@
 package Test.Adem.stepdefs;
 
-import Test.Adem.locators.Locators_AracBazliRapor;
+import Test.Adem.locators.Locators_Dashboard;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class AracBazliRapor_Mvt extends Base_Mvt implements Locators_AracBazliRapor {
+public class AracBazliRapor_Mvt extends Base_Mvt implements Locators_Dashboard {
 
     @Then("Kullanici dashboard u görmeli")
     public void kullaniciDashboardUGörmeli() {

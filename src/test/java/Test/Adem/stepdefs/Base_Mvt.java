@@ -56,8 +56,8 @@ public class Base_Mvt implements Locators {
 
         switch (visibility) {
 
-            case VISIBLE -> getWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
-            case INVISIBLE -> getWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
+            case VISIBLE :  getWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
+            case INVISIBLE : getWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
 
         }
 
@@ -119,7 +119,7 @@ public class Base_Mvt implements Locators {
      *
      * @param milis long
      */
-    public void bekleActions(long milis) {
+    public void bekleByActions(long milis) {
         new Actions(driver).pause(milis).perform();
     }
 
@@ -450,6 +450,38 @@ public class Base_Mvt implements Locators {
         hover(locator);
         boolean b = getWebElement(locator).getCssValue("cursor").equals("pointer");
         softAssert.assertTrue(b);
+    }
+
+    /**
+     * Dashboard Ana Menu de text i girilen sekmenin locatorını döndürür.
+     *
+     * @param text String
+     * @return By with xpath
+     */
+    public By dashboardAnaMenuXpathWithText(String text) {
+        return By.xpath(String.format("//ul[@id='main-menu-navigation']/li/a[contains(.,'%s')]", text));
+    }
+
+    /**
+     * Dashboard Ana Menu text ve altındaki Submenu text i girilen sekmenin locatorını döndürür.
+     *
+     * @param anamenutext String
+     * @param submenutext String
+     * @return By with xpath
+     */
+    public By dashboardSubMenuXpathWithText(String anamenutext, String submenutext) {
+        return By.xpath("//a[contains(.,'" + anamenutext + "')]/following-sibling::ul//a[contains(.,'" + submenutext + "')]");
+        // following-sibling:: -> current elementten sonraki kardeş childlardan seçer
+        // preceding-sibling:: -> current elementten önceki kardeş childlardan seçer
+    }
+
+    /**
+     * Text i içeren elementin locator unu xpath ile döndürür.
+     * @param text String
+     * @return By
+     */
+    public By xpathWithText(String text) {
+        return By.xpath("//a[contains(.,'" + text + "')]");
     }
 
 

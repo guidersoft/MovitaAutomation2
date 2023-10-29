@@ -1,4 +1,5 @@
 Feature: Alar Islemleri
+
   @Alarm_Islemleri
   Scenario: Alarm Islemi Functional and Nonfunctional
 
@@ -12,10 +13,30 @@ Feature: Alar Islemleri
     Then  user shoul see "Açıklama"
     Then  user shoul see "Alarm Tipi"
     And   user click Alarm Ekle button
-    Then  user should see as "Alarm Tipi"
-    Then  user should see as "Sms Bildirim"
-    Then  user should see as "Bölgede Kalma Süresi"
-    Then  user should see as "Bir Sonraki Bölgeye Max Varma"
+    And  user should see as "Alarm Tipi"
+    And  user should see as "Sms Bildirim"
+    And  user should see as "Bölgede Kalma Süresi"
+    And  user should see as "Bir Sonraki Bölgeye Max Varma"
+    And  user should see on the page "Alarm Bilgisi"
+    And  user should see fallowing
+      | Alarm Tipi 1   | Bölge İhlali      |
+      | Alarm Tipi 2   | Bölge Giriş/Çıkış |
+      | Alarm Tipi 3   | Hız Limiti        |
+      | Alarm Tipi 4   | Mesai             |
+      | SMS Bildirim 1 | Gönderilsin       |
+      | SMS Bildirim 2 | Gönderilmesin     |
+      | Günler 1       | Pazartesi         |
+      | Günler 2       | Salı              |
+      | Günler 3       | Çarşamba          |
+      | Günler 4       | Perşembe          |
+      | Günler 5       | Cuma              |
+      | Günler 6       | Cumartesi         |
+      | Günler 7       | Pazar             |
+    And Alarm should be saved
+
+
+    Then user driver quit
+
 
 
 

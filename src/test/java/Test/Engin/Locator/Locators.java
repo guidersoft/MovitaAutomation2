@@ -11,6 +11,8 @@ public interface Locators {
     By lDetayliAramaButton = By.xpath("//div[@class='card']//li/a/span[text()='Detaylı Filtre']");
     By lAlarmEkleButton = By.xpath("//div[@class='card']//li/a[text()='Alarm Ekle']");
     By lAlarmEkleNotifikation = By.xpath("//strong[contains(.,'Dikkat!')]");
+    By lAlarmBilgisiText= By.xpath("//div/h4");
+    By lSelectMenus = By.xpath("//div//select//option");
 
 
 
